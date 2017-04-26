@@ -32,33 +32,41 @@
 		<%@ include file="../../comment/header.jsp"%>
 		<form id="team">
 			<div class="container-fluid bg-3">
-				<div class="ibox-title">
+				<div class="ibox-title text-center">
 					<h2>Add Book</h2>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-sm-3">
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Title</label>
 						<input type="text" class="form-control" id="txt1">
 					</div>
-					<div class="col-sm-3">
+				</div>
+				<div class="row top-buffer">	
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Author</label>
 						<input type="text" class="form-control" id="txt1">
 					</div>
-					<div class="col-sm-3">
+				</div>
+				<div class="row top-buffer">	
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Category</label>
 						<input type="text" class="form-control" id="txt1">
 					</div>
-					<div class="col-sm-2">
+				</div>
+				<div class="row top-buffer">	
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Publishing house</label>
 						<input type="text" class="form-control" id="txt1">
 					</div>
-					<div class="col-sm-1">
+				</div>
+				<div class="row top-buffer">
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Year of publishing</label>
 						<input type="text" class="form-control" id="txt1">
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-sm-7">
+					<div class="col-sm-offset-2 col-sm-7">
 						<label>Image</label>
 						<input type="text" class="form-control" id="team" name="team">
 					</div>
@@ -67,7 +75,7 @@
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-sm-7">
+					<div class="col-sm-offset-2 col-sm-7">
 						<label>Book</label>
 						<input type="text" class="form-control" id="team" name="team">
 					</div>

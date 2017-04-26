@@ -19,8 +19,4 @@ public class BookManagementController {
 		return "/bookstore/bookmanagement/bookmanagement";
 	}
 	
-	@RequestMapping(value = "/bookmanagement/addbook", method = RequestMethod.GET)
-	public String addbook(Locale locale, Model model) {
-		return "/bookstore/bookmanagement/insertbook";
-	}
 }

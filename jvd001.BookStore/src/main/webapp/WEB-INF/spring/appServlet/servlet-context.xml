@@ -22,6 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="jvd001.bookstore.app" />
+	<!-- <context:component-scan base-package="jvd001.bookstore.app.controller.bookmanagement" /> -->
 	
 	
 	

@@ -12,7 +12,7 @@
 <!-- LINK LIB CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
-<link href="<c:url value="/resources/css/insertbook/insertbook.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bookmanagement/insertbook.css" />" rel="stylesheet">
 
 <!-- LINK LIB JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

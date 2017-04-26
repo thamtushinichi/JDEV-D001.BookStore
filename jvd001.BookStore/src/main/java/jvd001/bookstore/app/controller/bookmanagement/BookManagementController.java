@@ -1,7 +1,5 @@
 package jvd001.bookstore.app.controller.bookmanagement;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -19,5 +17,10 @@ public class BookManagementController {
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
 	public String bookManagement(Locale locale, Model model) {
 		return "/bookstore/bookmanagement/bookmanagement";
+	}
+	
+	@RequestMapping(value = "/bookmanagement/addbook", method = RequestMethod.GET)
+	public String addbook(Locale locale, Model model) {
+		return "/bookstore/bookmanagement/insertbook";
 	}
 }

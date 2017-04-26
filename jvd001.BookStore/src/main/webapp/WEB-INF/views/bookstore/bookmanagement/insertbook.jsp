@@ -29,7 +29,7 @@
 	<!-- start code -->
 	<div id="total">
 		<!-- HEADER -->
-		<%@ include file="../../public/header.jsp"%>
+		<%@ include file="../../comment/header.jsp"%>
 		<form id="team">
 			<div class="container-fluid bg-3">
 				<div class="ibox-title">

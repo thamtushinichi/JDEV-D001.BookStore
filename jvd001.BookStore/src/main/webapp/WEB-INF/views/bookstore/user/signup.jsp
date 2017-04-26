@@ -87,7 +87,7 @@
   </style>
 </head>
 <body>
-<%@ include file="../../public/header.jsp"%>
+<%@ include file="../../comment/header.jsp"%>
 
 </br>
 <div class="container-fluid bg-3 text-center">

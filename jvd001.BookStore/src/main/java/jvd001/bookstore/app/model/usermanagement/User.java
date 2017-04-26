@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import jvd001.bookstore.app.model.bookmanagement.Book;
+
 
 
 @Entity

@@ -16,9 +16,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-		<style type="text/css">
-			
-		</style>
+		<script type="text/javascript">
+		var url = '${pageContext.request.contextPath}/';
+		</script>
 	</head>
 	<body>
 		<%@ include file="../../comment/header.jsp"%>
@@ -117,7 +117,7 @@
 	</br>
 	<div class="container-fluid bg-3 text-center">
 		<div class="row text-center">
-			<div class= "col-sm-1"><button type="button" class="btn btn-success" style="text-align: center;">Add Book</button></div>
+			<div class= "col-sm-1"><button type="button" id="btnAddBook" class="btn btn-success" style="text-align: center;">Add Book</button></div>
 		</div>
 		<br><br>
 		

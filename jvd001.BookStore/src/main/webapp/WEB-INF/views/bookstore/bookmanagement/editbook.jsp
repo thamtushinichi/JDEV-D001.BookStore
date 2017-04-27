@@ -100,6 +100,7 @@
 		</form>
 			<!-- end code -->
 			<!-- -Footer -->
+			<%@ include file="../../comment/footer.jsp"%>
 	</div>
 	</body>
 	<br>

@@ -2,14 +2,21 @@ package jvd001.bookstore.app.model.bookmanagement;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="upload")
 public class Upload {
+	public Upload()
+	{
+		
+	}
 	@Id
 	@Column(name="upload_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -20,6 +27,13 @@ public class Upload {
 	private int book_Id;
 	private String create_Time;
 	private String extention;
+	private Book book;
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
+	}
 	public int getUpload_Id() {
 		return upload_Id;
 	}
@@ -44,6 +58,8 @@ public class Upload {
 	public void setUsers_Id(int users_Id) {
 		this.users_Id = users_Id;
 	}
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn(name="book_id",nullable=false)
 	public int getBook_Id() {
 		return book_Id;
 	}

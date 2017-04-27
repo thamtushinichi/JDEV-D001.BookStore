@@ -1,15 +1,31 @@
 package jvd001.bookstore.app.model.bookmanagement;
+import javax.persistence.JoinColumn;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import jvd001.bookstore.app.model.classification.Category;
+import jvd001.bookstore.app.model.usermanagement.User;
 
 @Entity
 @Table(name="book")
-public class Book {
+public class Book implements java.io.Serializable{
+	public Book()
+	{
+		
+	}
 	@Id
 	@Column(name="book_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,6 +38,36 @@ public class Book {
 	private String author;
 	private String description;
 	private String image;
+	private Set<Category> categories = new HashSet<Category>(0);
+	private User user ;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="users_id")
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	@ManyToMany(cascade={CascadeType.ALL})
+	@JoinTable(name="book_category",
+		joinColumns={@JoinColumn(name="book_id")},
+		inverseJoinColumns= {@JoinColumn(name="category_id")})
+	
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	private Set<Upload> uploads= new HashSet<Upload>(0);
+	@OneToMany(fetch= FetchType.LAZY,mappedBy="book")
+	public Set<Upload> getUploads() {
+		return uploads;
+	}
+	public void setUploads(Set<Upload> uploads) {
+		this.uploads = uploads;
+	}
 	public int getBook_Id() {
 		return book_Id;
 	}

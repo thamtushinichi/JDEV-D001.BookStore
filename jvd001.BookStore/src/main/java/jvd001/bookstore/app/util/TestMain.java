@@ -6,7 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import jvd001.bookstore.app.model.bookmanagement.Book;
+import jvd001.bookstore.app.model.usermanagement.User;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
+import jvd001.bookstore.app.service.usermanagement.UsermanagementService;
 
 public class TestMain {
 
@@ -23,8 +25,12 @@ public class TestMain {
 //		{
 //			b.toString();
 //		}
-//		 temp= (BookManagementService) context.getBean("bookmanagementService");
-//	List<Book> a=temp.listBooks();
+		UsermanagementService temp= (UsermanagementService) context.getBean("usermanagementService");
+	List<User> a=temp.listUsers();
+	for(User b:a)
+		{
+			b.toString();
+		}
 	}
 
 }

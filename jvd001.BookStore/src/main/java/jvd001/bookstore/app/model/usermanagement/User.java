@@ -96,6 +96,10 @@ public class User implements java.io.Serializable{
 	public void setAddress(int address) {
 		this.address = address;
 	}
-	
+	@Override
+	public String toString()
+	{
+		return "id: " + this.users_id+"username: "+ this.username+"full name la : "+this.fullname;
+	}
 
 }

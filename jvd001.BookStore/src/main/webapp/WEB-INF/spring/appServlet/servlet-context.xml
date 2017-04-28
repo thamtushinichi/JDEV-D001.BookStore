@@ -56,9 +56,16 @@
 	<beans:bean id="bookmanagementService" class="jvd001.bookstore.app.service.bookmanagement.BookManagementServiceImpl">
 		<beans:property name="bookManagementDAO" ref ="bookmanagementDAO"></beans:property>
 	</beans:bean>
+	<beans:bean id = "usermanagementDAO" class = "jvd001.bookstore.app.dao.usermanagement.UserManagementDAOImpl" >
+		<beans:property name="sessionFactory" ref ="hibernate4AnnotatedSessionFactory"/>
+	</beans:bean>
+	<beans:bean id="usermanagementService" class="jvd001.bookstore.app.service.usermanagement.UsermanagementServiceImpl">
+		<beans:property name="userManagementDAO" ref ="usermanagementDAO"></beans:property>
+	</beans:bean>
 	<context:component-scan base-package="jvd001.bookstore.app" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.bookmanagement" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.classification" />
+	<context:component-scan base-package="jvd001.bookstore.app.controller.usermanagement" />
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

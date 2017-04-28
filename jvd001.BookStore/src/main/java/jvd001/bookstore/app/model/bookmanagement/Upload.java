@@ -26,8 +26,17 @@ public class Upload {
 	private int users_Id;
 	private int book_Id;
 	private String create_Time;
-	private String extention;
+	private String extension;
+	public String getExtension() {
+		return extension;
+	}
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "book_id")
 	private Book book;
+	
 	public Book getBook() {
 		return book;
 	}
@@ -58,7 +67,7 @@ public class Upload {
 	public void setUsers_Id(int users_Id) {
 		this.users_Id = users_Id;
 	}
-	@ManyToOne(fetch= FetchType.LAZY)
+	@ManyToOne(fetch= FetchType.EAGER)
 	@JoinColumn(name="book_id",nullable=false)
 	public int getBook_Id() {
 		return book_Id;
@@ -72,12 +81,7 @@ public class Upload {
 	public void setCreate_Time(String create_Time) {
 		this.create_Time = create_Time;
 	}
-	public String getExtention() {
-		return extention;
-	}
-	public void setExtention(String extention) {
-		this.extention = extention;
-	}
+	
 	
 	
 	

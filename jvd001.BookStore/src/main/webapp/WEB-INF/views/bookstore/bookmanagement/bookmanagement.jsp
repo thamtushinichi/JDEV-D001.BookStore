@@ -11,11 +11,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="./css/mycss.css">
+		<!-- <link rel="stylesheet" href="./css/mycss.css"> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+		<script src="resources/js/bookmanagement/bookmanagement-main.js"></script>
+		<script src="resources/js/bookmanagement/bookmanagement-public.js"></script>
 		<script type="text/javascript">
 		var url = '${pageContext.request.contextPath}/';
 		</script>
@@ -88,25 +90,25 @@
 				<div class="col-sm-3">
 					<img src="./images/kieu.jpg" class="image-responsive" alt ="No.1" width="60%" height="240"></br></br>
 					<a href="#">Smith</a></br></br>
-					<button id ="btnEdit1" type="button" class="btn btn-info">Edit</button>
+					<button id ="btnEdit1" type="button" class="btn btn-info btnEditBook">Edit</button>
 					<button id ="btnDelete1" type="button" class="btn btn-danger" onclick="btnDelete(event)">Delete</button>
 				</div>
 				<div class="col-sm-3">
 					<img src="./images/dac-nhan-tam.jpg" class="image-responsive" alt ="No.2" width="60%"  height="240"></br></br>
 					<a href="#">Jackson</a></br></br>
-					<button id ="btnEdit2" type="button" class="btn btn-info">Edit</button>
+					<button id ="btnEdit2" type="button" class="btn btn-info btnEditBook">Edit</button>
 					<button id ="btnDelete2" type="button" class="btn btn-danger" onclick="btnDelete(event)">Delete</button>
 				</div>
 				<div class="col-sm-3">
 					<img src="./images/dac-nhan-tam.jpg" class="image-responsive" alt ="No.2" width="60%"  height="240"></br></br>
 					<a href="#">Jackson</a></br></br>
-					<button id ="btnEdit2" type="button" class="btn btn-info">Edit</button>
+					<button id ="btnEdit2" type="button" class="btn btn-info btnEditBook">Edit</button>
 					<button id ="btnDelete2" type="button" class="btn btn-danger" onclick="btnDelete(event)">Delete</button>
 				</div>
 				<div class="col-sm-3">
 					<img src="./images/dac-nhan-tam.jpg" class="image-responsive" alt ="No.2" width="60%"  height="240"></br></br>
 					<a href="#">Jackson</a></br></br>
-					<button id ="btnEdit2" type="button" class="btn btn-info">Edit</button>
+					<button id ="btnEdit2" type="button" class="btn btn-info btnEditBook">Edit</button>
 					<button id ="btnDelete2" type="button" class="btn btn-danger" onclick="btnDelete(event)">Delete</button>
 				</div>
 				

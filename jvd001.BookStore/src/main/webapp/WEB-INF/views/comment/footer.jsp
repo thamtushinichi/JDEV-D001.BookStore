@@ -9,8 +9,9 @@
   bottom: 0;
   left: 0;
   padding: 10px 20px;
-  position: absolute;
-  right: 0;
+  width:100%;
+  height:60px;
+  position:fixed;
 }
 </style>
 </head>
@@ -18,9 +19,7 @@
 <footer>
 	<div class ="footer">
 		<div class ="row" >
-			<div class = "col-sm-12">
-				<h4 style ="text-align:left">Copyright@2016 - Powered of JVD</h4>
-			</div>
+				<h4 style ="text-align:left">Copyright@2017 - Powered of JVD</h4>
 		</div>
 	</div>
 </footer>

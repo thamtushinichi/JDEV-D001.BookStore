@@ -12,13 +12,13 @@
 <!-- LINK LIB CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
-<link href="<c:url value="/resources/css/insertbook/insertbook.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bookmanagement/insertbook.css" />" rel="stylesheet">
 
 <!-- LINK LIB JS -->
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 
 <style type="text/css">
 
@@ -67,22 +67,22 @@
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-sm-offset-2 col-sm-7">
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Image</label>
-						<input type="text" class="form-control" id="team" name="team">
+						<input type="file" class="form-control" id="team" name="team">
 					</div>
-					<div class="col-sm-1">
+<!-- 					<div class="col-sm-1">
 						<button type="button" class="btn btn-success" style="margin: auto 0px -58px">Upload image</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row top-buffer">
-					<div class="col-sm-offset-2 col-sm-7">
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Book</label>
-						<input type="text" class="form-control" id="team" name="team">
+						<input type="file" class="form-control" id="team" name="team">
 					</div>
-					<div class="col-sm-1">
+<!-- 					<div class="col-sm-1">
 						<button type="button" class="btn btn-success" style="margin: auto 0px -58px">Upload book</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row top-buffer text-center">
 					<div class="col-sm-12">
@@ -93,6 +93,7 @@
 		</form>
 			<!-- end code -->
 			<!-- -Footer -->
+			<%@ include file="../../comment/footer.jsp"%>
 	</div>
 	</body>
 	<br>

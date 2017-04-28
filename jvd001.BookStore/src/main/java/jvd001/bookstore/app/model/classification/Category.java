@@ -3,11 +3,14 @@ package jvd001.bookstore.app.model.classification;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -33,9 +36,12 @@ public class Category implements java.io.Serializable{
 	private int category_id;
 
 	private String category_name;
-	private Set<Book> books= new HashSet<Book>();
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "book_id") }, 
+	inverseJoinColumns = {@JoinColumn(name = "category_id") })
+	private Set<Book> books= new HashSet<Book>(0);
 	
-	@ManyToMany(mappedBy = "BOOK")
+	
 	public Set<Book> getBooks() {
 		return books;
 	}

@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -37,10 +38,9 @@ public class User implements java.io.Serializable{
 	private String email;
 	private int sex;
 	private int address;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@JoinColumn(name="book_id")
 	private Set<Book> book = new HashSet<Book>(0);
-	
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Book> getBook() {
 		return book;
 	}

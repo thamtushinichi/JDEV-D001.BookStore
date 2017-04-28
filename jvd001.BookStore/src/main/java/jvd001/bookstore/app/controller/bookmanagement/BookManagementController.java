@@ -13,7 +13,7 @@ import jvd001.bookstore.app.HomeController;
 
 @Controller
 public class BookManagementController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
 	public String bookManagement(Locale locale, Model model) {
 		return "/bookstore/bookmanagement/bookmanagement";

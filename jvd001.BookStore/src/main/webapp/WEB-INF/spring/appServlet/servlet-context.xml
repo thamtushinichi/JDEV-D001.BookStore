@@ -50,6 +50,12 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
+	<beans:bean id = "bookmanagementDAO" class = "jvd001.bookstore.app.dao.bookmanagement.BookManagementDAOImpl" >
+		<beans:property name="sessionFactory" ref ="hibernate4AnnotatedSessionFactory"/>
+	</beans:bean>
+	<beans:bean id="bookmanagementService" class="jvd001.bookstore.app.service.bookmanagement.BookManagementServiceImpl">
+		<beans:property name="bookManagementDAO" ref ="bookmanagementDAO"></beans:property>
+	</beans:bean>
 	<context:component-scan base-package="jvd001.bookstore.app" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.bookmanagement" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.classification" />

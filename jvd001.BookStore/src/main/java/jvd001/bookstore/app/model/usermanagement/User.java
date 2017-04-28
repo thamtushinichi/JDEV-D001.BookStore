@@ -17,9 +17,15 @@ import jvd001.bookstore.app.model.bookmanagement.Book;
 
 
 
+
+
 @Entity
 @Table(name="users")
-public class User {
+public class User implements java.io.Serializable{
+	public User()
+	{
+		
+	}
 	@Id
 	@Column(name="users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

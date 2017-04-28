@@ -15,7 +15,7 @@ import jvd001.bookstore.app.HomeController;
 public class EditBook {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/editbook", method = RequestMethod.GET)
+	@RequestMapping(value = "/bookmanagement/editbook", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 
 		return "/bookstore/bookmanagement/editbook";

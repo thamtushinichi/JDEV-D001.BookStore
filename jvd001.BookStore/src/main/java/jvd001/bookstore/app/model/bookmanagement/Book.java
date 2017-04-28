@@ -146,5 +146,9 @@ public class Book implements java.io.Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
+	@Override
+	public String toString()
+	{
+		return "title: "+ this.title+" " + this.user_Id + " "+ this.book_Id;
+	}
 }

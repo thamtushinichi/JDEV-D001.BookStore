@@ -64,31 +64,15 @@
 				<div class="row top-buffer">
 					<div class="col-sm-7">
 						<label>Image</label>
-						<input type="text" class="form-control" id="team" name="team">
+						<input type="file" class="form-control" id="team" name="team">
 					</div>
 
-					<div class="col-sm-3">
-						<label> </label>
-						<input type="text" class="form-control" id="team">
-					</div>
-
-					<div class="col-sm-1">
-						<button type="button" class="btn btn-success" style="margin: auto 0px -58px">Upload image</button>
-					</div>
+					
 				</div>
 				<div class="row top-buffer">
 					<div class="col-sm-7">
 						<label>Book</label>
-						<input type="text" class="form-control" id="team" name="team">
-					</div>
-
-					<div class="col-sm-3">
-						<label> </label>
-						<input type="text" class="form-control" id="team">
-					</div>
-
-					<div class="col-sm-1">
-						<button type="button" class="btn btn-success" style="margin: auto 0px -58px">Upload book</button>
+						<input type="file" class="form-control" id="team" name="team">
 					</div>
 				</div>
 				<div class="row top-buffer text-center">

@@ -25,12 +25,12 @@ public class TestMain {
 //		{
 //			b.toString();
 //		}
-		UsermanagementService temp= (UsermanagementService) context.getBean("usermanagementService");
-	List<User> a=temp.listUsers();
-	for(User b:a)
-		{
-			b.toString();
-		}
+		//BookManagementService temp= (BookManagementService) context.getBean("bookmanagementService");
+//	List<User> a=temp.listUsers();
+//	for(User b:a)
+//		{
+//			b.toString();
+//		}
 	}
 
 }

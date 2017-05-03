@@ -32,45 +32,44 @@
 	</beans:bean>
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
-	<beans:bean id="hibernate4AnnotatedSessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	<beans:bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>jvd001.bookstore.app.model.bookmanagement.Book</beans:value>
 				<beans:value>jvd001.bookstore.app.model.bookmanagement.Upload</beans:value>
 				<beans:value>jvd001.bookstore.app.model.classification.Category</beans:value>
+				<beans:value>jvd001.bookstore.app.model.usermanagement.User</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
 			<beans:props>
-				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
-				</beans:prop>
-				<beans:prop key="hibernate.show_sql">true</beans:prop>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
+				<beans:prop key="hibernate.current_session_context_class">thread</beans:prop>
+				<beans:prop key="hibernate.show_sql">false</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
+	
+	<beans:bean id = "hibernateTemplate" class = "org.springframework.orm.hibernate3.HibernateTemplate">
+	<beans:property name = "sessionFactory" ref ="sessionFactory"/>
+	</beans:bean>
 	<beans:bean id = "bookmanagementDAO" class = "jvd001.bookstore.app.dao.bookmanagement.BookManagementDAOImpl" >
-		<beans:property name="sessionFactory" ref ="hibernate4AnnotatedSessionFactory"/>
+		<beans:property name ="hibernateTemplate" ref ="hibernateTemplate"></beans:property>
 	</beans:bean>
 	<beans:bean id="bookmanagementService" class="jvd001.bookstore.app.service.bookmanagement.BookManagementServiceImpl">
 		<beans:property name="bookManagementDAO" ref ="bookmanagementDAO"></beans:property>
 	</beans:bean>
-	<beans:bean id = "usermanagementDAO" class = "jvd001.bookstore.app.dao.usermanagement.UserManagementDAOImpl" >
-		<beans:property name="sessionFactory" ref ="hibernate4AnnotatedSessionFactory"/>
-	</beans:bean>
-	<beans:bean id="usermanagementService" class="jvd001.bookstore.app.service.usermanagement.UsermanagementServiceImpl">
-		<beans:property name="userManagementDAO" ref ="usermanagementDAO"></beans:property>
-	</beans:bean>
+
 	<context:component-scan base-package="jvd001.bookstore.app" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.bookmanagement" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.classification" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.usermanagement" />
+	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-	</beans:bean>
+	
 
 	
 </beans:beans>

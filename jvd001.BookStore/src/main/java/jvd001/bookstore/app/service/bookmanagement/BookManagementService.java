@@ -8,6 +8,6 @@ public interface BookManagementService {
 	public void addBook(Book book);
 	public void updateBook(Book book);
 	public List<Book> listBooks();
-	public Book getBookById(int id);
+	public List<Book> getBookById(int id);
 	public void removeBook(int id);
 }

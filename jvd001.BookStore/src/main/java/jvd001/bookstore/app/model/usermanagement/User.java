@@ -39,7 +39,7 @@ public class User implements java.io.Serializable{
 	private int sex;
 	private int address;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-	@JoinColumn(name="book_id")
+	//@JoinColumn(name="book_id")
 	private Set<Book> book = new HashSet<Book>(0);
 	public Set<Book> getBook() {
 		return book;

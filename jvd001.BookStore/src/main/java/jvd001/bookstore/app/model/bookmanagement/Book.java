@@ -44,10 +44,10 @@ public class Book implements java.io.Serializable {
 			@JoinColumn(name = "category_id") })
 	private Set<Category> categories = new HashSet<Category>(0);
 	
-	
-	private User user;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "users_id")
+	private User user;
+	
+	//@JoinColumn(name = "users_id")
 	public User getUser() {
 		return user;
 	}

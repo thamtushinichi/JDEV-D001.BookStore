@@ -2,6 +2,8 @@ package jvd001.bookstore.app.dao.bookmanagement;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
@@ -10,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import jvd001.bookstore.app.model.bookmanagement.Book;
-
+@Transactional
 public class BookManagementDAOImpl extends HibernateDaoSupport implements BookManagementDAO{
 
 	private static final Logger logger=LoggerFactory.getLogger(BookManagementDAOImpl.class);
@@ -30,8 +32,11 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<Book> listBooks() {
 		// TODO Auto-generated method stub
-		DetachedCriteria criteria= DetachedCriteria.forClass(Book.class);
-		return (List<Book>)getHibernateTemplate().findByCriteria(criteria);
+		
+		 DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		List <Book> a= (List<Book>)getHibernateTemplate().findByCriteria(criteria);
+		 return a;
+	        
 	}
 
 	@Override

@@ -33,7 +33,7 @@
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
 	<beans:bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
@@ -46,13 +46,13 @@
 		<beans:property name="hibernateProperties">
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
-				<beans:prop key="hibernate.current_session_context_class">thread</beans:prop>
+				<!-- <beans:prop key="hibernate.current_session_context_class">thread</beans:prop> -->
 				<beans:prop key="hibernate.show_sql">false</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
 	
-	<beans:bean id = "hibernateTemplate" class = "org.springframework.orm.hibernate3.HibernateTemplate">
+	<beans:bean id = "hibernateTemplate" class = "org.springframework.orm.hibernate4.HibernateTemplate">
 	<beans:property name = "sessionFactory" ref ="sessionFactory"/>
 	</beans:bean>
 	<beans:bean id = "bookmanagementDAO" class = "jvd001.bookstore.app.dao.bookmanagement.BookManagementDAOImpl" >

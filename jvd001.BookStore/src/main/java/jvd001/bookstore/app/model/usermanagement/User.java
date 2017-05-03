@@ -2,8 +2,10 @@ package jvd001.bookstore.app.model.usermanagement;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,21 +34,30 @@ public class User implements java.io.Serializable{
 	@Column(name="users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int users_id;
+	@Column(name="username")
 	private String username;
+	@Column(name="password")
 	private String password;
+	@Column(name="fullname")
 	private String fullname;
+	@Column(name="role_id")
 	private int role_id;
+	@Column(name="email")
 	private String email;
+	@Column(name="sex")
 	private int sex;
-	private int address;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@Column(name="address")
+	private String address;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="user")
+	//@JoinTable(name="book",joinColumns={@JoinColumn(name="users_id")},inverseJoinColumns=@JoinColumn(name="book_id"))
 	//@JoinColumn(name="book_id")
-	private Set<Book> book = new HashSet<Book>(0);
-	public Set<Book> getBook() {
-		return book;
+	private Set<Book> listBook=new HashSet<Book>(0);
+	
+	public Set<Book> getListBook() {
+		return listBook;
 	}
-	public void setBook(Set<Book> book) {
-		this.book = book;
+	public void setListBook(Set<Book> listBook) {
+		this.listBook = listBook;
 	}
 	public int getUsers_id() {
 		return users_id;
@@ -90,16 +102,17 @@ public class User implements java.io.Serializable{
 	public void setSex(int sex) {
 		this.sex = sex;
 	}
-	public int getAddress() {
+	
+	public String getAddress() {
 		return address;
 	}
-	public void setAddress(int address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	@Override
 	public String toString()
 	{
-		return "id: " + this.users_id+"username: "+ this.username+"full name la : "+this.fullname;
+		return "id: " + this.users_id+"username: "+ this.username +"full name la : "+this.fullname;
 	}
 
 }

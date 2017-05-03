@@ -12,15 +12,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- <link rel="stylesheet" href="./css/mycss.css"> -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-		<script src="resources/js/bookmanagement/bookmanagement-main.js"></script>
-		<script src="resources/js/bookmanagement/bookmanagement-public.js"></script>
-		<script type="text/javascript">
-		var url = '${pageContext.request.contextPath}/';
-		</script>
+		<link href="<c:url value="/resources/css/bookmanagement/insertbook.css" />" rel="stylesheet">
+		
 	</head>
 	<body>
 		<%@ include file="../../comment/header.jsp"%>
@@ -121,70 +116,41 @@
 		<div class="row text-center">
 			<div class= "col-sm-1"><button type="button" id="btnAddBook" class="btn btn-success" style="text-align: center;">Add Book</button></div>
 		</div>
-		<br><br>
+		 <br>
+        <div class="row text-center">
+            <div class= "col-sm-12">
+                <div class="pagelist">
+                
+                    <a id="N1" href="#" class="page">Previous</a>
+                    <a id="N1" href="?page=1" class="page">1</a>
+                    <a id="N2" href="?page=2" class="page">2</a>
+                    <a id="N3" href="?page=3" class="page">3</a>
+                    <a id="N3" href="?page=3" class="page">4</a>
+                    <a id="N3" href="?page=3" class="page">5</a>
+                    <a id="N3" href="?page=3" class="page">6</a>
+                    <a id="N3" href="?page=3" class="page">7</a>
+                    <a id="N1" href="#" class="page">Next</a>
+                </div>
+            </div>
+        </div>
 		
-		<div class="col-sm-7 text-right">
-			<ul id="pagination-digg">
-				<li class="previous-off">«Previous</li>
-				<li class="active">1</li>
-				<li><a href="?page=2">2</a></li>
-				<li><a href="?page=3">3</a></li>
-				<li><a href="?page=4">4</a></li>
-				<li><a href="?page=5">5</a></li>
-				<li><a href="?page=6">6</a></li>
-				<li><a href="?page=7">7</a></li>
-				<li class="next"><a href="?page=2">Next »</a></li>
-			</ul>
-		</div>
 	</div>	
 		<!-- end code -->
 
 
 
-
+<%@ include file="../../comment/footer.jsp"%>
 	</body>
 </br>
-<!-- <footer class="container-fluid text-center footer" style = "background-color:rgb(101, 103, 104);">
-	<div class ="container-fluid bg-3 text-center">
-		<div class="row">
-			<div class ="col-sm-3">
-				<h3 style ="text-align:left"><strong>Contact</strong></h3>
-				<h5 style ="text-align:left">Green Academy , Khang Thong Tower , Nguyen Thi Minh Khai Street, Ho Chi Minh City</h5>
-			</div>
-			<div class ="col-sm-3">
-			</br>
-			<img src="./images/Capture.jpg" class ="image-responsive" style ="width:30%"/>
-		</div>
 
-
-
-		<div class ="col-sm-3">
-			<h3 style ="text-align:left"><strong>Design details</strong></h3>
-			<h5 style ="text-align:left"></h5>
-		</div>
-		<div class ="col-sm-3" style="position:relative">
-			<h3 style ="text-align:left"><strong>Stay connected</strong></h3>
-			<span class="glyphicon glyphicon-globe"></span>
-			<span class="glyphicon glyphicon-earphone"></span>
-			<span class="glyphicon glyphicon-cloud-download"></span>   
-			<span style="display:inline-block; width: 140px;"></span>
-		</div>
-	</div>
-	<div class ="row" >
-	
-		<div class = "col-sm-4">
-			<h4 style ="text-align:left">Copyright@2011 - Shegy - All rights reserved.</h4>
-		</div>
-		<div class = "col-sm-5">
-		</div>
-		<div class = "col-sm-3">
-			<h4 style ="text-align:right">Privacy policy | Regulations</h4>
-		</div>
-	
-	</div>
-
-</div>
-</footer> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+		<script src="resources/js/bookmanagement/bookmanagement-main.js"></script>
+		<script src="resources/js/bookmanagement/bookmanagement-public.js"></script>
+		<script type="text/javascript">
+		var url = '${pageContext.request.contextPath}/';
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
 	function btnDelete(event)

@@ -17,3 +17,17 @@ td, th {
 tr:nth-child(even) {
 	background-color: #dddddd;
 }
+.pagelist { margin-bottom: 10px; padding-bottom: 10px; border-bottom: solid 1px silver;
+
+ }
+.pagelist .page { padding: 2px 5px 2px 5px; border: solid 1px teal; color: black; text-decoration: none;
+
+ }
+
+.pagelist .curpage { padding: 2px 5px 2px 5px; border: solid 1px silver; color: teal; text-decoration: none;
+
+ }
+.pane {
+
+ ;
+}

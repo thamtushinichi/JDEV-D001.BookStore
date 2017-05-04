@@ -19,19 +19,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
-
-<style type="text/css">
-
-</style>
 <script type="text/javascript">
+var url = '${pageContext.request.contextPath}/';
 </script>
+<script type="text/javascript" src="<c:url value='/resources/js/bookmanagement/insertbook-main.js' />"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/bookmanagement/insertbook-public.js' />"></script>
 </head>
 <body>
 	<!-- start code -->
 	<div id="total">
 		<!-- HEADER -->
 		<%@ include file="../../comment/header.jsp"%>
-		<form id="team">
+		<form id="frmAddBook">
 			<div class="container-fluid bg-3">
 				<div class="ibox-title text-center">
 					<h2>Add Book</h2>
@@ -39,13 +38,13 @@
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Title</label>
-						<input type="text" class="form-control" id="txt1">
+						<input type="text" class="form-control" id="title" name="title">
 					</div>
 				</div>
 				<div class="row top-buffer">	
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Author</label>
-						<input type="text" class="form-control" id="txt1">
+						<input type="text" class="form-control" id="author" name="author">
 					</div>
 				</div>
 				<div class="row top-buffer">	
@@ -57,36 +56,30 @@
 				<div class="row top-buffer">	
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Publishing house</label>
-						<input type="text" class="form-control" id="txt1">
+						<input type="text" class="form-control" id="publisher" name="publisher">
 					</div>
 				</div>
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Year of publishing</label>
-						<input type="text" class="form-control" id="txt1">
+						<input type="text" class="form-control" id="year_Of_Publishing" name="year_Of_Publishing">
 					</div>
 				</div>
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Image</label>
-						<input type="file" class="form-control" id="team" name="team">
+						<input type="file" class="form-control" id="image" name="image">
 					</div>
-<!-- 					<div class="col-sm-1">
-						<button type="button" class="btn btn-success" style="margin: auto 0px -58px">Upload image</button>
-					</div> -->
 				</div>
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Book</label>
-						<input type="file" class="form-control" id="team" name="team">
+						<input type="file" class="form-control" id="description" name="description">
 					</div>
-<!-- 					<div class="col-sm-1">
-						<button type="button" class="btn btn-success" style="margin: auto 0px -58px">Upload book</button>
-					</div> -->
 				</div>
 				<div class="row top-buffer text-center">
 					<div class="col-sm-12">
-						<button type="button" class="btn btn-success" >Save</button>
+						<button type="button" class="btn btn-success" id="btnSave">Save</button>
 					</div>
 				</div>
 			</div>

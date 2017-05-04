@@ -2,11 +2,14 @@ package jvd001.bookstore.app.service.bookmanagement;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import jvd001.bookstore.app.dao.bookmanagement.BookManagementDAO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
-@Transactional
+
+@Service
+@Transactional(value="LiveTransactionManager") 
 public class BookManagementServiceImpl implements BookManagementService{
 	private BookManagementDAO bookManagementDAO;
 	public BookManagementDAO getBookManagementDAO() {

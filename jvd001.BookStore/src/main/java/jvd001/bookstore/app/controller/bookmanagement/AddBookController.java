@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
 
@@ -30,7 +31,7 @@ public class AddBookController {
 	}
 	
 	@RequestMapping(value= "/bookmanagement/addbook/save", method = RequestMethod.POST)
-	public String addBook(@ModelAttribute("book") Book book){
+	public String addBook(@ModelAttribute("book") BookVO book){
 	
 		try {
 			this.bookmanagementService.addBook(book);

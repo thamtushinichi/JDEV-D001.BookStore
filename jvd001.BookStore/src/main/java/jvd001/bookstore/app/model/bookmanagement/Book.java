@@ -46,11 +46,11 @@ public class Book implements java.io.Serializable {
 	private String description;
 	@Column(name = "image")
 	private String image;
-//	@ManyToMany(cascade = { CascadeType.ALL })
-//	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
-//			@JoinColumn(name = "category_id") })
-//	private Set<Category> categories = new HashSet<Category>(0);
-//	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "category_id") })
+	private Set<Category> categories = new HashSet<Category>(0);
+	
 	
 	
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -64,24 +64,24 @@ public class Book implements java.io.Serializable {
 		this.user = user;
 	}
 
-//	public Set<Category> getCategories() {
-//		return categories;
-//	}
-//
-//	public void setCategories(Set<Category> categories) {
-//		this.categories = categories;
-//	}
+	public Set<Category> getCategories() {
+		return categories;
+	}
 
-//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
-//	private Set<Upload> uploads = new HashSet<Upload>(0);
-//
-//	public Set<Upload> getUploads() {
-//		return uploads;
-//	}
-//
-//	public void setUploads(Set<Upload> uploads) {
-//		this.uploads = uploads;
-//	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+	private Set<Upload> uploads = new HashSet<Upload>(0);
+
+	public Set<Upload> getUploads() {
+		return uploads;
+	}
+
+	public void setUploads(Set<Upload> uploads) {
+		this.uploads = uploads;
+	}
 
 	public int getBook_Id() {
 		return book_Id;
@@ -99,13 +99,7 @@ public class Book implements java.io.Serializable {
 		this.title = title;
 	}
 
-//	public int getUser_Id() {
-//		return user_Id;
-//	}
-//
-//	public void setUser_Id(int user_Id) {
-//		this.user_Id = user_Id;
-//	}
+
 
 	public int getCategory_Id() {
 		return category_Id;

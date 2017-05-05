@@ -1,5 +1,12 @@
 package jvd001.bookstore.app.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jvd001.bookstore.app.model.bookmanagement.Upload;
+import jvd001.bookstore.app.model.classification.Category;
+import jvd001.bookstore.app.model.usermanagement.User;
+
 public class BookVO {
 	private int book_Id;
 	private String title;
@@ -10,6 +17,27 @@ public class BookVO {
 	private String author;
 	private String description;
 	private String image;
+	private User user;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Set<Upload> getUploads() {
+		return uploads;
+	}
+	public void setUploads(Set<Upload> uploads) {
+		this.uploads = uploads;
+	}
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+	private Set<Upload> uploads;
+	private Set<Category> categories ;
 	public int getBook_Id() {
 		return book_Id;
 	}

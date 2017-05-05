@@ -85,8 +85,10 @@
 		<div class="container-fluid bg-3 text-center">
 			<div class="row text-center">
 				<div class="col-sm-1">
+				<a href ="/bookstore/bookmanagement/addbook">
 					<button type="button" id="btnAddBook" class="btn btn-success"
 						style="text-align: center;">Add Book</button>
+						</a>
 				</div>
 			</div>
 			<br>
@@ -94,7 +96,7 @@
 				<div class="col-sm-12">
 					<div class="pagelist">
 
-						<a id="N1" href="#" class="page">Previous</a> <a id="N1"
+						<a id="N1"
 							href="?page=1" class="page">1</a> <a id="N2" href="?page=2"
 							class="page">2</a> <a id="N3" href="?page=3" class="page">3</a> <a
 							id="N3" href="?page=3" class="page">4</a> <a id="N3"
@@ -116,8 +118,8 @@
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src="resources/js/bookmanagement/bookmanagement-main.js"></script>
-<script src="resources/js/bookmanagement/bookmanagement-public.js"></script>
+<script src="/resources/js/bookmanagement/bookmanagement-main.js"></script>
+<script src="/resources/js/bookmanagement/bookmanagement-public.js"></script>
 <script type="text/javascript">
 		var url = '${pageContext.request.contextPath}/';
 		</script>

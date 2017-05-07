@@ -59,17 +59,17 @@
 		
 		
 		<div class="row text-center">
-			<c:forEach items="${listBook }" var ="book">
+			<c:forEach items="${listBook }" var ="bookVO">
 				<div class="col-sm-3">
 				
-					<img src="<c:url value="/resources/images/${book.image}"/>" class="image-responsive" 
+					<img src="<c:url value="/resources/images/${bookVO.image}"/>" class="image-responsive" 
 						width="60%" height="240"></br>
-					</br> <a href="#">${book.title }</a></br>
+					</br> <a href="#">${bookVO.title }</a></br>
 					</br>
-					<a href="<c:url value='/bookmanagement/edit/${book.book_Id}'/>">
+					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
 					<button  type="button"
 						class="btn btn-info btnEditBook">Edit</button></a>
-						<a href="<c:url value='/bookmanagement/delete/${book.book_Id}'/>">
+						<a href="<c:url value='/bookmanagement/delete/${bookVO.book_Id}'/>">
 					<button  type="button" class="btn btn-danger"
 						onclick="btnDelete(event)">Delete</button><br><br></a>
 				</div>
@@ -92,17 +92,16 @@
 				</div>
 			</div>
 			<br>
+			<input id="sizeListBook" type="hidden" name="" value="${sizeListBook }">
+			<input  id="pagenumber" type="hidden" name="" value="${pagenumber }">
 			<div class="row text-center">
 				<div class="col-sm-12">
 					<div class="pagelist">
-
-						<a id="N1"
-							href="?page=1" class="page">1</a> <a id="N2" href="?page=2"
-							class="page">2</a> <a id="N3" href="?page=3" class="page">3</a> <a
-							id="N3" href="?page=3" class="page">4</a> <a id="N3"
-							href="?page=3" class="page">5</a> <a id="N3" href="?page=3"
-							class="page">6</a> <a id="N3" href="?page=3" class="page">7</a> <a
-							id="N1" href="#" class="page">Next</a>
+					<c:forEach var="i" begin="1" end="${pagenumber}">
+					 <a id="N2" href="/${ i}" name="page"
+							class="page">${ i}</a> 
+					</c:forEach>
+						
 					</div>
 				</div>
 			</div>

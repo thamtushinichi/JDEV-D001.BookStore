@@ -55,4 +55,20 @@ public class BookManagementServiceImpl implements BookManagementService{
 		this.bookManagementDAO.removeBook(id);
 	}
 
+	@Override
+	@Transactional
+	public List<BookVO> getListBookByPage(int pageStart,int NumberImageRender) {
+		// TODO Auto-generated method stub
+		
+		return this.bookManagementDAO.getListBookByPage(pageStart, NumberImageRender);
+	}
+	@Override
+	@Transactional
+	public List<BookVO> getBooksStandard( int pageStart, int record)
+	{
+		int start=(pageStart-1)*record;
+		
+		return this.bookManagementDAO.getBooksStandard(start, record);
+	}
+
 }

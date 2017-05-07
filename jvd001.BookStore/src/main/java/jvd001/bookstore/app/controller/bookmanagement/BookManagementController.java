@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jvd001.bookstore.app.HomeController;
+import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
 
@@ -35,12 +37,27 @@ public class BookManagementController {
 	}
 
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
-	public String bookManagement(HttpServletRequest request,Locale locale, Model model) {
-		model.addAttribute("book",new Book());
-		model.addAttribute("listBook",this.bookmanagementService.listBooks());
-		int size=this.bookmanagementService.listBooks().size();
+	public String bookManagement(Locale locale, Model model) {
+		model.addAttribute("bookVO",new BookVO());
 		
-		request.setAttribute("sizeListBook", size);
+		int size=this.bookmanagementService.listBooks().size();
+		int numberpagerender=8;
+		int pagenumber;
+		if(size%2==0)
+		{
+			pagenumber=size/numberpagerender;
+		}
+		else
+		{
+			pagenumber=size/numberpagerender + 1;
+		}
+		model.addAttribute("listBook",this.bookmanagementService.getBooksStandard(2, 8));
+		model.addAttribute("sizeListBook", size);
+		model.addAttribute("pagenumber", pagenumber);
+		//int so=page;
+		//System.out.println(so);
+//		request.setAttribute("sumpage", pagenumber);
+//		request.setAttribute("sizeListBook", size);
 		
 		return "/bookstore/bookmanagement/bookmanagement";
 	}

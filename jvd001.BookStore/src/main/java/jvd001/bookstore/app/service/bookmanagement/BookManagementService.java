@@ -10,4 +10,6 @@ public interface BookManagementService {
 	public List<BookVO> listBooks();
 	public List<BookVO> getBookById(int id);
 	public void removeBook(int id);
+	public List<BookVO> getListBookByPage(int pageStart,int NumberImageRender);
+	public List<BookVO> getBooksStandard( int pageStart, int record);
 }

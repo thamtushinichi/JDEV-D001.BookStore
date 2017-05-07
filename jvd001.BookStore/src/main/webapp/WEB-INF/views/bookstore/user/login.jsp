@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -118,24 +120,27 @@
   </div>
 </div>
 
+<!-- login -->
+
 <div class="container">
+		<form:form id="loginForm" method="post" modelAttribute="user">
         <div class="card card-container">
             
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                <input type="username" id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
                 <div class="text-center">
                 	<button class="btn btn-lg btn-primary btn-signin" type="submit">Sign in</button>
                 </div>
                 
-            </form><!-- /form -->
-            <a href="#" class="register">
+                
+          </form:form>
+            <a href="/bookstore/signup" class="register">
                 Don't have an account? Register
             </a>
-        </div><!-- /card-container -->
-    
+        </div>
+    				
 
 </br></br></br>
 <footer class="container-fluid text-center" style = "background-color:rgb(101, 103, 104);">

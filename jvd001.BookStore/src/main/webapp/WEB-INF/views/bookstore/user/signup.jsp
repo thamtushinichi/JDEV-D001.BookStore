@@ -176,10 +176,14 @@
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3 col-md-2">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <a href="/bookstore/signup" class="register">
+                Already have an Account? Login
+            </a>	
                     </div>
                 </div>
             </form> <!-- /form -->
         </div> <!-- ./container -->
+        
 
 
 </br></br></br>

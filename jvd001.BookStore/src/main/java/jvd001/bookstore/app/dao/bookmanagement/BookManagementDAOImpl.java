@@ -6,13 +6,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-<<<<<<< HEAD
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-=======
+
 import org.hibernate.Hibernate;
->>>>>>> e25df1134206e30adf96f34319c560ff6f04c2b2
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +29,9 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@SuppressWarnings("static-access")
 	public void addBook(BookVO bookVO) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
-		
-=======
+
 		Book book = new Book();
 		book = convertUtils.convertBookVOToBook(bookVO);
->>>>>>> e25df1134206e30adf96f34319c560ff6f04c2b2
 		getHibernateTemplate().save(book);
 	}
 

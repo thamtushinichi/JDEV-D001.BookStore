@@ -67,6 +67,12 @@ var url = '${pageContext.request.contextPath}/';
 				</div>
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
+						<label>Description</label>
+						<textarea rows="5" class="form-control" id="description" name="description"></textarea>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-sm-offset-2 col-sm-8">
 						<label>Image</label>
 						<input type="file" class="form-control" id="image" name="image">
 					</div>
@@ -74,7 +80,7 @@ var url = '${pageContext.request.contextPath}/';
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Book</label>
-						<input type="file" class="form-control" id="description" name="description">
+						<input type="file" class="form-control" id="" name="">
 					</div>
 				</div>
 				<div class="row top-buffer text-center">

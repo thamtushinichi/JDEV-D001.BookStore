@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jvd001.bookstore.app.dto.BookVO;
-import jvd001.bookstore.app.model.bookmanagement.Book;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
 
 @Controller
@@ -38,6 +37,7 @@ public class AddBookController {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		return "redirect:/bookmanagement/addbook";

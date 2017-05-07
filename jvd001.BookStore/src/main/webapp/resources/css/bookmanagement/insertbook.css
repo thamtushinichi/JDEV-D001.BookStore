@@ -13,6 +13,10 @@ td, th {
 	text-align: center;
 	padding: 8px;
 }
+textarea{
+	resize: none;
+	
+}
 
 tr:nth-child(even) {
 	background-color: #dddddd;

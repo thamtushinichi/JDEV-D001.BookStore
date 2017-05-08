@@ -1,6 +1,8 @@
 package jvd001.bookstore.app.controller.bookmanagement;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.model.classification.Category;
+import jvd001.bookstore.app.model.usermanagement.User;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
 
 @Controller
@@ -30,10 +34,22 @@ public class AddBookController {
 	}
 	
 	@RequestMapping(value= "/bookmanagement/addbook/save", method = RequestMethod.POST)
-	public String addBook(@ModelAttribute("book") BookVO book){
-	
+	public String addBook(@ModelAttribute("bookVO") BookVO bookVO){
+		// 	get user infor
+		User user = new User();
+		user.setUsers_id(1);
+		bookVO.setUser(user);
+		
+		Set<Category> categorys = new HashSet<Category>();
+		Category category = new Category();
+		//set category
+		category.setCategory_id(bookVO.getCategory_Id());
+		//add category to set category
+		categorys.add(category);
+		bookVO.setCategories(categorys);
 		try {
-			this.bookmanagementService.addBook(book);
+			
+			this.bookmanagementService.addBook(bookVO);
 			
 		} catch (Exception e) {
 			// TODO: handle exception

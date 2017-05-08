@@ -32,7 +32,6 @@ public class ConvertUtils {
 		book.setUploads(bookVO.getUploads());
 		book.setUser(bookVO.getUser());
 		book.setCategories(bookVO.getCategories());
-		
 		return book;
 	}
 	

@@ -13,12 +13,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
 <link href="<c:url value="/resources/css/bookmanagement/insertbook.css" />" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
 <!-- LINK LIB JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
 var url = '${pageContext.request.contextPath}/';
 </script>
@@ -50,7 +52,11 @@ var url = '${pageContext.request.contextPath}/';
 				<div class="row top-buffer">	
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Category</label>
-						<input type="text" class="form-control" id="txt1">
+						<select class="form-control selectpicker" name="category_Id" id="category_Id" multiple>
+							<option value="1">java</option>
+							<option value="2">b</option>
+							<option value="3">c</option>
+						</select>
 					</div>
 				</div>
 				<div class="row top-buffer">	

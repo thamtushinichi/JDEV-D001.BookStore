@@ -1,7 +1,8 @@
 package jvd001.bookstore.app.dto;
 
-import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import jvd001.bookstore.app.model.bookmanagement.Upload;
 import jvd001.bookstore.app.model.classification.Category;
@@ -18,6 +19,13 @@ public class BookVO {
 	private String description;
 	private String image;
 	private User user;
+	private MultipartFile file;
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -37,7 +45,7 @@ public class BookVO {
 		this.categories = categories;
 	}
 	private Set<Upload> uploads;
-	private Set<Category> categories ;
+	private Set<Category> categories;
 	public int getBook_Id() {
 		return book_Id;
 	}

@@ -17,33 +17,21 @@ import jvd001.bookstore.app.model.usermanagement.User;
 public class UserLoginDAOImpl extends HibernateDaoSupport implements UserLoginDAO {
 	private static final Logger logger = LoggerFactory.getLogger(UserLoginDAOImpl.class);
 
-//	@Override
-//	public UserVO checkLogin(String UsernameInput, String PasswordInput) {
-//		UserVO UserVO = null;
-//		List<User> results = (List<User>) getHibernateTemplate().find("from" + " User " + "where book where username = ? and password= ? ",
-//				new Object[] { UsernameInput,PasswordInput });
-//		if(results.size()>0){
-//			User u = results.get(0);
-//			UserVO.setUsers_id(  u.getUsers_id());
-//			System.out.println("login thanh cong");
-//		}
-//		else{
-//			System.out.println("login that bai");
-//		}
-//		return UserVO;
-//	}
+	@SuppressWarnings("unchecked")
 	@Override
-	public boolean checkLogin(String UsernameInput, String PasswordInput) {
-		UserVO UserVO = null;
-		List<User> results = (List<User>) getHibernateTemplate().find("from" + " User " + "where book where username = ? and password= ? ",
+	public UserVO checkLogin(String UsernameInput, String PasswordInput) {
+		UserVO UserVO= new UserVO();
+		List<User> results = (List<User>) getHibernateTemplate().find("from" + " User " + "where username = ? and password= ? ",
 				new Object[] { UsernameInput,PasswordInput });
 		if(results.size()>0){
-			return true;
+			User u = results.get(0);
+			UserVO.setUsers_id(u.getUsers_id());
+			UserVO.setUsername(u.getUsername());
+			return UserVO;
 		}
 		else{
-			return false;
+		return null;
 		}
-	
 	}
-
+	
 }

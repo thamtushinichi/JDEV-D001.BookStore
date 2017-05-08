@@ -62,13 +62,7 @@
 		<beans:property name="bookManagementDAO" ref ="bookmanagementDAO"></beans:property>
 	</beans:bean>
 	
-	<!--User Login  -->
-	<beans:bean id = "UserLoginDAO" class = "jvd001.bookstore.app.dao.usermanagement.UserLoginDAOImpl" >
-		<beans:property name ="hibernateTemplate" ref ="hibernateTemplate"></beans:property>
-	</beans:bean>
-	<beans:bean id="UserLoginService" class="jvd001.bookstore.app.service.usermanagement.UserLoginServiceImpl">
-		<beans:property name="UserLoginDAO" ref ="UserLoginDAO"></beans:property>
-	</beans:bean>
+
 
 	<context:component-scan base-package="jvd001.bookstore.app" />
 	<context:component-scan base-package="jvd001.bookstore.app.controller.bookmanagement" />

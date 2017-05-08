@@ -143,48 +143,6 @@
     				
 
 </br></br></br>
-<footer class="container-fluid text-center" style = "background-color:rgb(101, 103, 104);">
-  <div class ="container-fluid bg-3 text-center">
-  <div class="row">
-	<div class ="col-sm-3">
-		<h3 style ="text-align:left"><strong>Contact</strong></h3>
-		<h5 style ="text-align:left">Green Academy , Khang Thong Tower , Nguyen Thi Minh Khai Street, Ho Chi Minh City</h5>
-	</div>
-	<div class ="col-sm-3">
-		</br>
-		<img src="./images/Capture.jpg" class ="image-responsive" style ="width:100%"/>
-	</div>
-	<div class ="col-sm-3">
-		<h3 style ="text-align:left"><strong>Design details</strong></h3>
-		<h5 style ="text-align:left"></h5>
-	</div>
-	<div class ="col-sm-3" style="position:relative">
-		<h3 style ="text-align:left"><strong>Stay connected</strong></h3>
-		  <span class="glyphicon glyphicon-globe"></span>
-		 <span class="glyphicon glyphicon-earphone"></span>
-		 <span class="glyphicon glyphicon-cloud-download"></span>   
-		 <span class="glyphicon glyphicon-globe"></span>
-		 <span class="glyphicon glyphicon-earphone"></span>
-		 <span class="glyphicon glyphicon-cloud-download"></span> 
-		 <span class="glyphicon glyphicon-globe"></span>
-		 <span class="glyphicon glyphicon-earphone"></span>
-		
-		<span style="display:inline-block; width: 140px;"></span>
-	</div>
-  </div>
-  </div>
-  </footer>
-  <div class="container-fluid" style = "background-color:rgb(86, 88, 86);">
-  <div class ="row" >
-	<div class = "col-sm-4">
-		<h4 style ="text-align:left">Copyright@2011 - Shegy - All rights reserved.</h4>
-	</div>
-	<div class = "col-sm-5">
-	</div>
-	<div class = "col-sm-3">
-	<h4 style ="text-align:right">Privacy policy | Regulations</h4>
-	</div>
-  </div>
-</div>
+<%@ include file="../../comment/footer.jsp"%>
 </body>
 </html>

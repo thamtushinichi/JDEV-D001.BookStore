@@ -43,15 +43,12 @@ public class UserLogin {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, @ModelAttribute("user") UserVO u) {
-		
 		try{
-		if(this.UserLoginService.checkLogin(u.getUsername(), u.getPassword())){
-			
-			return "redirect:/bookmanagement";
+		if(this.UserLoginService.checkLogin(u.getUsername(), u.getPassword())==null){
+			return "redirect:/aa";
 		}
 		else{
-			
-			return "redirect:/aa";
+			return "redirect:/bookmanagement";
 		}
 		}catch(Exception e){
 			e.printStackTrace();

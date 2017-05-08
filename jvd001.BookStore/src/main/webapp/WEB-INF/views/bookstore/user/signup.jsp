@@ -118,37 +118,37 @@
   </div>
 </div>
 <div class="container">
-            <form class="form-horizontal" role="form">
+            <form:form id="signupForm" method="post" modelAttribute="user">
                 <h2>Sign Up</h2>
                 <div class="form-group">
                     <label for="firstName" class="col-sm-3 control-label">Full Name</label>
                     <div class="col-sm-9">
-                        <input type="text" id="firstName" placeholder="Full Name" class="form-control" autofocus>
+                        <input type="text" id="inputFullname" name="fullname" placeholder="Full Name" class="form-control" autofocus>
                         <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-9">
-                        <input type="email" id="email" placeholder="Email" class="form-control">
+                        <input type="email" id="inputEmail" name="email" placeholder="Email" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="username" class="col-sm-3 control-label">Username</label>
                     <div class="col-sm-9">
-                        <input type="username" id="username" placeholder="Username" class="form-control">
+                        <input type="username" id="username" name="username" placeholder="Username" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Password</label>
                     <div class="col-sm-9">
-                        <input type="password" id="password" placeholder="Password" class="form-control">
+                        <input type="password" id="password" name="password" placeholder="Password" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="address" class="col-sm-3 control-label">Address</label>
                     <div class="col-sm-9">
-                        <input type="address" id="address" placeholder="Address" class="form-control">
+                        <input type="address" id="address" name="address" placeholder="Address" class="form-control">
                     </div>
                 </div>
                 
@@ -157,78 +157,27 @@
                     <label class="control-label col-sm-3">Gender</label>
                     <div class="col-sm-6">
                         <div class="row">
-                            <label class="radio-inline"><input type="radio" name="optradio">Male</label>
-<label class="radio-inline"><input type="radio" name="optradio">Female</label>
+                            <label class="radio-inline"><input type="radio" name="sex" value="0">Male</label>
+<label class="radio-inline"><input type="radio" name="sex" value="1">Female</label>
 <label class="radio-inline"></label>
                         </div>
                     </div>
-                </div> <!-- /.form-group -->
+                </div> 
                 
-                <div class="form-group">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox">I accept <a href="#">terms</a>
-                            </label>
-                        </div>
-                    </div>
-                </div> <!-- /.form-group -->
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3 col-md-2">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
-                        <a href="/bookstore/signup" class="register">
-                Already have an Account? Login
-            </a>	
                     </div>
                 </div>
-            </form> <!-- /form -->
+            </form:form> <!-- /form -->
+            <a href="/bookstore/login" class="register">
+                Already have an Account? Login
+            </a>	
         </div> <!-- ./container -->
         
 
 
 </br></br></br>
-<footer class="container-fluid text-center" style = "background-color:rgb(101, 103, 104);">
-  <div class ="container-fluid bg-3 text-center">
-  <div class="row">
-	<div class ="col-sm-3">
-		<h3 style ="text-align:left"><strong>Contact</strong></h3>
-		<h5 style ="text-align:left">Green Academy , Khang Thong Tower , Nguyen Thi Minh Khai Street, Ho Chi Minh City</h5>
-	</div>
-	<div class ="col-sm-3">
-		</br>
-		<img src="./images/Capture.jpg" class ="image-responsive" style ="width:100%"/>
-	</div>
-	<div class ="col-sm-3">
-		<h3 style ="text-align:left"><strong>Design details</strong></h3>
-		<h5 style ="text-align:left"></h5>
-	</div>
-	<div class ="col-sm-3" style="position:relative">
-		<h3 style ="text-align:left"><strong>Stay connected</strong></h3>
-		  <span class="glyphicon glyphicon-globe"></span>
-		 <span class="glyphicon glyphicon-earphone"></span>
-		 <span class="glyphicon glyphicon-cloud-download"></span>   
-		 <span class="glyphicon glyphicon-globe"></span>
-		 <span class="glyphicon glyphicon-earphone"></span>
-		 <span class="glyphicon glyphicon-cloud-download"></span> 
-		 <span class="glyphicon glyphicon-globe"></span>
-		 <span class="glyphicon glyphicon-earphone"></span>
-		
-		<span style="display:inline-block; width: 140px;"></span>
-	</div>
-  </div>
-  </div>
-  </footer>
-  <div class="container-fluid" style = "background-color:rgb(86, 88, 86);">
-  <div class ="row" >
-	<div class = "col-sm-4">
-		<h4 style ="text-align:left">Copyright@2011 - Shegy - All rights reserved.</h4>
-	</div>
-	<div class = "col-sm-5">
-	</div>
-	<div class = "col-sm-3">
-	<h4 style ="text-align:right">Privacy policy | Regulations</h4>
-	</div>
-  </div>
-</div>
+<%@ include file="../../comment/footer.jsp"%>
 </body>
 </html>

@@ -21,7 +21,7 @@ public class UserLoginServiceImpl implements UserLoginService {
 
 
 	@Override
-	public boolean checkLogin(String UsernameInput, String PasswordInput) {
+	public UserVO checkLogin(String UsernameInput, String PasswordInput) {
 		// TODO Auto-generated method stub
 		return UserLoginDAO.checkLogin(UsernameInput, PasswordInput);
 	}

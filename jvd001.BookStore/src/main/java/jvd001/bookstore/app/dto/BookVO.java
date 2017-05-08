@@ -100,6 +100,11 @@ public class BookVO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+	@Override
+	public String toString()
+	{
+		return "id: " + this.book_Id + "title: "+ this.title+" " + " " + "user fullname la : " + this.user.getFullname()
+		+ "category id la: "+ this.category_Id + "publisher : "+ this.publisher + "nam xuat ban : "+ this.year_Of_Publishing;
+	}
 	
 }

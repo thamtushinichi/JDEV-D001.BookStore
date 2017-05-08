@@ -25,32 +25,36 @@
 	<%@ include file="../../comment/header.jsp"%>
 
 	<!-- start code -->
+	
 	<div class="container-fluid bg-3 text-center">
+	
+	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">
 		<div class="row text-center">
 			<div class="col-sm-offset-2 col-sm-2">
-				<input type="text" class="form-control" id="txt1"
+				<input type="text" class="form-control" id="txt1" name="category_name"
 					placeholder="Category...">
 			</div>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" id="txt1"
+				<input type="text" class="form-control" id="txt1" name="title"
 					placeholder="Title...">
 			</div>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" id="txt1"
+				<input  type="text" class="form-control" id="txt1" name="publisher"
 					placeholder="Publisher...">
 			</div>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" id="txt1"
+				<input  type="text" class="form-control" id="txt1" name="year_of_publishing"
 					placeholder="YearofPublishing...">
 			</div>
 			<div class="col-sm-2">
-				<button type="button" class="btn btn-primary"
-					style="text-align: left; float: left;">Search</button>
+				<button type="submit" class="btn btn-primary"
+					style="text-align: left; float: left;" value="Search">Search</button>
 			</div>
 
 			<div class="col-sm-5"></div>
 			<div class="col-sm-3"></div>
 		</div>
+		</form>
 		</br>
 		<div class="container-fluid bg-3 text-center">
 		
@@ -98,7 +102,7 @@
 				<div class="col-sm-12">
 					<div class="pagelist">
 					<c:forEach var="i" begin="1" end="${pagenumber}">
-					 <a id="N2" href="/${ i}" name="page"
+					 <a id="N2" href="/bookstore/bookmanagement/${ i}" name="page"
 							class="page">${ i}</a> 
 					</c:forEach>
 						

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jvd001.bookstore.app.dao.bookmanagement.BookManagementDAO;
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.dto.BookSearchCondition;
 
 @Service
 @Transactional(value="LiveTransactionManager") 
@@ -69,6 +70,34 @@ public class BookManagementServiceImpl implements BookManagementService{
 		int start=(pageStart-1)*record;
 		
 		return this.bookManagementDAO.getBooksStandard(start, record);
+	}
+
+	@Override
+	@Transactional
+	public List<BookVO> getListBookByCategory(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		return this.bookManagementDAO.getListBookByCategory(sc);
+	}
+
+	@Override
+	@Transactional
+	public List<BookVO> getListBookByTitle(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		return this.bookManagementDAO.getListBookByTitle(sc);
+	}
+
+	@Override
+	@Transactional
+	public List<BookVO> getListBookByPublisher(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		return this.bookManagementDAO.getListBookByPublisher(sc);
+	}
+
+	@Override
+	@Transactional
+	public List<BookVO> getListBookByYearOfPublishing(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		return this.bookManagementDAO.getListBookByYearOfPublishing(sc);
 	}
 
 }

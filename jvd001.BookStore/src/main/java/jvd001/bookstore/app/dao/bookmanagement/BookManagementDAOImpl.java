@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.dto.BookSearchCondition;
 import jvd001.bookstore.app.model.bookmanagement.Book;
 import jvd001.bookstore.app.util.ConvertUtils;
 @Transactional
@@ -115,6 +116,71 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 		}
 		return null;
 	}
+
+	@Override
+	public List<BookVO> getListBookByCategory(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		List results=getHibernateTemplate().find(
+				"select book from Book book,Category cat where cat.category_id = book.category_id and cat.category_name= ? "
+				,new Object[]{sc.getCategory_name()});
+		
+		List<BookVO> listBookVO = new ArrayList<BookVO>();
+		for(int i=0;i<results.size();i++)
+		{
+			
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		}
+		return results.size() > 0 ? listBookVO : null;
+		
+			}
+
+	@Override
+	public List<BookVO> getListBookByTitle(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		List results=getHibernateTemplate().find(
+				"select book from Book book where book.title=?"
+				,new Object[]{sc.getTitle()});
+		List<BookVO> listBookVO = new ArrayList<BookVO>();
+		for(int i=0;i<results.size();i++)
+		{
+			
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		}
+		return results.size() > 0 ? listBookVO : null;
+	}
+
+	@Override
+	public List<BookVO> getListBookByPublisher(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		List results=getHibernateTemplate().find(
+				"select book from Book book where book.publisher= ? "
+				,new Object[]{sc.getPublisher()});
+		List<BookVO> listBookVO = new ArrayList<BookVO>();
+		for(int i=0;i<results.size();i++)
+		{
+			
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		}
+		return results.size() > 0 ? listBookVO : null;
+	}
+
+	@Override
+	public List<BookVO> getListBookByYearOfPublishing(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		List results=getHibernateTemplate().find(
+				"select book from Book book where book.year_of_publishing= ? "
+				,new Object[]{sc.getYear_of_publishing()});
+		
+		List<BookVO> listBookVO = new ArrayList<BookVO>();
+		for(int i=0;i<results.size();i++)
+		{
+			
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		}
+		return results.size() > 0 ? listBookVO : null;
+	}
+
+	
 
 	
 }

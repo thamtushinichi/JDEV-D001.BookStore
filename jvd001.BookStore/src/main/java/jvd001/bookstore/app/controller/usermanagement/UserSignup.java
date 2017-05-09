@@ -38,7 +38,7 @@ public class UserSignup {
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, @ModelAttribute("user") UserVO u) {
+	public String signup(HttpServletRequest request, @ModelAttribute("user") UserVO u) {
 		UserSignupService.ExecuteSignup(u);
 		return "redirect:/login";
 	}

@@ -81,6 +81,13 @@
 	<beans:bean id="UserSignupService" class="jvd001.bookstore.app.service.usermanagement.UserSignupServiceImpl">
 		<beans:property name="userSignupDAO" ref ="UserSignupDAO"></beans:property>
 	</beans:bean>
+	
+	<beans:bean id="categoryDAO" class="jvd001.bookstore.app.dao.classification.CategoryDAOImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	<beans:bean id="categoryService" class="jvd001.bookstore.app.service.classification.CategoryServiceImpl">
+		<beans:property name="categoryDAO" ref="categoryDAO"></beans:property>
+	</beans:bean>
 
 	
 

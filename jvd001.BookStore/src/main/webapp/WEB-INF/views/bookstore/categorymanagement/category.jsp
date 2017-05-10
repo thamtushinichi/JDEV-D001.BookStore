@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-
+<script type="text/javascript">
+var url = '${pageContext.request.contextPath}/';
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -78,37 +81,39 @@
       </tr>
       <c:forEach items="${listCategory}" var="category">
       	<tr>
-			<td>${category.id}</td>
-			<td>${category.name}</td>
-			<td><button class="btn btn-warning" type="button" onclick="btnadd(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event)">Delete</button></td>
+			<td>${category.category_id}</td>
+			<td>${category.category_name}</td>
+			<td><button class="btn btn-warning" type="button" onclick="btnupdate(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event,${category.category_id})">Delete</button></td>
 		</tr>
       </c:forEach>
-      <!-- <tr>
-        <td>1</td>
-        <td>Comedy</td>
-        <td><button class="btn btn-warning" type="button" onclick="btnadd(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event)">Delete</button></td>
-      </tr>
       <tr>
-        <td>2</td>
-        <td>Horror</td>
-        <td><button class="btn btn-warning" type="button" onclick="btnadd(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event)">Delete</button></td>
+            <td colspan="3"><button class="btn-success btn-lg btn-block" type="button" onclick="btnadd(event)">Insert</button></td>
       </tr>
-      <tr>
-        <td>3</td>
-        <td>Literary</td>
-        <td><button class="btn btn-warning" type="button" onclick="btnadd(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event)">Delete</button></td>
-      </tr>
-        <tr>
-            <td>4</td>
-            <td colspan="2"><button class="btn-success btn-lg btn-block" type="button" onclick="btnadd(event)">Insert</button></td>
-        </tr>-->
     </table>
     </c:if>
     <br/>
     </div>
     <script>
     function btnupdate(event){
-        swal("Good job!", "You clicked the button!", "success");
+    	swal({
+            title: "An input!",
+            text: "Write something interesting:",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "slide-from-top",
+            inputPlaceholder: "Write something"
+          },
+          function(inputValue){
+            if (inputValue === false) return false;
+
+            if (inputValue === "") {
+              swal.showInputError("You need to write something!");
+              return false
+            }
+
+            swal("Nice!", "You wrote: " + inputValue, "success");
+          });
     }
     function btnadd(event){
     swal({
@@ -131,7 +136,7 @@
           swal("Nice!", "You wrote: " + inputValue, "success");
         });
     }
-    function btndelete(event){
+    function btndelete(event,id){
     swal({
       title: "Are you sure?",
       text: "You will not be able to recover!",
@@ -141,7 +146,10 @@
       confirmButtonText: "Yes, delete it!",
       closeOnConfirm: false
     },
-    function(){
+    function(isConfirm){
+  		if(isConfirm){
+  			window.location= url + "/categorymanagement/category/remove/" + id;
+  		}
       swal("Deleted!", "Your imaginary file has been deleted.", "success");
     });
     }

@@ -9,6 +9,7 @@ var AddBookPublic = {
 				form.attr("action",action);
 				form.attr("method",method);
 				form.attr("modelattribute",modelattribute);
+//				form.attr("enctype","multipart/form-data");
 				form.submit();
 			});
 		},

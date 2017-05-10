@@ -1,5 +1,6 @@
 package jvd001.bookstore.app.dto;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -12,13 +13,25 @@ public class BookVO {
 	private int book_Id;
 	private String title;
 	private int user_Id;
-	private int category_Id;
+	private List<Integer> category_Ids;
 	private String publisher;
 	private String year_Of_Publishing;
 	private String author;
 	private String description;
 	private String image;
 	private User user;
+	/**
+	 * @return the category_Ids
+	 */
+	public List<Integer> getCategory_Ids() {
+		return category_Ids;
+	}
+	/**
+	 * @param category_Ids the category_Ids to set
+	 */
+	public void setCategory_Ids(List<Integer> category_Ids) {
+		this.category_Ids = category_Ids;
+	}
 	private MultipartFile file;
 	public MultipartFile getFile() {
 		return file;
@@ -64,12 +77,7 @@ public class BookVO {
 	public void setUser_Id(int user_Id) {
 		this.user_Id = user_Id;
 	}
-	public int getCategory_Id() {
-		return category_Id;
-	}
-	public void setCategory_Id(int category_Id) {
-		this.category_Id = category_Id;
-	}
+
 	public String getPublisher() {
 		return publisher;
 	}

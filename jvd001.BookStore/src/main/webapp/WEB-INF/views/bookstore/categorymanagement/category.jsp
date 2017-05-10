@@ -69,13 +69,21 @@
     <p align="right"><input class="searchtxtbox" type="text" name="Search" placeholder="Search"></p><br>
     <h1>Catagory Management</h1>
     <div class="content">
+    <c:if test="${!empty listCategory}">
     <table class="table-bordered" border="1">
       <tr>
         <th>ID</th>
         <th>Catagory Name</th> 
         <th>Function</th>
       </tr>
-      <tr>
+      <c:forEach items="${listCategory}" var="category">
+      	<tr>
+			<td>${category.id}</td>
+			<td>${category.name}</td>
+			<td><button class="btn btn-warning" type="button" onclick="btnadd(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event)">Delete</button></td>
+		</tr>
+      </c:forEach>
+      <!-- <tr>
         <td>1</td>
         <td>Comedy</td>
         <td><button class="btn btn-warning" type="button" onclick="btnadd(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event)">Delete</button></td>
@@ -93,8 +101,9 @@
         <tr>
             <td>4</td>
             <td colspan="2"><button class="btn-success btn-lg btn-block" type="button" onclick="btnadd(event)">Insert</button></td>
-        </tr>
+        </tr>-->
     </table>
+    </c:if>
     <br/>
     </div>
     <script>

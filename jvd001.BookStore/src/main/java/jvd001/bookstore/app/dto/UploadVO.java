@@ -51,6 +51,4 @@ public class UploadVO {
 		this.extention = extention;
 	}
 	
-	
-	
 }

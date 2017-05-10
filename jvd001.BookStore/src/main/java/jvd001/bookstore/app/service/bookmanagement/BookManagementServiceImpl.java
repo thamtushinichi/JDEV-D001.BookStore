@@ -100,4 +100,11 @@ public class BookManagementServiceImpl implements BookManagementService{
 		return this.bookManagementDAO.getListBookByYearOfPublishing(sc);
 	}
 
+	@Override
+	@Transactional
+	public List<BookVO> getListBookBySearchCondition(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		return this.bookManagementDAO.getListBookBySearchCondition(sc);
+	}
+
 }

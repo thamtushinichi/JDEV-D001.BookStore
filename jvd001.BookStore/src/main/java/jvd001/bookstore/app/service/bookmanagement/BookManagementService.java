@@ -17,4 +17,5 @@ public interface BookManagementService {
 	public List<BookVO> getListBookByTitle(BookSearchCondition sc);
 	public List<BookVO> getListBookByPublisher(BookSearchCondition sc);
 	public List<BookVO> getListBookByYearOfPublishing(BookSearchCondition sc);
+	public List<BookVO> getListBookBySearchCondition(BookSearchCondition sc);
 }

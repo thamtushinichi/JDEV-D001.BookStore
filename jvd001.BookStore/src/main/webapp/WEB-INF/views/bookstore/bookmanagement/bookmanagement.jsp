@@ -19,7 +19,7 @@
 <link
 	href="<c:url value="/resources/css/bookmanagement/insertbook.css" />"
 	rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 </head>
 <body>
 	<%@ include file="../../comment/header.jsp"%>
@@ -31,8 +31,14 @@
 	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">
 		<div class="row text-center">
 			<div class="col-sm-offset-2 col-sm-2">
-				<input type="text" class="form-control" id="txt1" name="category_name"
-					placeholder="Category...">
+				<select class="form-control selectpicker" name="category_id" id="category_id" multiple>
+							<option value="1">java</option>
+							<option value="2">food</option>
+							<option value="3">restaurant</option>
+							<option value="4">country</option>
+							<option value="5">animal</option>
+							<option value="6">class</option>
+						</select>
 			</div>
 			<div class="col-sm-2">
 				<input type="text" class="form-control" id="txt1" name="title"
@@ -130,7 +136,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
+
 	
 	function btnDelete(event)
 	{

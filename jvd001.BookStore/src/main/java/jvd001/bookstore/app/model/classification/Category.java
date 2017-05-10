@@ -37,8 +37,8 @@ public class Category implements java.io.Serializable{
 
 	private String category_name;
 	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "book_id") }, 
-	inverseJoinColumns = {@JoinColumn(name = "category_id") })
+	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "category_id") }, 
+	inverseJoinColumns = {@JoinColumn(name = "book_id") })
 	private Set<Book> books= new HashSet<Book>(0);
 	
 	

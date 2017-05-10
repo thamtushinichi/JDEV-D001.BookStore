@@ -112,7 +112,7 @@ public class BookVO {
 	public String toString()
 	{
 		return "id: " + this.book_Id + "title: "+ this.title+" " + " " + "user fullname la : " + this.user.getFullname()
-		+ "category id la: "+ this.category_Id + "publisher : "+ this.publisher + "nam xuat ban : "+ this.year_Of_Publishing;
+		+ "category id la: " + "publisher : "+ this.publisher + "nam xuat ban : "+ this.year_Of_Publishing;
 	}
 	
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package jvd001.bookstore.app.util;
 
 import jvd001.bookstore.app.dto.BookVO;
@@ -24,7 +21,7 @@ public class ConvertUtils {
 		book.setAuthor(bookVO.getAuthor());
 		book.setBook_Id(bookVO.getBook_Id());
 		book.setDescription(bookVO.getDescription());
-		book.setCategory_Id(bookVO.getCategory_Id());
+//		book.setCategory_Ids(bookVO.getCategory_Ids());
 		book.setImage(bookVO.getImage());
 		book.setPublisher(bookVO.getPublisher());
 		book.setTitle(bookVO.getTitle());
@@ -46,7 +43,7 @@ public class ConvertUtils {
 		bookVO.setAuthor(book.getAuthor());
 		bookVO.setBook_Id(book.getBook_Id());
 		bookVO.setDescription(book.getDescription());
-		bookVO.setCategory_Id(book.getCategory_Id());
+//		bookVO.setCategory_Ids(book.getCategory_Ids());
 		bookVO.setImage(book.getImage());
 		bookVO.setPublisher(book.getPublisher());
 		bookVO.setTitle(book.getTitle());

@@ -1,6 +1,5 @@
 package jvd001.bookstore.app.model.bookmanagement;
 
-import javax.persistence.JoinColumn;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -99,16 +99,6 @@ public class Book implements java.io.Serializable {
 		this.title = title;
 	}
 
-
-
-	public int getCategory_Id() {
-		return category_Id;
-	}
-
-	public void setCategory_Id(int category_Id) {
-		this.category_Id = category_Id;
-	}
-
 	public String getPublisher() {
 		return publisher;
 	}
@@ -148,6 +138,17 @@ public class Book implements java.io.Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	
+
+	public int getCategory_Id() {
+		return category_Id;
+	}
+
+	public void setCategory_Id(int category_Id) {
+		this.category_Id = category_Id;
+	}
+
 	@Override
 	public String toString()
 	{

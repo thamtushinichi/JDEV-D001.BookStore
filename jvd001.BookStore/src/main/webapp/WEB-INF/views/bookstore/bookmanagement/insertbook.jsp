@@ -52,7 +52,7 @@ var url = '${pageContext.request.contextPath}/';
 				<div class="row top-buffer">	
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Category</label>
-						<select class="form-control selectpicker" name="category_Id" id="category_Id" multiple>
+						<select class="form-control selectpicker" name="category_Ids" id="category_Ids" multiple>
 							<option value="1">java</option>
 							<option value="2">b</option>
 							<option value="3">c</option>

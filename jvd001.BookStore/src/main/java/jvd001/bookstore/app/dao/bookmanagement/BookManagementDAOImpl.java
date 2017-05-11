@@ -3,24 +3,23 @@ package jvd001.bookstore.app.dao.bookmanagement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
-
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
-import org.hibernate.Hibernate;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.util.StringUtils;
 
-import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.BookSearchCondition;
+import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
+import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.util.ConvertUtils;
 @Transactional
 public class BookManagementDAOImpl extends HibernateDaoSupport implements BookManagementDAO{
@@ -120,18 +119,32 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<BookVO> getListBookByCategory(BookSearchCondition sc) {
 		// TODO Auto-generated method stub
-		List results=getHibernateTemplate().find(
-				"select book from Book book,Category cat where cat.category_id = book.category_id and cat.category_name= ? "
-				,new Object[]{sc.getCategory_name()});
-		
-		List<BookVO> listBookVO = new ArrayList<BookVO>();
-		for(int i=0;i<results.size();i++)
-		{
-			
-			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
-		}
-		return results.size() > 0 ? listBookVO : null;
-		
+//		List<BookVO> listBookVO= this.listBooks();
+//		Set<Category> categories;
+//		List<BookVO> results =new ArrayList<BookVO>();
+//		if(listBookVO.size()==0)
+//		{
+//			return null;
+//		}
+//		
+//		else
+//		{
+//			for(int i=0;i<listBookVO.size();i++)
+//			{
+//				List<Category> listCategory=new ArrayList<Category>(listBookVO.get(i).getCategories());
+//				for(int j=0;j<listCategory.size();j++)
+//				{
+//					// so sanh ten category de lay duoc cuon sach co category do
+//					if(listCategory.get(j).getCategory_name().equals(sc.getCategory_name()))
+//					{
+//						results.add(listBookVO.get(i));
+//						break;
+//					}	
+//				}
+//			}
+//		}
+//		return results.size() > 0 ? results : null;
+		return null;
 			}
 
 	@Override
@@ -178,6 +191,41 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
 		}
 		return results.size() > 0 ? listBookVO : null;
+	}
+
+	@Override
+	public List<BookVO> getListBookBySearchCondition(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		String query="select book from Book book, book.categories cat where 1=1 ";
+		if(sc.getCategory_id()!=0)
+		{
+			String q1= " and cat.category_id = "+sc.getCategory_id() ;
+			query=query +q1;
+		}
+		if(!StringUtils.isEmpty(sc.getTitle()))
+		{
+			String q2= " and book.title = " + sc.getTitle();
+			query=query +q2;
+		}
+		if(!StringUtils.isEmpty(sc.getPublisher()))
+		{
+			String q2= " and book.publisher = " + sc.getPublisher();
+			query=query +q2;
+		}
+		if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
+		{
+			String q2= " and book.year_Of_Publishing = " + sc.getYear_of_publishing();
+			query=query +q2;
+		}
+		List results=getHibernateTemplate().find(query);
+		List<BookVO> listBookVO = new ArrayList<BookVO>();
+		for(int i=0;i<results.size();i++)
+		{
+			
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		}
+		return results.size() > 0 ? listBookVO : null;
+		//return results.size()>0? results:null;
 	}
 
 	

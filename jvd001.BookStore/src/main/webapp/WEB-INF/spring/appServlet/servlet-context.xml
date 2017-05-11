@@ -24,7 +24,7 @@
 	</beans:bean>
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	 <!-- setting maximum upload size -->
-	<beans:property name="maxUploadSize" value="100000" />
+	<beans:property name="maxUploadSize" value="10000000" />
 	</beans:bean>
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -51,7 +51,7 @@
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
 				<!-- <beans:prop key="hibernate.current_session_context_class">thread</beans:prop> -->
-				<beans:prop key="hibernate.show_sql">false</beans:prop>
+				<beans:prop key="hibernate.show_sql">true</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
@@ -80,6 +80,13 @@
 	</beans:bean>
 	<beans:bean id="UserSignupService" class="jvd001.bookstore.app.service.usermanagement.UserSignupServiceImpl">
 		<beans:property name="userSignupDAO" ref ="UserSignupDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="categoryDAO" class="jvd001.bookstore.app.dao.classification.CategoryDAOImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	<beans:bean id="categoryService" class="jvd001.bookstore.app.service.classification.CategoryServiceImpl">
+		<beans:property name="categoryDAO" ref="categoryDAO"></beans:property>
 	</beans:bean>
 
 	

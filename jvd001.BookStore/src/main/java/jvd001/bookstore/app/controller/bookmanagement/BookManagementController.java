@@ -18,7 +18,7 @@ import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
 
 @Controller
-@SessionAttributes("bookSearchCondition")
+//@SessionAttributes("bookSearchCondition")
 public class BookManagementController {
 	private BookManagementService bookmanagementService;
 	
@@ -62,10 +62,7 @@ public class BookManagementController {
 	public  String bookManagementByPage(@PathVariable String page,Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition sc )
 	{
 		
-		System.out.println(sc.getCategory_name());
-		System.out.println(sc.getTitle());
-		System.out.println(sc.getPublisher());
-		System.out.println(sc.getYear_of_publishing());
+		
 		int size=this.bookmanagementService.listBooks().size();
 		int numberpagerender=8;
 		int pagenumber;
@@ -85,20 +82,20 @@ public class BookManagementController {
 		return "bookstore/bookmanagement/bookmanagement";
 	}
 	@RequestMapping(value="/bookmanagement/search/", method=RequestMethod.POST)
-	public  String search(Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition sc )
+	public  String search(Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition bookSearchCondition )
 	{
 		
 //		System.out.println(sc.getCategory_name());
 //		System.out.println(sc.getTitle());
 //		System.out.println(sc.getPublisher());
 //		System.out.println(sc.getYear_of_publishing());
-		
-		List<BookVO> listBookTitle = bookmanagementService.getListBookByTitle(sc);
-		if(listBookTitle!=null)
+		System.out.println(bookSearchCondition.getCategory_id());
+		List<BookVO> listBook = bookmanagementService.getListBookBySearchCondition(bookSearchCondition);
+		if(listBook!=null)
 		{
-			for(int i=0;i<listBookTitle.size();i++)
+			for(int i=0;i<listBook.size();i++)
 			{
-				System.out.println(listBookTitle.get(i).toString());
+				System.out.println(listBook.get(i).toString());
 			}
 		}
 		else

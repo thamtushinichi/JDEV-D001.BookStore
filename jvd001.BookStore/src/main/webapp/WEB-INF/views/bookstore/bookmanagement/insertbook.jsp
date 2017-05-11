@@ -33,6 +33,7 @@ var url = '${pageContext.request.contextPath}/';
 		<!-- HEADER -->
 		<%@ include file="../../comment/header.jsp"%>
 		<form id="frmAddBook">
+		<input type="hidden" name="message" id="message" value="${message }">
 			<div class="container-fluid bg-3">
 				<div class="ibox-title text-center">
 					<h2>Add Book</h2>
@@ -53,9 +54,9 @@ var url = '${pageContext.request.contextPath}/';
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Category</label>
 						<select class="form-control selectpicker" name="category_Ids" id="category_Ids" multiple>
-							<option value="1">java</option>
-							<option value="2">b</option>
-							<option value="3">c</option>
+							<c:forEach items="${categoryLists }" var="categoryList">
+								<option value="${categoryList.category_id }">${categoryList.category_name }</option>
+							</c:forEach>
 						</select>
 					</div>
 				</div>
@@ -68,7 +69,7 @@ var url = '${pageContext.request.contextPath}/';
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Year of publishing</label>
-						<input type="text" class="form-control" id="year_Of_Publishing" name="year_Of_Publishing">
+						<input type="text" class="form-control onlynumber" id="year_Of_Publishing" name="year_Of_Publishing" maxlength="4">
 					</div>
 				</div>
 				<div class="row top-buffer">
@@ -80,7 +81,7 @@ var url = '${pageContext.request.contextPath}/';
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Image</label>
-						<input type="file" class="form-control" id="image" name="image">
+						<input type="file" class="form-control" id="file" name="file">
 					</div>
 				</div>
 				<div class="row top-buffer">

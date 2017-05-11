@@ -1,6 +1,14 @@
 .top-buffer { 
 margin-top:15px;
 }
+label.error {
+    display:block;
+    width:100%;
+    color: red;
+}
+input.error {
+    border:1px solid red;
+}
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;

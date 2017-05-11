@@ -65,7 +65,7 @@ public class ConvertUtils {
 		User user = new User();
 		user.setUsers_id(userVO.getUsers_id());
 		user.setAddress(userVO.getAddress());
-		user.setEmail(user.getEmail());
+		user.setEmail(userVO.getEmail());
 		user.setPassword(userVO.getPassword());
 		user.setFullname(userVO.getFullname());
 		user.setSex(userVO.getSex());

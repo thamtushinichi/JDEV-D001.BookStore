@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.model.usermanagement.User;
 
+@Repository("UserLoginDAO")
+@Transactional
 public class UserLoginDAOImpl extends HibernateDaoSupport implements UserLoginDAO {
 	private static final Logger logger = LoggerFactory.getLogger(UserLoginDAOImpl.class);
 

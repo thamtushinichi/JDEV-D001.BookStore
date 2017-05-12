@@ -91,30 +91,14 @@
 <body>
 <%@ include file="../../comment/header.jsp"%>
 
-</br>
-<div class="container-fluid bg-3 text-center">
-	<div class="row">
-		<div class="col-sm-2">
-		<img src="./images/bookstore-logo_1x.jpg" width="136px" height = "128px"/>
-		</div>
-		<div class="col-sm-3">
-		</br></br>
-			<tab1>BOOK<tab2>STORE</tab2></tab1>
-		</div>
-		<div class="col-sm-3">
-			
-		</div>
-		<div class="col-sm-4">
-		</br></br>
-			<span style="font-size:30px">CALL NOW!<span style="font-size:30px;color:rgb(193, 219, 200);"> 1-800-123-4567</span></span>
-		</div>
-	</div>
-</div>
-  </br>
+
 
 <div class="jumbotron">
   <div class="container text-center">
     <p><h2 ><strong>LOGIN</strong></h2></p>
+    <c:if test="${user.username!=null}">
+    <p><h2 ><strong><font color="red">Username or Password was wrong!</font></strong></h2></p>
+    </c:if>
 	</br>
 	
   </div>
@@ -128,8 +112,8 @@
             
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin">
-                <input type="username" id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus>
-                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+                <input type="username" id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus value="${user.username}">
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="" value="${user.password}">
                 <div class="text-center">
                 	<button class="btn btn-lg btn-primary btn-signin" type="submit">Sign in</button>
                 </div>

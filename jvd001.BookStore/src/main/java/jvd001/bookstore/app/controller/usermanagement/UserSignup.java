@@ -40,8 +40,11 @@ public class UserSignup {
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(HttpServletRequest request, @ModelAttribute("user") UserVO u) {
+	public String signup(HttpServletRequest request, Model model, @ModelAttribute("user") UserVO u) {
 		UserSignupService.ExecuteSignup(u);
+		u.setPassword(null);
+		model.addAttribute("userVO", u);
+		request.getSession().setAttribute("CurrentUserLogin", u);
 		return "redirect:/login";
 	}
 }

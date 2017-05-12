@@ -29,6 +29,8 @@ public class UserLoginDAOImpl extends HibernateDaoSupport implements UserLoginDA
 			User u = results.get(0);
 			UserVO.setUsers_id(u.getUsers_id());
 			UserVO.setUsername(u.getUsername());
+			UserVO.setFullname(u.getFullname());
+			UserVO.setRole_id(u.getRole_id());
 			return UserVO;
 		}
 		else{

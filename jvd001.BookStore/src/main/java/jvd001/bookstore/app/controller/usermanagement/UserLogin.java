@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import jvd001.bookstore.app.HomeController;
 import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.service.usermanagement.UserLoginService;
@@ -23,7 +22,7 @@ import jvd001.bookstore.app.service.usermanagement.UserLoginService;
 public class UserLogin {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@Autowired
 	private UserLoginService UserLoginService;
 
@@ -42,15 +41,17 @@ public class UserLogin {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, @ModelAttribute("user") UserVO u) {
-		try{
-		if(this.UserLoginService.checkLogin(u.getUsername(), u.getPassword())==null){
-			return "redirect:/aa";
-		}
-		else{
-			return "redirect:/bookmanagement";
-		}
-		}catch(Exception e){
+	public String login(HttpServletRequest request, Model model, @ModelAttribute("user") UserVO u) {
+		try {
+			if (this.UserLoginService.checkLogin(u.getUsername(), u.getPassword()) == null) {
+				
+				return "/bookstore/user/login";
+			} else {
+				model.addAttribute("userVO", u);
+				request.getSession().setAttribute("CurrentUserLogin", u);
+				return "/bookstore/user/login";
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:/login";

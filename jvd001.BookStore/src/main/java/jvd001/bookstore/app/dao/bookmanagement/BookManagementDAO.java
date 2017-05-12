@@ -6,7 +6,7 @@ import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 
 public interface BookManagementDAO {
-	public void addBook(BookVO book);
+	public Integer addBook(BookVO book);
 	public void updateBook(BookVO book);
 	public List<BookVO> listBooks();
 	public List<BookVO> getBookById(int id);

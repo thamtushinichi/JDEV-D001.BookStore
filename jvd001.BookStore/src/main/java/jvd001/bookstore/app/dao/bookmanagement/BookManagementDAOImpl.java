@@ -3,7 +3,6 @@ package jvd001.bookstore.app.dao.bookmanagement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -19,95 +18,95 @@ import org.springframework.util.StringUtils;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
-import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.util.ConvertUtils;
-@Transactional
-public class BookManagementDAOImpl extends HibernateDaoSupport implements BookManagementDAO{
 
-	private static final Logger logger=LoggerFactory.getLogger(BookManagementDAOImpl.class);
+@Transactional
+public class BookManagementDAOImpl extends HibernateDaoSupport implements BookManagementDAO {
+
+	private static final Logger logger = LoggerFactory.getLogger(BookManagementDAOImpl.class);
 	private ConvertUtils convertUtils;
+
 	@SuppressWarnings("static-access")
-	public void addBook(BookVO bookVO) {
+	public Integer addBook(BookVO bookVO) {
 		// TODO Auto-generated method stub
 
 		Book book = new Book();
 		book = convertUtils.convertBookVOToBook(bookVO);
-		getHibernateTemplate().save(book);
+		return (Integer) getHibernateTemplate().save(book);
 	}
 
 	@Override
 	public void updateBook(BookVO book) {
 		// TODO Auto-generated method stub
 		// convert
-		
+
 		// execure
-		
+
 	}
 
 	@Override
 	public List<BookVO> listBooks() {
 		// TODO Auto-generated method stub
-		
-		 DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
-		List<Book> books= (List<Book>)getHibernateTemplate().findByCriteria(criteria);
+
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		List<Book> books = (List<Book>) getHibernateTemplate().findByCriteria(criteria);
 		List<BookVO> bookVOs = new ArrayList<BookVO>();
-		for(Book a:books)
-		{
+		for (Book a : books) {
 			bookVOs.add(ConvertUtils.convertBookToBookVO(a));
 		}
-		
-		 return bookVOs;
-	        
+
+		return bookVOs;
+
 	}
 
 	@Override
 	public List<BookVO> getBookById(int id) {
 		// TODO Auto-generated method stub
-		List results=getHibernateTemplate().find("from Book where book_id = ? ",new Object[]{id});
-		
+		List results = getHibernateTemplate().find("from Book where book_id = ? ", new Object[] { id });
+
 		return results.size() > 0 ? results : null;
 	}
 
 	@Override
 	public void removeBook(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public List<BookVO> getListBookByPage(int pageStart,int NumberImageRender) {
+	public List<BookVO> getListBookByPage(int pageStart, int NumberImageRender) {
 		// TODO Auto-generated method stub
-		List<BookVO> bookVOs= this.listBooks();
-		List<BookVO> listBookByPage= new ArrayList<BookVO>();
-		int startIndex=(pageStart-1)*NumberImageRender;
-		int endIndex=pageStart*NumberImageRender;
-		for(int i=startIndex;i<bookVOs.size() && i<endIndex;i++)
-		{
+		List<BookVO> bookVOs = this.listBooks();
+		List<BookVO> listBookByPage = new ArrayList<BookVO>();
+		int startIndex = (pageStart - 1) * NumberImageRender;
+		int endIndex = pageStart * NumberImageRender;
+		for (int i = startIndex; i < bookVOs.size() && i < endIndex; i++) {
 			listBookByPage.add(bookVOs.get(i));
 		}
 		return listBookByPage;
 	}
-	public List<BookVO> getBooksStandard( int start, int record) {
+
+	public List<BookVO> getBooksStandard(int start, int record) {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		try {
 			List<Book> books = new ArrayList<Book>();
 			String queryStr = "select book from Book book ";
-			//queryStr += makeQueryString(queryConditions, logicOperator);
-			
+			// queryStr += makeQueryString(queryConditions, logicOperator);
+
 			Query query = session.createQuery(queryStr);
 			query.setFirstResult(start);
 			query.setMaxResults(record);
-			
-			for (Iterator iterator = query.iterate() ; iterator.hasNext();) {
-				books.add((Book)iterator.next());
+
+			for (Iterator iterator = query.iterate(); iterator.hasNext();) {
+				books.add((Book) iterator.next());
 			}
-			
+
 			List<BookVO> bookVos = new ArrayList<BookVO>();
 			for (Book book : books) {
 				bookVos.add(ConvertUtils.convertBookToBookVO(book));
 			}
 			return bookVos;
-			
+
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -119,45 +118,44 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<BookVO> getListBookByCategory(BookSearchCondition sc) {
 		// TODO Auto-generated method stub
-//		List<BookVO> listBookVO= this.listBooks();
-//		Set<Category> categories;
-//		List<BookVO> results =new ArrayList<BookVO>();
-//		if(listBookVO.size()==0)
-//		{
-//			return null;
-//		}
-//		
-//		else
-//		{
-//			for(int i=0;i<listBookVO.size();i++)
-//			{
-//				List<Category> listCategory=new ArrayList<Category>(listBookVO.get(i).getCategories());
-//				for(int j=0;j<listCategory.size();j++)
-//				{
-//					// so sanh ten category de lay duoc cuon sach co category do
-//					if(listCategory.get(j).getCategory_name().equals(sc.getCategory_name()))
-//					{
-//						results.add(listBookVO.get(i));
-//						break;
-//					}	
-//				}
-//			}
-//		}
-//		return results.size() > 0 ? results : null;
+		// List<BookVO> listBookVO= this.listBooks();
+		// Set<Category> categories;
+		// List<BookVO> results =new ArrayList<BookVO>();
+		// if(listBookVO.size()==0)
+		// {
+		// return null;
+		// }
+		//
+		// else
+		// {
+		// for(int i=0;i<listBookVO.size();i++)
+		// {
+		// List<Category> listCategory=new
+		// ArrayList<Category>(listBookVO.get(i).getCategories());
+		// for(int j=0;j<listCategory.size();j++)
+		// {
+		// // so sanh ten category de lay duoc cuon sach co category do
+		// if(listCategory.get(j).getCategory_name().equals(sc.getCategory_name()))
+		// {
+		// results.add(listBookVO.get(i));
+		// break;
+		// }
+		// }
+		// }
+		// }
+		// return results.size() > 0 ? results : null;
 		return null;
-			}
+	}
 
 	@Override
 	public List<BookVO> getListBookByTitle(BookSearchCondition sc) {
 		// TODO Auto-generated method stub
-		List results=getHibernateTemplate().find(
-				"select book from Book book where book.title=?"
-				,new Object[]{sc.getTitle()});
+		List results = getHibernateTemplate().find("select book from Book book where book.title=?",
+				new Object[] { sc.getTitle() });
 		List<BookVO> listBookVO = new ArrayList<BookVO>();
-		for(int i=0;i<results.size();i++)
-		{
-			
-			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		for (int i = 0; i < results.size(); i++) {
+
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book) results.get(i)));
 		}
 		return results.size() > 0 ? listBookVO : null;
 	}
@@ -165,14 +163,12 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<BookVO> getListBookByPublisher(BookSearchCondition sc) {
 		// TODO Auto-generated method stub
-		List results=getHibernateTemplate().find(
-				"select book from Book book where book.publisher= ? "
-				,new Object[]{sc.getPublisher()});
+		List results = getHibernateTemplate().find("select book from Book book where book.publisher= ? ",
+				new Object[] { sc.getPublisher() });
 		List<BookVO> listBookVO = new ArrayList<BookVO>();
-		for(int i=0;i<results.size();i++)
-		{
-			
-			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		for (int i = 0; i < results.size(); i++) {
+
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book) results.get(i)));
 		}
 		return results.size() > 0 ? listBookVO : null;
 	}
@@ -180,15 +176,13 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<BookVO> getListBookByYearOfPublishing(BookSearchCondition sc) {
 		// TODO Auto-generated method stub
-		List results=getHibernateTemplate().find(
-				"select book from Book book where book.year_of_publishing= ? "
-				,new Object[]{sc.getYear_of_publishing()});
-		
+		List results = getHibernateTemplate().find("select book from Book book where book.year_of_publishing= ? ",
+				new Object[] { sc.getYear_of_publishing() });
+
 		List<BookVO> listBookVO = new ArrayList<BookVO>();
-		for(int i=0;i<results.size();i++)
-		{
-			
-			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		for (int i = 0; i < results.size(); i++) {
+
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book) results.get(i)));
 		}
 		return results.size() > 0 ? listBookVO : null;
 	}
@@ -196,39 +190,31 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<BookVO> getListBookBySearchCondition(BookSearchCondition sc) {
 		// TODO Auto-generated method stub
-		String query="select book from Book book, book.categories cat where 1=1 ";
-		if(sc.getCategory_id()!=0)
-		{
-			String q1= " and cat.category_id = "+sc.getCategory_id() ;
-			query=query +q1;
+		String query = "select book from Book book, book.categories cat where 1=1 ";
+		if (sc.getCategory_id() != 0) {
+			String q1 = " and cat.category_id = " + sc.getCategory_id();
+			query = query + q1;
 		}
-		if(!StringUtils.isEmpty(sc.getTitle()))
-		{
-			String q2= " and book.title = " + sc.getTitle();
-			query=query +q2;
+		if (!StringUtils.isEmpty(sc.getTitle())) {
+			String q2 = " and book.title = " + sc.getTitle();
+			query = query + q2;
 		}
-		if(!StringUtils.isEmpty(sc.getPublisher()))
-		{
-			String q2= " and book.publisher = " + sc.getPublisher();
-			query=query +q2;
+		if (!StringUtils.isEmpty(sc.getPublisher())) {
+			String q2 = " and book.publisher = " + sc.getPublisher();
+			query = query + q2;
 		}
-		if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
-		{
-			String q2= " and book.year_Of_Publishing = " + sc.getYear_of_publishing();
-			query=query +q2;
+		if (!StringUtils.isEmpty(sc.getYear_of_publishing())) {
+			String q2 = " and book.year_Of_Publishing = " + sc.getYear_of_publishing();
+			query = query + q2;
 		}
-		List results=getHibernateTemplate().find(query);
+		List results = getHibernateTemplate().find(query);
 		List<BookVO> listBookVO = new ArrayList<BookVO>();
-		for(int i=0;i<results.size();i++)
-		{
-			
-			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		for (int i = 0; i < results.size(); i++) {
+
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book) results.get(i)));
 		}
 		return results.size() > 0 ? listBookVO : null;
-		//return results.size()>0? results:null;
+		// return results.size()>0? results:null;
 	}
 
-	
-
-	
 }

@@ -23,9 +23,9 @@ public class BookManagementServiceImpl implements BookManagementService{
 
 	@Override
 	@Transactional
-	public void addBook(BookVO book) {
+	public Integer addBook(BookVO book) {
 		// TODO Auto-generated method stub
-		this.bookManagementDAO.addBook(book);
+		return this.bookManagementDAO.addBook(book);
 	}
 
 	@Override

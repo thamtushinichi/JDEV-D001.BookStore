@@ -3,7 +3,7 @@ var AddBookPublic = {
 		eventOnClickButtonSave : function(){
 			$('#btnSave').on('click',function(){
 				var form = $("#frmAddBook");
-				var action = url + "/bookmanagement/addbook/save";
+				var action = url + "bookmanagement/addbook/save";
 				var method = "POST";
 				var modelattribute = "bookVO";
 				$(form).attr("action",action);
@@ -23,9 +23,6 @@ var AddBookPublic = {
 					'year_Of_Publishing' : {
 						minlength : 4,
 					},
-					'category_Ids' : {
-						required : true,
-					},
 				},
 				messages : {
 					'title' : {
@@ -33,9 +30,6 @@ var AddBookPublic = {
 					},
 					'year_Of_Publishing' : {
 						minlength : "Please input 4 number" 
-					},
-					'category_Ids' : {
-						required : "Please choose category" 
 					},
 				},
 			});
@@ -52,28 +46,28 @@ var AddBookPublic = {
 			});
 		},
 		
-		initNotifyMessageBox : function(){
-			var message = $("#message").val();
-			//if message=1 then save successfully
-			if(message == 1){
-				swal({
-					   title: "Notify",
-				       text:  "Save successfully",
-				       type:  "success",
-				       confirmButtonText: "OK"
-				 });
-				$('body').css('overflow','auto');
-			}
-			//if message=2 then save failed
-			else if(message == 2){
-				swal({
-					   title: "Notify",
-				       text:  "Save failed ",
-				       type:  "error",
-				       confirmButtonText: "OK"
-				 });
-				$('body').css('overflow','auto');
-			}
-			$("#message").val(0);
-		},
+//		initNotifyMessageBox : function(){
+//			var message = $("#message").val();
+//			//if message=1 then save successfully
+//			if(message == 1){
+//				swal({
+//					   title: "Notify",
+//				       text:  "Save successfully",
+//				       type:  "success",
+//				       confirmButtonText: "OK"
+//				 });
+//				$('body').css('overflow','auto');
+//			}
+//			//if message=2 then save failed
+//			else if(message == 2){
+//				swal({
+//					   title: "Notify",
+//				       text:  "Save failed ",
+//				       type:  "error",
+//				       confirmButtonText: "OK"
+//				 });
+//				$('body').css('overflow','auto');
+//			}
+//			$("#message").val(0);
+//		},
 }

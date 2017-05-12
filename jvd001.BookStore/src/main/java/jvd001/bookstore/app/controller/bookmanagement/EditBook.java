@@ -17,7 +17,6 @@ public class EditBook {
 	
 	@RequestMapping(value = "/bookmanagement/editbook", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
-
 		return "/bookstore/bookmanagement/editbook";
 	}
 

@@ -3,6 +3,8 @@ package jvd001.bookstore.app.controller.bookmanagement;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,15 +17,26 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jvd001.bookstore.app.dto.BookSearchCondition;
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.dto.CategoryVO;
+import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
+import jvd001.bookstore.app.service.classification.CategoryService;
 
 @Controller
 //@SessionAttributes("bookSearchCondition")
 public class BookManagementController {
 	private BookManagementService bookmanagementService;
-	
+	private CategoryService categoryService;
 	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	public CategoryService getCategoryService() {
+		return categoryService;
+	}
+	@Autowired(required=true)
+	@Qualifier(value="categoryService")
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
 	public BookManagementService getBookService() {
 		return bookmanagementService;
 	}
@@ -34,7 +47,7 @@ public class BookManagementController {
 	}
 
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
-	public String bookManagement(Locale locale, Model model) {
+	public String bookManagement(Locale locale, Model model, HttpServletRequest request) {
 		model.addAttribute("bookVO",new BookVO());
 		
 		int size=this.bookmanagementService.listBooks().size();
@@ -51,6 +64,8 @@ public class BookManagementController {
 		model.addAttribute("listBook",this.bookmanagementService.getBooksStandard(1, numberpagerender));
 		model.addAttribute("sizeListBook", size);
 		model.addAttribute("pagenumber", pagenumber);
+		model.addAttribute("category",new Category());
+		model.addAttribute("listCategory",this.categoryService.listCategory());
 		//int so=page;
 		//System.out.println(so);
 //		request.setAttribute("sumpage", pagenumber);
@@ -89,19 +104,51 @@ public class BookManagementController {
 //		System.out.println(sc.getTitle());
 //		System.out.println(sc.getPublisher());
 //		System.out.println(sc.getYear_of_publishing());
-		System.out.println(bookSearchCondition.getCategory_id());
+		//System.out.println(bookSearchCondition.getCategory_id());
 		List<BookVO> listBook = bookmanagementService.getListBookBySearchCondition(bookSearchCondition);
 		if(listBook!=null)
 		{
-			for(int i=0;i<listBook.size();i++)
+			int size=listBook.size();
+			int numberpagerender=8;
+			int pagenumber;
+			if(size%2==0)
 			{
-				System.out.println(listBook.get(i).toString());
+				pagenumber=size/numberpagerender;
+			}
+			else
+			{
+				pagenumber=size/numberpagerender + 1;
+			}
+			//int iPage= Integer.parseInt(page.trim());
+		//	System.out.println("page la: "+ iPage);
+			model.addAttribute("listBook",listBook);
+			model.addAttribute("sizeListBook", size);
+			model.addAttribute("pagenumber", pagenumber);
+			return "bookstore/bookmanagement/bookmanagement";
+		}
+		else
+		{
+			
+			return "bookstore/bookmanagement/bookmanagement";
+		}
+				
+	}
+	@RequestMapping(value="/bookmanagement/detail/{idbook}", method=RequestMethod.GET)
+	public String detailBook(@PathVariable String idbook,Locale locale, Model model)
+	{
+		System.out.println("id la: " + idbook);
+		List<BookVO> bookVO= this.bookmanagementService.getBookById(Integer.parseInt(idbook));
+		if(bookVO.size()>0)
+		{
+			for(int i=0;i<bookVO.size();i++)
+			{
+				bookVO.get(i).toString();
 			}
 		}
 		else
 		{
-			System.out.println("ko lay duoc du lieu");
+			System.out.println("khong lay duoc");
 		}
-				return null;
+		return "bookstore/bookmanagement/detailbook";
 	}
 }

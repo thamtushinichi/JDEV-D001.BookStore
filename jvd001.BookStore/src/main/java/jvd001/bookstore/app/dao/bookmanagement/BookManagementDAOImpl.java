@@ -63,9 +63,13 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<BookVO> getBookById(int id) {
 		// TODO Auto-generated method stub
-		List results=getHibernateTemplate().find("from Book where book_id = ? ",new Object[]{id});
-		
-		return results.size() > 0 ? results : null;
+		List results=getHibernateTemplate().find("select book from Book book where book.book_Id = "+id);
+		List<BookVO> listBookVO = new ArrayList<BookVO>();
+		for(int i=0;i<results.size();i++)
+		{
+			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
+		}
+		return results.size() > 0 ? listBookVO : null;
 	}
 
 	@Override
@@ -196,37 +200,59 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public List<BookVO> getListBookBySearchCondition(BookSearchCondition sc) {
 		// TODO Auto-generated method stub
-		String query="select book from Book book, book.categories cat where 1=1 ";
+		String query="select book from Category cat join cat.books book where 1=1";
 		if(sc.getCategory_id()!=0)
 		{
+			query="select book from Category cat join cat.books book where 1=1";
 			String q1= " and cat.category_id = "+sc.getCategory_id() ;
 			query=query +q1;
+			if(!StringUtils.isEmpty(sc.getTitle()))
+			{
+				String q2= " and book.title = " +"\'"+ sc.getTitle()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getPublisher()))
+			{
+				String q2= " and book.publisher = " +"\'" +sc.getPublisher()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
+			{
+				String q2= " and book.year_Of_Publishing = " +"\'"+ sc.getYear_of_publishing()+"\'";
+				query=query +q2;
+			}
 		}
-		if(!StringUtils.isEmpty(sc.getTitle()))
+		else
 		{
-			String q2= " and book.title = " + sc.getTitle();
-			query=query +q2;
+			query="select book from Book book where 1=1";
+			if(!StringUtils.isEmpty(sc.getTitle()))
+			{
+				String q2= " and book.title = " +"\'"+ sc.getTitle()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getPublisher()))
+			{
+				String q2= " and book.publisher = " +"\'" +sc.getPublisher()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
+			{
+				String q2= " and book.year_Of_Publishing = " +"\'"+ sc.getYear_of_publishing()+"\'";
+				query=query +q2;
+			}
 		}
-		if(!StringUtils.isEmpty(sc.getPublisher()))
-		{
-			String q2= " and book.publisher = " + sc.getPublisher();
-			query=query +q2;
-		}
-		if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
-		{
-			String q2= " and book.year_Of_Publishing = " + sc.getYear_of_publishing();
-			query=query +q2;
-		}
+		System.out.println("query: "+query);
 		List results=getHibernateTemplate().find(query);
 		List<BookVO> listBookVO = new ArrayList<BookVO>();
 		for(int i=0;i<results.size();i++)
 		{
-			
 			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
 		}
 		return results.size() > 0 ? listBookVO : null;
-		//return results.size()>0? results:null;
+		
 	}
+
+	
 
 	
 

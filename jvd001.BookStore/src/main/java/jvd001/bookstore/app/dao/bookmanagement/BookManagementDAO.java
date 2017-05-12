@@ -3,6 +3,7 @@ package jvd001.bookstore.app.dao.bookmanagement;
 import java.util.List;
 
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 
 public interface BookManagementDAO {
@@ -18,4 +19,5 @@ public interface BookManagementDAO {
 	public List<BookVO> getListBookByPublisher(BookSearchCondition sc);
 	public List<BookVO> getListBookByYearOfPublishing(BookSearchCondition sc);
 	public List<BookVO> getListBookBySearchCondition(BookSearchCondition sc);
+	
 } 

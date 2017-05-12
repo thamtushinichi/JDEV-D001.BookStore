@@ -31,13 +31,11 @@
 	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">
 		<div class="row text-center">
 			<div class="col-sm-offset-2 col-sm-2">
-				<select class="form-control selectpicker" name="category_id" id="category_id" multiple>
-							<option value="1">java</option>
-							<option value="2">food</option>
-							<option value="3">restaurant</option>
-							<option value="4">country</option>
-							<option value="5">animal</option>
-							<option value="6">class</option>
+				<select class="form-control" name="category_id" id="category_id">
+				<option value="0">NoOption</option>
+				<c:forEach items="${listCategory}" var ="category">
+			<option value="${category.category_id}">${category.category_name}</option>
+				</c:forEach>
 						</select>
 			</div>
 			<div class="col-sm-2">
@@ -74,7 +72,7 @@
 				
 					<img src="<c:url value="/resources/images/${bookVO.image}"/>" class="image-responsive" 
 						width="60%" height="240"></br>
-					</br> <a href="#">${bookVO.title }</a></br>
+					</br> <a href="<c:url value='/bookmanagement/detail/${bookVO.book_Id}'/>" name ="idbook">${bookVO.title }</a></br>
 					</br>
 					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
 					<button  type="button"

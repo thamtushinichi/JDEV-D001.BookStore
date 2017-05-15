@@ -113,7 +113,7 @@ public class AddBookController {
 	        //set upload file name
 	        upload.setUpload_File_Name(bookVO.getBook().getOriginalFilename());
 	        //set upload file show
-	        String fileNameBookUpLoad = bookId + bookVO.getBook().getContentType();
+	        String fileNameBookUpLoad = bookId + bookVO.getBook().getOriginalFilename();
 	        upload.setFile_Name(fileNameBookUpLoad);
 	        //set extension
 	        String extention = FilenameUtils.getExtension(bookVO.getBook().getOriginalFilename());

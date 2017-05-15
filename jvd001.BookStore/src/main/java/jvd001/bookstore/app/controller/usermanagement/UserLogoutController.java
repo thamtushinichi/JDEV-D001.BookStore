@@ -18,33 +18,19 @@ import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.service.usermanagement.UserSignupService;
 
 @Controller
-public class UserSignup {
+public class UserLogoutController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@Autowired
-	private UserSignupService UserSignupService;
 	
-	public UserSignupService getUserSignupService() {
-		return UserSignupService;
-	}
 
-	public void setUserSignupService(UserSignupService userSignupService) {
-		UserSignupService = userSignupService;
-	}
-
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public String signup(Locale locale, Model model) {
-
-		return "/bookstore/user/signup";
-	}
-	
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(HttpServletRequest request, Model model, @ModelAttribute("user") UserVO u) {
-		UserSignupService.ExecuteSignup(u);
-		u.setPassword(null);
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String signup(HttpServletRequest request,Locale locale, Model model, @ModelAttribute("user") UserVO u) {
+		request.getSession().removeAttribute("CurrentUserLogin");
 		model.addAttribute("userVO", u);
-		request.getSession().setAttribute("CurrentUserLogin", u);
-		return "redirect:/login";
+		
+		return "/bookstore/user/logout";
 	}
+	
+	
 }

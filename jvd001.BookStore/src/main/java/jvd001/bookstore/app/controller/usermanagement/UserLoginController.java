@@ -21,7 +21,7 @@ import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.service.usermanagement.UserLoginService;
 
 @Controller
-public class UserLogin {
+public class UserLoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 

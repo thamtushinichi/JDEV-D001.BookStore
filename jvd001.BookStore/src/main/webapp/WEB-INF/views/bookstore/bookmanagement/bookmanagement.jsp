@@ -28,8 +28,7 @@
 	<!-- start code -->
 	
 	<div class="container-fluid bg-3 text-center">
-	<%BookSearchCondition sc= new BookSearchCondition(); %>
-	<%sc= (BookSearchCondition)request.getSession().getAttribute("bookSearchCondition"); %>
+	
 	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">
 		<div class="row text-center">
 			<div class="col-sm-offset-2 col-sm-2">
@@ -42,15 +41,15 @@
 			</div>
 			<div class="col-sm-2">
 				<input type="text" class="form-control" id="txt1" name="title"
-					placeholder="Title..." value="${sc.title }"/>
+					placeholder="Title..." value="${bsc.title}"/>
 			</div>
 			<div class="col-sm-2">
 				<input  type="text" class="form-control" id="txt1" name="publisher"
-					placeholder="Publisher..." value="${sc.publisher }"/>
+					placeholder="Publisher..." value="${bsc.publisher}"/>
 			</div>
 			<div class="col-sm-2">
 				<input  type="text" class="form-control" id="txt1" name="year_of_publishing"
-					placeholder="YearofPublishing..." value="${sc.year_Of_Publishing }"/>
+					placeholder="YearofPublishing..." value="${bsc.year_of_publishing}"/>
 			</div>
 			<div class="col-sm-2">
 				<button type="submit" class="btn btn-primary"

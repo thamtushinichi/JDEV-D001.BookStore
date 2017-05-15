@@ -89,11 +89,11 @@ public class BookManagementController {
 	@RequestMapping(value="/bookmanagement/{page}", method=RequestMethod.GET)
 	public  String bookManagementByPage(@PathVariable String page,Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition sc,HttpServletRequest request )
 	{
-		HttpSession session =request.getSession(false);
-		if(session !=null)
-		{
 			BookSearchCondition bsc=(BookSearchCondition) request.getSession().getAttribute("bookSearchCondition");
+			if(bsc !=null)
+			{
 			System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
+			model.addAttribute("bsc",bsc);
 		}
 		
 		int size=this.bookmanagementService.listBooks().size();
@@ -112,12 +112,14 @@ public class BookManagementController {
 		model.addAttribute("listBook",this.bookmanagementService.getBooksStandard(iPage, numberpagerender));
 		model.addAttribute("sizeListBook", size);
 		model.addAttribute("pagenumber", pagenumber);
+		
 		return "bookstore/bookmanagement/bookmanagement";
 	}
 	@RequestMapping(value="/bookmanagement/search/", method=RequestMethod.POST)
 	public  String search(Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition bookSearchCondition,HttpServletRequest request )
 	{
 		request.getSession().setAttribute("bookSearchCondition", bookSearchCondition);
+		model.addAttribute("bsc",bookSearchCondition);
 		List<BookVO> listBook = bookmanagementService.getListBookBySearchCondition(bookSearchCondition);
 		if(listBook!=null)
 		{

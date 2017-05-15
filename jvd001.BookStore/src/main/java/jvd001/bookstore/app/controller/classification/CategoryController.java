@@ -35,16 +35,20 @@ public class CategoryController {
 	}
 	
 	
-	//For add and update person both
+	//For add and update category both
 		@RequestMapping(value= "/categorymanagement/category/add", method = RequestMethod.POST)
-		public String addPerson(@ModelAttribute("category") Category p){
-			
-			if(p.getCategory_id() == 0){
-				//new person, add it
-				this.categoryService.addCategory(p);
+		public String addCategory(@ModelAttribute("category") Category p){
+			if ((p.getCategory_name().isEmpty()==false)){
+			if((p.getCategory_id() == 0)){
+				
+				//new category, add id
+					this.categoryService.addCategory(p);
 			}else{
-				//existing person, call update
+				//existing category, call update
 				this.categoryService.updateCategory(p);
+			}
+			}else{
+				return "/bookstore/categorymanagement/error";
 			}
 			
 			return "redirect:/categorymanagement/category";
@@ -58,6 +62,12 @@ public class CategoryController {
 	        return "redirect:/categorymanagement/category";
 	    }
 		
+		@RequestMapping("/categorymanagement/category/edit/{id}")
 		
+	    public String editCategory(@PathVariable("id") int id, Model model){
+	        model.addAttribute("category", this.categoryService.getCategoryById(id));
+	        model.addAttribute("listCategory", this.categoryService.listCategory());
+	        return "/bookstore/categorymanagement/category";
+	    }
 		
 }

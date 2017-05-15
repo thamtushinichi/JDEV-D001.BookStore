@@ -17,10 +17,15 @@
 
 <!-- LINK LIB JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/validate-js/2.0.1/validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/validate-js/2.0.1/validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript">
-var url = '${pageContext.request.contextPath}/';
+var url = '${pageContext.request.contextPath}';
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -51,7 +56,7 @@ var url = '${pageContext.request.contextPath}/';
             background-color: white;
         }
         table tr:nth-child(odd) {
-            background-color: #dddddd;
+            background-color: white;
         }
         .searchtxtbox{
             -moz-border-radius: 10px;
@@ -65,6 +70,14 @@ var url = '${pageContext.request.contextPath}/';
             -webkit-border-radius: 20px;
             border-radius: 20px;
         }
+        .hideme{
+    		display:none;
+    		visibility:hidden;
+		}
+		.showme{
+    		display:inline;
+    		visibility:visible;
+		}
     </style>
 </head>
 <body>
@@ -73,7 +86,7 @@ var url = '${pageContext.request.contextPath}/';
     <h1>Catagory Management</h1>
     <div class="content">
     <c:if test="${!empty listCategory}">
-    <table class="table-bordered" border="1">
+    <table  border="1">
       <tr>
         <th>ID</th>
         <th>Catagory Name</th> 
@@ -81,20 +94,65 @@ var url = '${pageContext.request.contextPath}/';
       </tr>
       <c:forEach items="${listCategory}" var="category">
       	<tr>
-			<td>${category.category_id}</td>
+			<td width=10%>${category.category_id}</td>
 			<td>${category.category_name}</td>
-			<td><button class="btn btn-warning" type="button" onclick="btnupdate(event)">Update</button> <button class="btn btn-danger" type="button" onclick="btndelete(event,${category.category_id})">Delete</button></td>
+			<td width=20%>
+				<button class="btn btn-warning" type="button" onclick="btnedit(event,${category.category_id})">Edit</button>
+				<button class="btn btn-danger" type="button" onclick="btndelete(event,${category.category_id})">Delete</button>
+			</td>
 		</tr>
       </c:forEach>
+      <c:url var="addAction" value="/categorymanagement/category/add" ></c:url>
+      <form:form id="myForm" action="${addAction}" commandName="category">
       <tr>
-            <td colspan="3"><button class="btn-success btn-lg btn-block" type="button" onclick="btnadd(event)">Insert</button></td>
+      		<td>
+      			<c:if test="${!empty category.category_name}">
+      				Editing: ${category.category_id}
+      				<form:input class="hideme" path="category_id" />
+      				<form:hidden class="hideme" path="category_id" />
+      			</c:if>
+			</td>
+			<td>
+			<form:input path="category_name" />
+			</td>
+            <td>
+            	<c:if test="${empty category.category_name}"> 
+            	<input class="btn-success btn btn-block" type="submit" value="<spring:message text="Insert"/>" /> 
+            	</c:if>
+            	<c:if test="${!empty category.category_name}"> 
+            	<input class="btn-warning btn" type="submit" value="<spring:message text="Update"/>" /> 
+            	<button class="btn-danger btn" type="button" onclick="btncancel(event)">Cancel</button>
+            	</c:if>
+            </td>
       </tr>
+      </form:form>
     </table>
     </c:if>
     <br/>
     </div>
     <script>
-    function btnupdate(event){
+    $(document).ready(function () {
+        $('#myForm').validate({ // initialize the plugin
+            rules: {
+                category_name: {
+                    required: true
+                },
+            },
+            messages: {
+            	category_name: {
+                    required: 'Please enter the category name!!!'
+                }
+            }
+        });
+
+    });
+    function btncancel(event){
+    	window.location= url + "/categorymanagement/category/";
+    }
+    function btnedit(event,id){
+    	window.location= url + "/categorymanagement/category/edit/" + id;
+    }
+    function btnupdate(event,id,name){
     	swal({
             title: "An input!",
             text: "Write something interesting:",
@@ -102,40 +160,24 @@ var url = '${pageContext.request.contextPath}/';
             showCancelButton: true,
             closeOnConfirm: false,
             animation: "slide-from-top",
-            inputPlaceholder: "Write something"
+            inputPlaceholder: "Write something",
+            inputValue: name
           },
           function(inputValue){
             if (inputValue === false) return false;
-
+            if (inputValue === name) {
+                swal.showInputError("You need to write something else!");
+                return false
+              }
             if (inputValue === "") {
               swal.showInputError("You need to write something!");
               return false
             }
-
+            //window.location= url + "/categorymanagement/category/edit/" + id +"/"+ name;
             swal("Nice!", "You wrote: " + inputValue, "success");
           });
     }
-    function btnadd(event){
-    swal({
-          title: "An input!",
-          text: "Write something interesting:",
-          type: "input",
-          showCancelButton: true,
-          closeOnConfirm: false,
-          animation: "slide-from-top",
-          inputPlaceholder: "Write something"
-        },
-        function(inputValue){
-          if (inputValue === false) return false;
 
-          if (inputValue === "") {
-            swal.showInputError("You need to write something!");
-            return false
-          }
-
-          swal("Nice!", "You wrote: " + inputValue, "success");
-        });
-    }
     function btndelete(event,id){
     swal({
       title: "Are you sure?",
@@ -150,7 +192,6 @@ var url = '${pageContext.request.contextPath}/';
   		if(isConfirm){
   			window.location= url + "/categorymanagement/category/remove/" + id;
   		}
-      swal("Deleted!", "Your imaginary file has been deleted.", "success");
     });
     }
     </script>

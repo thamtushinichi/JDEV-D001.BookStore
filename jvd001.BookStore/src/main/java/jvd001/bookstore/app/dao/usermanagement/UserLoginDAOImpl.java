@@ -1,5 +1,7 @@
 package jvd001.bookstore.app.dao.usermanagement;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -23,6 +25,7 @@ public class UserLoginDAOImpl extends HibernateDaoSupport implements UserLoginDA
 	@Override
 	public UserVO checkLogin(String UsernameInput, String PasswordInput) {
 		UserVO UserVO= new UserVO();
+		PasswordInput=cryptWithMD5(PasswordInput);
 		List<User> results = (List<User>) getHibernateTemplate().find("from" + " User " + "where username = ? and password= ? ",
 				new Object[] { UsernameInput,PasswordInput });
 		if(results.size()>0){
@@ -37,5 +40,22 @@ public class UserLoginDAOImpl extends HibernateDaoSupport implements UserLoginDA
 		return null;
 		}
 	}
-	
+	public static String cryptWithMD5(String pass){
+	    try {
+	    	MessageDigest md = MessageDigest.getInstance("MD5");
+	        byte[] passBytes = pass.getBytes();
+	        md.reset();
+	        byte[] digested = md.digest(passBytes);
+	        StringBuffer sb = new StringBuffer();
+	        for(int i=0;i<digested.length;i++){
+	            sb.append(Integer.toHexString(0xff & digested[i]));
+	        }
+	        return sb.toString();
+	    } catch (NoSuchAlgorithmException ex) {
+	       ex.printStackTrace();
+	    }
+	        return null;
+
+
+	   }
 }

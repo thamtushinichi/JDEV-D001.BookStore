@@ -1,5 +1,7 @@
 package jvd001.bookstore.app.controller.usermanagement;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +44,7 @@ public class UserLogin {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, Model model, @ModelAttribute("user") UserVO u) {
+
 		try {
 			if (this.UserLoginService.checkLogin(u.getUsername(), u.getPassword()) == null) {
 				
@@ -57,4 +60,5 @@ public class UserLogin {
 		return "redirect:/login";
 	}
 
+	   
 }

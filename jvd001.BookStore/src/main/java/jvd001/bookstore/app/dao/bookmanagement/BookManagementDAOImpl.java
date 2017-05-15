@@ -35,11 +35,14 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 		return (Integer) getHibernateTemplate().save(book);
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
-	public void updateBook(BookVO book) {
+	public void updateBook(BookVO bookVO) {
 		// TODO Auto-generated method stub
+		Book book = new Book();
 		// convert
-
+		book = convertUtils.convertBookVOToBook(bookVO);
+		getHibernateTemplate().update(book);
 		// execure
 
 	}

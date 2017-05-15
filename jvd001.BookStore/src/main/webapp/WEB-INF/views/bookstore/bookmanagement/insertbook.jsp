@@ -87,7 +87,7 @@ var url = '${pageContext.request.contextPath}/';
 				<div class="row top-buffer">
 					<div class="col-sm-offset-2 col-sm-8">
 						<label>Book</label>
-						<input type="file" class="form-control" id="" name="">
+						<input type="file" class="form-control" id="book" name="book">
 					</div>
 				</div>
 				<div class="row top-buffer text-center">

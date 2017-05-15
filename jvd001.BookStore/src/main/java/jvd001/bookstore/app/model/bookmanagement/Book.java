@@ -50,9 +50,7 @@ public class Book implements java.io.Serializable {
 	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "category_id") })
 	private Set<Category> categories = new HashSet<Category>(0);
-	
-	
-	
+
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
@@ -72,7 +70,7 @@ public class Book implements java.io.Serializable {
 		this.categories = categories;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "book")
 	private Set<Upload> uploads = new HashSet<Upload>(0);
 
 	public Set<Upload> getUploads() {

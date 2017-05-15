@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.model.bookmanagement.Upload;
 import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.model.usermanagement.User;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
@@ -72,22 +74,55 @@ public class AddBookController {
 				 categorys.add(category);
 				}
 			bookVO.setCategories(categorys);
-			bookVO.setImage(bookVO.getFile().getContentType());
-			int bookId = this.bookmanagementService.addBook(bookVO);
+			int bookId = 0;
+//			bookId = this.bookmanagementService.addBook(bookVO);
 			String fileName = null;
-			//book upload
+			//image upload
 		if(!bookVO.getFile().isEmpty()){
 	        try {
 	        	String path = request.getSession().getServletContext().getRealPath("");
 	        	fileName = bookVO.getFile().getOriginalFilename();
 	            byte[] bytes = bookVO.getFile().getBytes();
 	            BufferedOutputStream buffStream = 
-	                    new BufferedOutputStream(new FileOutputStream(new File(path + "temp\\images\\" + bookId + fileName)));
+	                    new BufferedOutputStream(new FileOutputStream(new File(path + "resources\\images\\" + bookId + fileName)));
 	            buffStream.write(bytes);
 	            buffStream.close();
 	        } catch (Exception e) {
 	            return "You failed to upload " + fileName + ": " + e.getMessage();
 	        }
+		}
+		//set image name
+		bookVO.setImage(bookId + bookVO.getFile().getOriginalFilename());
+		
+		String fileNameBook = null;
+		if(!bookVO.getBook().isEmpty()){
+	        try {
+	        	String path = request.getSession().getServletContext().getRealPath("");
+	        	fileNameBook = bookVO.getBook().getOriginalFilename();
+	            byte[] bytes = bookVO.getBook().getBytes();
+	            BufferedOutputStream buffStream = 
+	                    new BufferedOutputStream(new FileOutputStream(new File(path + "resources\\book\\" + bookId + fileNameBook)));
+	            buffStream.write(bytes);
+	            buffStream.close();
+	        } catch (Exception e) {
+	            return "You failed to upload " + fileName + ": " + e.getMessage();
+	        }
+	        bookVO.setBook_Id(bookId);
+	        Set<Upload> uploads = new HashSet<Upload>();
+	        Upload upload = new Upload();
+	        //set upload file name
+	        upload.setUpload_File_Name(bookVO.getBook().getOriginalFilename());
+	        //set upload file show
+	        String fileNameBookUpLoad = bookId + bookVO.getBook().getContentType();
+	        upload.setFile_Name(fileNameBookUpLoad);
+	        //set extension
+	        String extention = FilenameUtils.getExtension(bookVO.getBook().getOriginalFilename());
+	        upload.setExtension(extention);
+	        upload.setUsers_Id(1);
+	        uploads.add(upload);
+	        bookVO.setUploads(uploads);
+	        
+	        bookId = this.bookmanagementService.addBook(bookVO);
 		}
 
 			rd.addFlashAttribute("message", 1);

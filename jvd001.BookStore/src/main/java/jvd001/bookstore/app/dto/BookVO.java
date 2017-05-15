@@ -20,6 +20,14 @@ public class BookVO {
 	private String description;
 	private String image;
 	private User user;
+	private MultipartFile book;
+	
+	public MultipartFile getBook() {
+		return book;
+	}
+	public void setBook(MultipartFile book) {
+		this.book = book;
+	}
 	/**
 	 * @return the category_Ids
 	 */

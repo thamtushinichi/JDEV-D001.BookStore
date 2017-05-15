@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Category implements java.io.Serializable{
 	private int category_id;
 
 	private String category_name;
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
 	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "category_id") }, 
 	inverseJoinColumns = {@JoinColumn(name = "book_id") })
 	private Set<Book> books= new HashSet<Book>(0);

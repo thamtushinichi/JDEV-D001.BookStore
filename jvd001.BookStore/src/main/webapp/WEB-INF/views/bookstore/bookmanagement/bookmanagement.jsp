@@ -1,3 +1,4 @@
+<%@page import="jvd001.bookstore.app.dto.BookSearchCondition"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -27,7 +28,8 @@
 	<!-- start code -->
 	
 	<div class="container-fluid bg-3 text-center">
-	
+	<%BookSearchCondition sc= new BookSearchCondition(); %>
+	<%sc= (BookSearchCondition)request.getSession().getAttribute("bookSearchCondition"); %>
 	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">
 		<div class="row text-center">
 			<div class="col-sm-offset-2 col-sm-2">
@@ -40,15 +42,15 @@
 			</div>
 			<div class="col-sm-2">
 				<input type="text" class="form-control" id="txt1" name="title"
-					placeholder="Title...">
+					placeholder="Title..." value="${sc.title }"/>
 			</div>
 			<div class="col-sm-2">
 				<input  type="text" class="form-control" id="txt1" name="publisher"
-					placeholder="Publisher...">
+					placeholder="Publisher..." value="${sc.publisher }"/>
 			</div>
 			<div class="col-sm-2">
 				<input  type="text" class="form-control" id="txt1" name="year_of_publishing"
-					placeholder="YearofPublishing...">
+					placeholder="YearofPublishing..." value="${sc.year_Of_Publishing }"/>
 			</div>
 			<div class="col-sm-2">
 				<button type="submit" class="btn btn-primary"
@@ -62,10 +64,7 @@
 		</br>
 		<div class="container-fluid bg-3 text-center">
 		
-			
 		<%int i=0; %>
-		
-		
 		<div class="row text-center">
 			<c:forEach items="${listBook }" var ="bookVO">
 				<div class="col-sm-3">
@@ -86,8 +85,6 @@
 			<br>
 		</div>
 			
-		
-
 		<!-- insert book -->
 		</br>
 		<div class="container-fluid bg-3 text-center">

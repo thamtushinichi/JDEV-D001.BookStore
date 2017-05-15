@@ -1,9 +1,12 @@
 package jvd001.bookstore.app.controller.bookmanagement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,7 +41,7 @@ public class BookManagementController {
 		this.categoryService = categoryService;
 	}
 	public BookManagementService getBookService() {
-		return bookmanagementService;
+		return bookmanagementService;                   
 	}
 	@Autowired(required=true)
 	@Qualifier(value="bookmanagementService")
@@ -48,8 +51,18 @@ public class BookManagementController {
 
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
 	public String bookManagement(Locale locale, Model model, HttpServletRequest request) {
+//		HttpSession session =request.getSession(false);
+//		if(session ==null)
+//		{
+//			BookSearchCondition bsc=(BookSearchCondition) request.getSession().getAttribute("bookSearchCondition");
+//		System.out.println("bookmanagemt , "+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
+//		
+//		}
+//		else
+//		{
+//			System.out.println("null");
+//		}
 		model.addAttribute("bookVO",new BookVO());
-		
 		int size=this.bookmanagementService.listBooks().size();
 		int numberpagerender=8;
 		int pagenumber;
@@ -74,9 +87,14 @@ public class BookManagementController {
 		return "/bookstore/bookmanagement/bookmanagement";
 	}
 	@RequestMapping(value="/bookmanagement/{page}", method=RequestMethod.GET)
-	public  String bookManagementByPage(@PathVariable String page,Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition sc )
+	public  String bookManagementByPage(@PathVariable String page,Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition sc,HttpServletRequest request )
 	{
-		
+		HttpSession session =request.getSession(false);
+		if(session !=null)
+		{
+			BookSearchCondition bsc=(BookSearchCondition) request.getSession().getAttribute("bookSearchCondition");
+			System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
+		}
 		
 		int size=this.bookmanagementService.listBooks().size();
 		int numberpagerender=8;
@@ -97,19 +115,14 @@ public class BookManagementController {
 		return "bookstore/bookmanagement/bookmanagement";
 	}
 	@RequestMapping(value="/bookmanagement/search/", method=RequestMethod.POST)
-	public  String search(Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition bookSearchCondition )
+	public  String search(Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition bookSearchCondition,HttpServletRequest request )
 	{
-		
-//		System.out.println(sc.getCategory_name());
-//		System.out.println(sc.getTitle());
-//		System.out.println(sc.getPublisher());
-//		System.out.println(sc.getYear_of_publishing());
-		//System.out.println(bookSearchCondition.getCategory_id());
+		request.getSession().setAttribute("bookSearchCondition", bookSearchCondition);
 		List<BookVO> listBook = bookmanagementService.getListBookBySearchCondition(bookSearchCondition);
 		if(listBook!=null)
 		{
 			int size=listBook.size();
-			int numberpagerender=8;
+			int numberpagerender=8; 
 			int pagenumber;
 			if(size%2==0)
 			{
@@ -137,14 +150,22 @@ public class BookManagementController {
 	public String detailBook(@PathVariable String idbook,Locale locale, Model model)
 	{
 		System.out.println("id la: " + idbook);
-		List<BookVO> bookVO= this.bookmanagementService.getBookById(Integer.parseInt(idbook));
-		if(bookVO.size()>0)
+		List<BookVO> bookVOs= this.bookmanagementService.getBookById(Integer.parseInt(idbook));
+		if(bookVOs.size()>0)
 		{
-			for(int i=0;i<bookVO.size();i++)
+			BookVO bookVO = null;
+			List<Category> a = null;
+			for(int i=0;i<bookVOs.size();i++)
 			{
-				bookVO.get(i).toString();
+				 bookVO=bookVOs.get(i);
+				 a= new ArrayList(bookVO.getCategories());                
+				
 			}
+			model.addAttribute("bookVO",bookVO);
+			model.addAttribute("listCategory",a);
+			
 		}
+		
 		else
 		{
 			System.out.println("khong lay duoc");

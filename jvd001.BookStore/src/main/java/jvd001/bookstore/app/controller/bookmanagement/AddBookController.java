@@ -75,7 +75,7 @@ public class AddBookController {
 				}
 			bookVO.setCategories(categorys);
 			int bookId = 0;
-//			bookId = this.bookmanagementService.addBook(bookVO);
+			bookId = this.bookmanagementService.addBook(bookVO);
 			String fileName = null;
 			//image upload
 		if(!bookVO.getFile().isEmpty()){
@@ -122,7 +122,8 @@ public class AddBookController {
 	        uploads.add(upload);
 	        bookVO.setUploads(uploads);
 	        
-	        bookId = this.bookmanagementService.addBook(bookVO);
+//	        bookId = this.bookmanagementService.addBook(bookVO);
+	        this.bookmanagementService.updateBook(bookVO);
 		}
 
 			rd.addFlashAttribute("message", 1);

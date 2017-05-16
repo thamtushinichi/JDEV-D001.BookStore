@@ -45,6 +45,23 @@ var AddBookPublic = {
 				 }
 			});
 		},
+		initValidateFile : function(){
+			$('input[name="book"]').change(function () {
+				if ($(this).val() != '') {      
+				   if(!(/\.(doc|docx|pdf|txt)$/i).test($(this).val())){
+						swal({
+					   title: "Notify",
+				       text:  "You must select an valid document file",
+				       type:  "warning",
+				       confirmButtonText: "OK"
+						});
+					   $(this).val("");
+					   return false;
+				   }
+				}
+				
+			});
+		},
 		
 //		initNotifyMessageBox : function(){
 //			var message = $("#message").val();

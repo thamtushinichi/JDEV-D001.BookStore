@@ -91,54 +91,17 @@
 <body>
 <%@ include file="../../comment/header.jsp"%>
 
+
+
 <div class="jumbotron">
   <div class="container text-center">
-    <p><h2 ><strong>LOGIN</strong></h2></p>
+    <p><h2 ><strong>You've logged out successfully!</strong></h2></p>
     
-				<c:if test="${userVO.users_id>0}">
-					<p>
-					<h2>
-						<strong><font color="red">You've logged in
-								successfully!</font></strong>
-					</h2>
-					</p>
-				</c:if>
-
-					<c:if test="${user.username!=null&&userVO.users_id==null}">
-						<p>
-						<h2>
-							<strong><font color="red">Username or Password
-									was wrong!</font></strong>
-						</h2>
-						</p>
-					</c:if>
+    <p><h2 ><strong><font color="red"></font></strong></h2></p>
 	
   </div>
 </div>
 
-<!-- login -->
-<c:if test="${userVO.users_id==null}">
-					<div class="container">
-		<form:form id="loginForm" method="post" modelAttribute="user">
-        <div class="card card-container">
-            
-            <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin">
-                <input type="username" id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus value="${user.username}">
-                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="" value="${user.password}">
-                <div class="text-center">
-                	<button class="btn btn-lg btn-primary btn-signin" type="submit">Sign in</button>
-                </div>
-                
-                
-          </form:form>
-            <a href="/bookstore/signup" class="register">
-                Don't have an account? Register
-            </a>
-        </div>
-				</c:if>
-
-    				
 
 <%@ include file="../../comment/footer.jsp"%>
 </body>

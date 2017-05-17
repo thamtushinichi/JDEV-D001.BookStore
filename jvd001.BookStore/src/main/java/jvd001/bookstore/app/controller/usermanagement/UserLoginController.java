@@ -44,19 +44,14 @@ public class UserLoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, Model model, @ModelAttribute("user") UserVO u,@ModelAttribute("userValid") UserVO userValid) {
-		String status=" ";
-		
 		try {
 			if (this.UserLoginService.checkLogin(u.getUsername(), u.getPassword()) == null) {
-				status="Username or Password was wrong!";
+				
 				return "/bookstore/user/login";
 			} else {
 				userValid=this.UserLoginService.checkLogin(u.getUsername(), u.getPassword());
 				model.addAttribute("userVO", userValid);
 				request.getSession().setAttribute("CurrentUserLogin", userValid);
-				userValid=u;
-				status="You've logged in successfully!";
-
 				return "/bookstore/user/login";
 			}
 		} catch (Exception e) {

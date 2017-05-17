@@ -26,6 +26,8 @@
 					<c:when test="${userVO.users_id>0}">
 						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
 								Hello ${userVO.fullname}</a></li>
+								<li><a href="/bookstore/logout"><span class="glyphicon glyphicon-log-in"></span>
+								Log Out</a></li>
 						<br />
 					</c:when>
 					<c:otherwise>

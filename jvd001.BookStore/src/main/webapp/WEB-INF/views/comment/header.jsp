@@ -23,9 +23,9 @@
 			<ul class="nav navbar-nav navbar-right">
 
 				<c:choose>
-					<c:when test="${userVO.getUsers_id()>0}">
+					<c:when test="${userVO.users_id>0}">
 						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-								Hello ${userVO.getFullname()}</a></li>
+								Hello ${userVO.fullname}</a></li>
 						<br />
 					</c:when>
 					<c:otherwise>

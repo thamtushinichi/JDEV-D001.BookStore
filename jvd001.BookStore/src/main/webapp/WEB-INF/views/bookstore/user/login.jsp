@@ -96,10 +96,8 @@
 <div class="jumbotron">
   <div class="container text-center">
     <p><h2 ><strong>LOGIN</strong></h2></p>
-    <c:if test="${user.username!=null}">
-    <p><h2 ><strong><font color="red">Username or Password was wrong!</font></strong></h2></p>
-    </c:if>
-	</br>
+    
+    <p><h2 ><strong><font color="red"></font></strong></h2></p>
 	
   </div>
 </div>

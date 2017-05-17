@@ -75,7 +75,7 @@ public class AddBookController {
 				}
 			bookVO.setCategories(categorys);
 //			int bookId = 0;
-			int bookId = this.bookmanagementService.getMaxId() +1;
+			int bookId = this.bookmanagementService.getMaxId() + 1;
 			//set book
 	        Set<Upload> uploads = new HashSet<Upload>();
 	        Upload upload = new Upload();
@@ -92,7 +92,6 @@ public class AddBookController {
 	        bookVO.setUploads(uploads);
 	        
 	        //save book
-			bookId = this.bookmanagementService.addBook(bookVO);
 			String fileName = null;
 			//image upload
 		if(!bookVO.getFile().isEmpty()){
@@ -124,11 +123,7 @@ public class AddBookController {
 	        } catch (Exception e) {
 	            return "You failed to upload " + fileName + ": " + e.getMessage();
 	        }
-//	        bookVO.setBook_Id(bookId);
-
-	        
-//	        bookId = this.bookmanagementService.addBook(bookVO);
-//	        this.bookmanagementService.updateBook(bookVO);
+	        bookId = this.bookmanagementService.addBook(bookVO);
 		}
 
 			rd.addFlashAttribute("message", 1);

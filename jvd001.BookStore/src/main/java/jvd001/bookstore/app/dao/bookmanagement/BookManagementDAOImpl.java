@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import jvd001.bookstore.app.dto.BookSearchCondition;
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.dto.UploadVO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
 import jvd001.bookstore.app.util.ConvertUtils;
 
@@ -257,13 +258,21 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 		// TODO Auto-generated method stub
 		
 		int maxId=0;
-		Book results=(Book) getHibernateTemplate().find("select max(book.book_id) from Book book");
-		if(results!=null)
+		List<Integer> results= (List<Integer>) getHibernateTemplate().find("select max(book.book_Id) from Book book");
+	
+		if(results.size()>0)
 		{
-			maxId = results.getBook_Id();
+			maxId = results.get(0);
+			System.out.print("chay toi day id la: " + maxId);
 			return maxId;
 		}
 		 return -1;
+		
+	}
+
+	@Override
+	public void uploadFileBook(UploadVO upload) {
+		// TODO Auto-generated method stub
 		
 	}
 }

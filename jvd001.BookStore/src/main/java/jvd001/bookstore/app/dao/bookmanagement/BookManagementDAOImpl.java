@@ -10,6 +10,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -247,6 +249,21 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 			listBookVO.add(ConvertUtils.convertBookToBookVO((Book)results.get(i)));
 		}
 		return results.size() > 0 ? listBookVO : null;
+		
+	}
+
+	@Override
+	public int getMaxId() {
+		// TODO Auto-generated method stub
+		
+		int maxId=0;
+		Book results=(Book) getHibernateTemplate().find("select max(book.book_id) from Book book");
+		if(results!=null)
+		{
+			maxId = results.getBook_Id();
+			return maxId;
+		}
+		 return -1;
 		
 	}
 }

@@ -74,8 +74,8 @@ public class AddBookController {
 				 categorys.add(category);
 				}
 			bookVO.setCategories(categorys);
-			int bookId = 0;
-			
+//			int bookId = 0;
+			int bookId = this.bookmanagementService.getMaxId() +1;
 			//set book
 	        Set<Upload> uploads = new HashSet<Upload>();
 	        Upload upload = new Upload();

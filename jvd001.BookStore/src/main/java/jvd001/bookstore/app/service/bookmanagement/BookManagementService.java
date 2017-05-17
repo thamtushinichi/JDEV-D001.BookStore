@@ -2,6 +2,8 @@ package jvd001.bookstore.app.service.bookmanagement;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 
@@ -18,4 +20,5 @@ public interface BookManagementService {
 	public List<BookVO> getListBookByPublisher(BookSearchCondition sc);
 	public List<BookVO> getListBookByYearOfPublishing(BookSearchCondition sc);
 	public List<BookVO> getListBookBySearchCondition(BookSearchCondition sc);
+	public int getMaxId();
 }

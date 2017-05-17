@@ -2,6 +2,7 @@ package jvd001.bookstore.app.service.bookmanagement;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,5 +107,14 @@ public class BookManagementServiceImpl implements BookManagementService{
 		// TODO Auto-generated method stub
 		return this.bookManagementDAO.getListBookBySearchCondition(sc);
 	}
+
+	@Override
+	@Transactional
+	public int getMaxId() {
+		// TODO Auto-generated method stub
+		return this.bookManagementDAO.getMaxId();
+	}
+
+
 
 }

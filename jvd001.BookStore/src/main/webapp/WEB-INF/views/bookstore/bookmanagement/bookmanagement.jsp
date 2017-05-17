@@ -63,7 +63,7 @@
 		</br>
 		<div class="container-fluid bg-3 text-center">
 		
-		<%int i=0; %>
+		
 		<div class="row text-center">
 			<c:forEach items="${listBook }" var ="bookVO">
 				<div class="col-sm-3">
@@ -79,7 +79,7 @@
 					<button  type="button" class="btn btn-danger"
 						onclick="btnDelete(event)">Delete</button><br><br></a>
 				</div>
-				<%i=i+1; %>
+				
 			</c:forEach>
 			<br>
 		</div>

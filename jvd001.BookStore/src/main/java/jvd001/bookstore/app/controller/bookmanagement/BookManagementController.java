@@ -112,7 +112,7 @@ public class BookManagementController {
 		model.addAttribute("listBook",this.bookmanagementService.getBooksStandard(iPage, numberpagerender));
 		model.addAttribute("sizeListBook", size);
 		model.addAttribute("pagenumber", pagenumber);
-		
+		model.addAttribute("listCategory",this.categoryService.listCategory());
 		return "bookstore/bookmanagement/bookmanagement";
 	}
 	@RequestMapping(value="/bookmanagement/search/", method=RequestMethod.POST)
@@ -139,11 +139,12 @@ public class BookManagementController {
 			model.addAttribute("listBook",listBook);
 			model.addAttribute("sizeListBook", size);
 			model.addAttribute("pagenumber", pagenumber);
+			model.addAttribute("listCategory",this.categoryService.listCategory());
 			return "bookstore/bookmanagement/bookmanagement";
 		}
 		else
 		{
-			
+			model.addAttribute("listCategory",this.categoryService.listCategory());
 			return "bookstore/bookmanagement/bookmanagement";
 		}
 				

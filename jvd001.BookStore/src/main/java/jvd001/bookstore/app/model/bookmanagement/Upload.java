@@ -1,5 +1,6 @@
 package jvd001.bookstore.app.model.bookmanagement;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Upload {
 	public void setExtension(String extension) {
 		this.extension = extension;
 	}
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "book_id")
 	private Book book;
 	

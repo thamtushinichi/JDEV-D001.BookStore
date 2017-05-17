@@ -46,12 +46,12 @@ public class Book implements java.io.Serializable {
 	private String description;
 	@Column(name = "image")
 	private String image;
-	@ManyToMany(cascade = { CascadeType.ALL },fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "category_id") })
 	private Set<Category> categories = new HashSet<Category>(0);
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
 	public User getUser() {

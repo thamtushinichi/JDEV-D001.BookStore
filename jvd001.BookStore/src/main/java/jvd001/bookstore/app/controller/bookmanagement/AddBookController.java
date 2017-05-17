@@ -75,6 +75,23 @@ public class AddBookController {
 				}
 			bookVO.setCategories(categorys);
 			int bookId = 0;
+			
+			//set book
+	        Set<Upload> uploads = new HashSet<Upload>();
+	        Upload upload = new Upload();
+	        //set upload file name
+	        upload.setUpload_File_Name(bookVO.getBook().getOriginalFilename());
+	        //set upload file show
+	        String fileNameBookUpLoad = bookId + bookVO.getBook().getOriginalFilename();
+	        upload.setFile_Name(fileNameBookUpLoad);
+	        //set extension
+	        String extention = FilenameUtils.getExtension(bookVO.getBook().getOriginalFilename());
+	        upload.setExtension(extention);
+	        upload.setUsers_Id(1);
+	        uploads.add(upload);
+	        bookVO.setUploads(uploads);
+	        
+	        //save book
 			bookId = this.bookmanagementService.addBook(bookVO);
 			String fileName = null;
 			//image upload
@@ -107,23 +124,11 @@ public class AddBookController {
 	        } catch (Exception e) {
 	            return "You failed to upload " + fileName + ": " + e.getMessage();
 	        }
-	        bookVO.setBook_Id(bookId);
-	        Set<Upload> uploads = new HashSet<Upload>();
-	        Upload upload = new Upload();
-	        //set upload file name
-	        upload.setUpload_File_Name(bookVO.getBook().getOriginalFilename());
-	        //set upload file show
-	        String fileNameBookUpLoad = bookId + bookVO.getBook().getOriginalFilename();
-	        upload.setFile_Name(fileNameBookUpLoad);
-	        //set extension
-	        String extention = FilenameUtils.getExtension(bookVO.getBook().getOriginalFilename());
-	        upload.setExtension(extention);
-	        upload.setUsers_Id(1);
-	        uploads.add(upload);
-	        bookVO.setUploads(uploads);
+//	        bookVO.setBook_Id(bookId);
+
 	        
 //	        bookId = this.bookmanagementService.addBook(bookVO);
-	        this.bookmanagementService.updateBook(bookVO);
+//	        this.bookmanagementService.updateBook(bookVO);
 		}
 
 			rd.addFlashAttribute("message", 1);

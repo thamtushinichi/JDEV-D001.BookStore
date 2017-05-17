@@ -95,7 +95,7 @@
 
 <div class="jumbotron">
   <div class="container text-center">
-    <p><h2 ><strong>You've logged out successfully!</strong></h2></p>
+    <p><h2 ><strong><font color="red">You've logged out successfully!</font></strong></h2></p>
     
     <p><h2 ><strong><font color="red"></font></strong></h2></p>
 	

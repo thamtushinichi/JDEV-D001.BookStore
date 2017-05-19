@@ -115,6 +115,21 @@ public class BookManagementServiceImpl implements BookManagementService{
 		return this.bookManagementDAO.getMaxId();
 	}
 
+	@Override
+	@Transactional
+	public List<BookVO> getListBook_By_SearchCondition_Per_Page(BookSearchCondition sc, int start_Page,
+			int nRecord_Per_Page) {
+		int start=(start_Page-1)*nRecord_Per_Page;
+		return this.bookManagementDAO.getListBook_By_SearchCondition_Per_Page(sc,start, nRecord_Per_Page);
+	}
+
+	@Override
+	@Transactional
+	public long getSize_By_SearchCondition_Per_Page(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		return this.bookManagementDAO.getSize_By_SearchCondition_Per_Page(sc);
+	}
+
 
 
 }

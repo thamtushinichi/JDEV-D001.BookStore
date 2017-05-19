@@ -51,22 +51,24 @@ public class BookManagementController {
 
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
 	public String bookManagement(Locale locale, Model model, HttpServletRequest request) {
-//		HttpSession session =request.getSession(false);
-//		if(session ==null)
-//		{
-//			BookSearchCondition bsc=(BookSearchCondition) request.getSession().getAttribute("bookSearchCondition");
-//		System.out.println("bookmanagemt , "+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
-//		
-//		}
-//		else
-//		{
-//			System.out.println("null");
-//		}
-		model.addAttribute("bookVO",new BookVO());
-		int size=this.bookmanagementService.listBooks().size();
+		
+		BookSearchCondition sc= new BookSearchCondition();
+		sc.setCategory_id(0);
+		sc.setPublisher("");
+		sc.setTitle("");
+		sc.setYear_of_publishing("");
+		
+		if(sc !=null)
+		{
+	//	System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
+		model.addAttribute("bsc",sc);
+	}
+		
+		int size=(int)this.bookmanagementService.getSize_By_SearchCondition_Per_Page(sc);
+		
 		int numberpagerender=8;
 		int pagenumber;
-		if(size%2==0)
+		if(size%numberpagerender==0)
 		{
 			pagenumber=size/numberpagerender;
 		}
@@ -74,32 +76,39 @@ public class BookManagementController {
 		{
 			pagenumber=size/numberpagerender + 1;
 		}
-		model.addAttribute("listBook",this.bookmanagementService.getBooksStandard(1, numberpagerender));
+		
+		model.addAttribute("bookVO",new BookVO());
+		model.addAttribute("listBook",this.bookmanagementService.getListBook_By_SearchCondition_Per_Page(sc, 1, numberpagerender));
 		model.addAttribute("sizeListBook", size);
 		model.addAttribute("pagenumber", pagenumber);
 		model.addAttribute("category",new Category());
 		model.addAttribute("listCategory",this.categoryService.listCategory());
-		//int so=page;
-		//System.out.println(so);
-//		request.setAttribute("sumpage", pagenumber);
-//		request.setAttribute("sizeListBook", size);
+		
 		
 		return "/bookstore/bookmanagement/bookmanagement";
 	}
 	@RequestMapping(value="/bookmanagement/{page}", method=RequestMethod.GET)
 	public  String bookManagementByPage(@PathVariable String page,Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition sc,HttpServletRequest request )
 	{
-			BookSearchCondition bsc=(BookSearchCondition) request.getSession().getAttribute("bookSearchCondition");
-			if(bsc !=null)
-			{
-			System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
-			model.addAttribute("bsc",bsc);
+		//BookSearchCondition sc= new BookSearchCondition();
+//		sc.setCategory_id(0);
+//		sc.setPublisher("");
+//		sc.setTitle("");
+//		sc.setYear_of_publishing("");
+		sc=(BookSearchCondition) request.getSession().getAttribute("bookSearchCondition");
+		if(sc !=null)
+		{
+		model.addAttribute("bsc",sc);
 		}
-		
-		int size=this.bookmanagementService.listBooks().size();
+		else
+		{
+			sc= new BookSearchCondition();
+			sc.setCategory_id(0);
+		}
+		int size=(int)this.bookmanagementService.getSize_By_SearchCondition_Per_Page(sc);
 		int numberpagerender=8;
 		int pagenumber;
-		if(size%2==0)
+		if(size%numberpagerender==0)
 		{
 			pagenumber=size/numberpagerender;
 		}
@@ -109,7 +118,7 @@ public class BookManagementController {
 		}
 		int iPage= Integer.parseInt(page.trim());
 		System.out.println("page la: "+ iPage);
-		model.addAttribute("listBook",this.bookmanagementService.getBooksStandard(iPage, numberpagerender));
+		model.addAttribute("listBook",this.bookmanagementService.getListBook_By_SearchCondition_Per_Page(sc, iPage, numberpagerender));
 		model.addAttribute("sizeListBook", size);
 		model.addAttribute("pagenumber", pagenumber);
 		model.addAttribute("listCategory",this.categoryService.listCategory());
@@ -120,13 +129,13 @@ public class BookManagementController {
 	{
 		request.getSession().setAttribute("bookSearchCondition", bookSearchCondition);
 		model.addAttribute("bsc",bookSearchCondition);
-		List<BookVO> listBook = bookmanagementService.getListBookBySearchCondition(bookSearchCondition);
+		List<BookVO> listBook = bookmanagementService.getListBook_By_SearchCondition_Per_Page(bookSearchCondition, 1, 8);
 		if(listBook!=null)
 		{
-			int size=listBook.size();
+			int size=(int)this.bookmanagementService.getSize_By_SearchCondition_Per_Page(bookSearchCondition);
 			int numberpagerender=8; 
 			int pagenumber;
-			if(size%2==0)
+			if(size%numberpagerender==0)
 			{
 				pagenumber=size/numberpagerender;
 			}
@@ -134,8 +143,6 @@ public class BookManagementController {
 			{
 				pagenumber=size/numberpagerender + 1;
 			}
-			//int iPage= Integer.parseInt(page.trim());
-		//	System.out.println("page la: "+ iPage);
 			model.addAttribute("listBook",listBook);
 			model.addAttribute("sizeListBook", size);
 			model.addAttribute("pagenumber", pagenumber);

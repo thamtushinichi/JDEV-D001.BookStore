@@ -10,8 +10,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -102,7 +100,7 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 		try {
 			List<Book> books = new ArrayList<Book>();
 			String queryStr = "select book from Book book ";
-			// queryStr += makeQueryString(queryConditions, logicOperator);
+//			 queryStr += makeQueryString(queryConditions, logicOperator);
 
 			Query query = session.createQuery(queryStr);
 			query.setFirstResult(start);
@@ -273,6 +271,143 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 	@Override
 	public void uploadFileBook(UploadVO upload) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getSizeListBook() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<BookVO> getListBook_By_SearchCondition_Per_Page(BookSearchCondition sc, int start_Page,
+			int nRecord_Per_Page) {
+		// TODO Auto-generated method stub
+		String query="select book from Category cat join cat.books book where 1=1";
+		if(sc.getCategory_id()!=0)
+		{
+			query="select book from Category cat join cat.books book where 1=1";
+			String q1= " and cat.category_id = "+sc.getCategory_id() ;
+			query=query +q1;
+			if(!StringUtils.isEmpty(sc.getTitle()))
+			{
+				String q2= " and book.title = " +"\'"+ sc.getTitle()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getPublisher()))
+			{
+				String q2= " and book.publisher = " +"\'" +sc.getPublisher()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
+			{
+				String q2= " and book.year_Of_Publishing = " +"\'"+ sc.getYear_of_publishing()+"\'";
+				query=query +q2;
+			}
+		}
+		else
+		{
+			query="select book from Book book where 1=1";
+			if(!StringUtils.isEmpty(sc.getTitle()))
+			{
+				String q2= " and book.title = " +"\'"+ sc.getTitle()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getPublisher()))
+			{
+				String q2= " and book.publisher = " +"\'" +sc.getPublisher()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
+			{
+				String q2= " and book.year_Of_Publishing = " +"\'"+ sc.getYear_of_publishing()+"\'";
+				query=query +q2;
+			}
+		}
+		System.out.println("query: "+query);
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		try {
+			List<Book> books = new ArrayList<Book>();
+			
+//			 queryStr += makeQueryString(queryConditions, logicOperator);
+
+			Query queryQ = session.createQuery(query);
+			queryQ.setFirstResult(start_Page);
+			queryQ.setMaxResults(nRecord_Per_Page);
+
+			for (Iterator iterator = queryQ.iterate(); iterator.hasNext();) {
+				books.add((Book) iterator.next());
+			}
+
+			List<BookVO> bookVos = new ArrayList<BookVO>();
+			for (Book book : books) {
+				bookVos.add(ConvertUtils.convertBookToBookVO(book));
+			}
+			return bookVos;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+		
+	}
+
+	@Override
+	public long getSize_By_SearchCondition_Per_Page(BookSearchCondition sc) {
+		// TODO Auto-generated method stub
+		String query="select count(*) from Category cat join cat.books book where 1=1";
+		if(sc.getCategory_id()!=0)
+		{
+			query="select count(*) from Category cat join cat.books book where 1=1";
+			String q1= " and cat.category_id = "+sc.getCategory_id() ;
+			query=query +q1;
+			if(!StringUtils.isEmpty(sc.getTitle()))
+			{
+				String q2= " and book.title = " +"\'"+ sc.getTitle()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getPublisher()))
+			{
+				String q2= " and book.publisher = " +"\'" +sc.getPublisher()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
+			{
+				String q2= " and book.year_Of_Publishing = " +"\'"+ sc.getYear_of_publishing()+"\'";
+				query=query +q2;
+			}
+		}
+		else
+		{
+			query="select count(*) from Book book where 1=1";
+			if(!StringUtils.isEmpty(sc.getTitle()))
+			{
+				String q2= " and book.title = " +"\'"+ sc.getTitle()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getPublisher()))
+			{
+				String q2= " and book.publisher = " +"\'" +sc.getPublisher()+"\'";
+				query=query +q2;
+			}
+			if(!StringUtils.isEmpty(sc.getYear_of_publishing()))
+			{
+				String q2= " and book.year_Of_Publishing = " +"\'"+ sc.getYear_of_publishing()+"\'";
+				query=query +q2;
+			}
+		}
+		System.out.println("query: "+query);
+		List<Long> results=(List<Long>) getHibernateTemplate().find(query);
+		long nRecord=0;
+		if(results.size()>0)
+		{
+			nRecord = results.get(0);
+			System.out.print("Record Sum is: " + nRecord);
+			return nRecord;
+		}
+		 return -1;
 		
 	}
 }

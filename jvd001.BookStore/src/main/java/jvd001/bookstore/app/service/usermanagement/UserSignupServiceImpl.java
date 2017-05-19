@@ -12,13 +12,13 @@ public class UserSignupServiceImpl implements UserSignupService {
 	public UserSignupDAO getUserSignupDAO() {
 		return UserSignupDAO;
 	}
-
+	
 	public void setUserSignupDAO(UserSignupDAO userSignupDAO) {
 		UserSignupDAO = userSignupDAO;
 	}
 
 	@Override
-	public UserVO ExecuteSignup(UserVO UserVO) {
+	public boolean ExecuteSignup(UserVO UserVO) {
 		// TODO Auto-generated method stub
 		return UserSignupDAO.ExecuteSignup(UserVO);
 	}

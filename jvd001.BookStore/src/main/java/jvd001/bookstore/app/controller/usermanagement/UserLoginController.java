@@ -46,13 +46,12 @@ public class UserLoginController {
 	public String login(HttpServletRequest request, Model model, @ModelAttribute("user") UserVO u,@ModelAttribute("userValid") UserVO userValid) {
 		try {
 			if (this.UserLoginService.checkLogin(u.getUsername(), u.getPassword()) == null) {
-				
 				return "/bookstore/user/login";
 			} else {
 				userValid=this.UserLoginService.checkLogin(u.getUsername(), u.getPassword());
 				model.addAttribute("userVO", userValid);
 				request.getSession().setAttribute("CurrentUserLogin", userValid);
-				return "/bookstore/user/login";
+				return "/bookstore/";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

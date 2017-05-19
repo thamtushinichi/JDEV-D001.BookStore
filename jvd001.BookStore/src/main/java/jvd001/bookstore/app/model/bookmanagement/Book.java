@@ -11,12 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.model.usermanagement.User;
 
@@ -70,8 +72,9 @@ public class Book implements java.io.Serializable {
 		this.categories = categories;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "book")
-	private Set<Upload> uploads = new HashSet<Upload>(0);
+	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name="book_id")
+	private Set<Upload> uploads = new HashSet<Upload>();
 
 	public Set<Upload> getUploads() {
 		return uploads;
@@ -152,4 +155,5 @@ public class Book implements java.io.Serializable {
 	{
 		return "title: "+ this.title+" " + " "+ this.book_Id + "user fullname la : " + this.user.getFullname();
 	}
+
 }

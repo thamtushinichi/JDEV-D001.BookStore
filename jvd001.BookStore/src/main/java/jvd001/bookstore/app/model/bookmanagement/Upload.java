@@ -1,6 +1,7 @@
 package jvd001.bookstore.app.model.bookmanagement;
 
-import javax.persistence.CascadeType;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 @Entity
 @Table(name="upload")
@@ -20,7 +26,10 @@ public class Upload {
 	private String upload_File_Name;
 	private String file_Name;
 	private int users_Id;
-	private String create_Time;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Generated(GenerationTime.ALWAYS) 
+	@Column(name="create_time", insertable=false,updatable=false)
+	private Calendar create_Time;
 	private String extension;
 	public String getExtension() {
 		return extension;
@@ -28,7 +37,7 @@ public class Upload {
 	public void setExtension(String extension) {
 		this.extension = extension;
 	}
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
 	
@@ -63,10 +72,12 @@ public class Upload {
 	public void setUsers_Id(int users_Id) {
 		this.users_Id = users_Id;
 	}
-	public String getCreate_Time() {
+	public Calendar getCreate_Time() {
 		return create_Time;
 	}
-	public void setCreate_Time(String create_Time) {
+	public void setCreate_Time(Calendar create_Time) {
 		this.create_Time = create_Time;
 	}
+	
+	
 }

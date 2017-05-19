@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jvd001.bookstore.app.dto.BookVO;
+import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.model.bookmanagement.Upload;
 import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.model.usermanagement.User;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
 import jvd001.bookstore.app.service.classification.CategoryService;
+import jvd001.bookstore.app.util.ConvertUtils;
 
 @Controller
 public class AddBookController {
@@ -50,18 +52,22 @@ public class AddBookController {
 	}
 
 	@RequestMapping(value = "/bookmanagement/addbook", method = RequestMethod.GET)
-	public String addbook(Locale locale, Model model) {
+	public String addbook(Locale locale, Model model, HttpServletRequest request) {
 		List<Category> categoryLists = new ArrayList<Category>();
 		categoryLists = this.categoryService.listCategory();
 		model.addAttribute("categoryLists", categoryLists);
+		UserVO user = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+		model.addAttribute("userVO", user);
 		return "/bookstore/bookmanagement/insertbook";
 	}
 
 	@RequestMapping(value = "/bookmanagement/addbook/save", method = RequestMethod.POST)
-	public String addBook(@ModelAttribute("bookVO") BookVO bookVO,HttpServletRequest request,RedirectAttributes rd) {
+	public String addBook(@ModelAttribute("bookVO") BookVO bookVO,HttpServletRequest request,RedirectAttributes rd, Model model) {
 		// get user infor
-		User user = new User();
-		user.setUsers_id(1);
+		UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+		User user = ConvertUtils.convertUserVOToUser(userVO);
+		
+//		user.setUsers_id(1);
 		bookVO.setUser(user);
 		try {
 			Set<Category> categorys = new HashSet<Category>();
@@ -87,7 +93,7 @@ public class AddBookController {
 	        //set extension
 	        String extention = FilenameUtils.getExtension(bookVO.getBook().getOriginalFilename());
 	        upload.setExtension(extention);
-	        upload.setUsers_Id(1);
+	        upload.setUsers_Id(bookVO.getUser().getUsers_id());
 	        uploads.add(upload);
 	        bookVO.setUploads(uploads);
 	        

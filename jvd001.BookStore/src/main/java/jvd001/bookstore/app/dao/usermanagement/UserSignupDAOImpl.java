@@ -2,6 +2,7 @@ package jvd001.bookstore.app.dao.usermanagement;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ public class UserSignupDAOImpl extends HibernateDaoSupport implements UserSignup
 
 	@Override
 	@Transactional(readOnly=false)
-	public UserVO ExecuteSignup(UserVO UserVO) {
+	public boolean ExecuteSignup(UserVO UserVO) {
 		// TODO Auto-generated method stub
 		
 		UserVO.setRole_id(1);
@@ -25,8 +26,12 @@ public class UserSignupDAOImpl extends HibernateDaoSupport implements UserSignup
 		User User = new User();
 		ConvertUtils c = new ConvertUtils();
 		User=c.convertUserVOToUser(UserVO);
-		getHibernateTemplate().save(User);
-		return UserVO;
+		if(!checkExistUser(User)){
+			getHibernateTemplate().save(User);
+			return true;
+		}
+		
+		return false;
 	}
 	public static String cryptWithMD5(String pass){
 	    try {
@@ -43,9 +48,14 @@ public class UserSignupDAOImpl extends HibernateDaoSupport implements UserSignup
 	       ex.printStackTrace();
 	    }
 	        return null;
-
-
 	   }
-	
+	public boolean checkExistUser(User User){
+		List<User> results = (List<User>) getHibernateTemplate().find("from" + " User " + "where username = ? or email= ? ",
+				new Object[] { User.getUsername(),User.getEmail() });
+		if (results.isEmpty()){
+			return false;
+		}
+		return true;
+	}
 
 }

@@ -34,6 +34,7 @@ var url = '${pageContext.request.contextPath}/';
 		<%@ include file="../../comment/header.jsp"%>
 		<form id="frmAddBook">
 		<input type="hidden" name="message" id="message" value="${message }">
+		<input type="hidden" name="userVO" id="users_id" value="${userVO.users_id == null ? '0':userVO.users_id}">
 			<div class="container-fluid bg-3">
 				<div class="ibox-title text-center">
 					<h2>Add Book</h2>
@@ -103,26 +104,4 @@ var url = '${pageContext.request.contextPath}/';
 	</div>
 	</body>
 	<br>
-
-<!-- <script type="text/javascript">
-	swal({
-  title: "Are you sure?",
-  text: "You will not be able to recover this imaginary file!",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonClass: "btn-danger",
-  confirmButtonText: "Yes, delete it!",
-  cancelButtonText: "No, cancel plx!",
-  closeOnConfirm: false,
-  closeOnCancel: false
-},
-function(isConfirm) {
-  if (isConfirm) {
-    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-  } else {
-    swal("Cancelled", "Your imaginary file is safe :)", "error");
-  }
-});
-
-</script> -->
 </html>

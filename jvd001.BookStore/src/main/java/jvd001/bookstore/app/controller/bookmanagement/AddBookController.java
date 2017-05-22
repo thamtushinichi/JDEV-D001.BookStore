@@ -66,7 +66,7 @@ public class AddBookController {
 		// get user infor
 		UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
 		User user = ConvertUtils.convertUserVOToUser(userVO);
-		
+		model.addAttribute("userVO", userVO);
 //		user.setUsers_id(1);
 		bookVO.setUser(user);
 		try {

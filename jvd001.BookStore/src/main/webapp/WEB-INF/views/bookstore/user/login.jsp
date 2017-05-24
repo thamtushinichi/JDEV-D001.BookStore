@@ -95,7 +95,7 @@
   <div class="container text-center">
     <p><h2 ><strong>LOGIN</strong></h2></p>
     
-				<c:if test="${userVO.users_id>0}">
+				<c:if test="${userVO.users_id>0||userVO.username!=null}">
 					<p>
 					<h2>
 						<strong><font color="red">You've logged in

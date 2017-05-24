@@ -23,7 +23,7 @@
 			<ul class="nav navbar-nav navbar-right">
 
 				<c:choose>
-					<c:when test="${userVO.users_id>0}">
+					<c:when test="${userVO.users_id>0||userVO.username!=null}">
 						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
 								Hello ${userVO.fullname}</a></li>
 								<li><a href="/bookstore/logout"><span class="glyphicon glyphicon-log-in"></span>

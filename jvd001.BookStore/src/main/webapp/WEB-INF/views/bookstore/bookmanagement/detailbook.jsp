@@ -71,7 +71,8 @@
 					<div class="col-sm-2">
 					<br>
 					<br>
-						<button type="button" class="btn btn-success" >DownLoad</button>
+						<%-- <a href="<c:url value="/resources/book/${bookVO.image}"/>"><button type="button" class="btn btn-success" >DownLoad</button></a> --%>
+						<a href="<c:url value="/bookmanagement/detail/download/${bookVO.book_Id }"/>"><button type="button" class="btn btn-success" >DownLoad</button></a>
 					</div>
 				</div>
 				</div>

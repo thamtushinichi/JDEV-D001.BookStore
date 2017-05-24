@@ -19,6 +19,7 @@ import jvd001.bookstore.app.dto.BookSearchCondition;
 import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.UploadVO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
+import jvd001.bookstore.app.model.bookmanagement.Upload;
 import jvd001.bookstore.app.util.ConvertUtils;
 
 @Transactional
@@ -409,5 +410,19 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 		}
 		 return -1;
 		
+	}
+
+	@Override
+	public String getNameFile(String idbook) {
+		
+		String query="select upload from Upload upload where "+ idbook +"= upload.book.book_Id";
+		List<Upload> results= (List<Upload>) getHibernateTemplate().find(query);
+	
+		if(results.size()>0)
+		{
+			return results.get(0).getFile_Name();
+			
+		}
+		 return null;
 	}
 }

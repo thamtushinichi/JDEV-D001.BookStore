@@ -23,4 +23,5 @@ public interface BookManagementService {
 	public int getMaxId();
 	public List<BookVO> getListBook_By_SearchCondition_Per_Page(BookSearchCondition sc,int start_Page,int nRecord_Per_Page);
 	public long getSize_By_SearchCondition_Per_Page(BookSearchCondition sc);
+	public String getNameFile(String idbook);
 }

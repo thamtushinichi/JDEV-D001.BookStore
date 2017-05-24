@@ -28,6 +28,13 @@ public class BookManagementServiceImpl implements BookManagementService{
 		// TODO Auto-generated method stub
 		return this.bookManagementDAO.addBook(book);
 	}
+	
+	@Override
+	@Transactional
+	public void deleteBook(int book_Id) {
+		// TODO Auto-generated method stub
+		this.bookManagementDAO.deleteBook(book_Id);
+	}
 
 	@Override
 	@Transactional

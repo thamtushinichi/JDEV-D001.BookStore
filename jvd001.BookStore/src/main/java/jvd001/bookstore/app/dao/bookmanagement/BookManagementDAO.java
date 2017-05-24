@@ -10,6 +10,7 @@ import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 
 public interface BookManagementDAO {
+	public void deleteBook(int book_Id);
 	public Integer addBook(BookVO book);
 	public void uploadFileBook(UploadVO upload);
 	public void updateBook(BookVO book);

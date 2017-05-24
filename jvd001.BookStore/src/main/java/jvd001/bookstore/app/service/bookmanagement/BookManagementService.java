@@ -8,6 +8,7 @@ import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 
 public interface BookManagementService {
+	public void deleteBook(int book_Id);
 	public Integer addBook(BookVO book);
 	public void updateBook(BookVO book);
 	public List<BookVO> listBooks();

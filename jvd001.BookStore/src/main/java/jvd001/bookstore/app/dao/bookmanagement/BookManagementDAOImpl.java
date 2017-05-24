@@ -19,6 +19,7 @@ import jvd001.bookstore.app.dto.BookSearchCondition;
 import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.UploadVO;
 import jvd001.bookstore.app.model.bookmanagement.Book;
+import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.util.ConvertUtils;
 
 @Transactional
@@ -34,6 +35,13 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 		Book book = new Book();
 		book = convertUtils.convertBookVOToBook(bookVO);
 		return (Integer) getHibernateTemplate().save(book);
+	}
+
+	@Override
+	public void deleteBook(int book_Id) {
+		// TODO Auto-generated method stub
+		Book book = (Book) getHibernateTemplate().load(Book.class, new Integer(book_Id));
+		getHibernateTemplate().delete(book);
 	}
 
 	@SuppressWarnings("static-access")
@@ -410,4 +418,6 @@ public class BookManagementDAOImpl extends HibernateDaoSupport implements BookMa
 		 return -1;
 		
 	}
+
+
 }

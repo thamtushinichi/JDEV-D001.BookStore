@@ -17,11 +17,7 @@
 
 <!-- LINK LIB JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/validate-js/2.0.1/validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/validate-js/2.0.1/validate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript">
@@ -78,6 +74,10 @@ var url = '${pageContext.request.contextPath}';
     		display:inline;
     		visibility:visible;
 		}
+		.alert{
+			font-weight:normal;
+			color: red;
+		}
     </style>
 </head>
 <body>
@@ -103,7 +103,7 @@ var url = '${pageContext.request.contextPath}';
 		</tr>
       </c:forEach>
       <c:url var="addAction" value="/categorymanagement/category/add" ></c:url>
-      <form:form id="myForm" action="${addAction}" commandName="category">
+      <form:form  action="${addAction}" commandName="category">
       <tr>
       		<td>
       			<c:if test="${!empty category.category_name}">
@@ -113,7 +113,7 @@ var url = '${pageContext.request.contextPath}';
       			</c:if>
 			</td>
 			<td>
-			<form:input path="category_name" />
+				<form:input path="category_name" /> <b class="alert">${error_msg}</b>
 			</td>
             <td>
             	<c:if test="${empty category.category_name}"> 
@@ -131,21 +131,6 @@ var url = '${pageContext.request.contextPath}';
     <br/>
     </div>
     <script>
-    $(document).ready(function () {
-        $('#myForm').validate({ // initialize the plugin
-            rules: {
-                category_name: {
-                    required: true
-                },
-            },
-            messages: {
-            	category_name: {
-                    required: 'Please enter the category name!!!'
-                }
-            }
-        });
-
-    });
     function btncancel(event){
     	window.location= url + "/categorymanagement/category/";
     }

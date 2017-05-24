@@ -1,6 +1,11 @@
 package jvd001.bookstore.app.controller.classification;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,7 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import jvd001.bookstore.app.dto.CategoryVO;
+import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.service.classification.CategoryService;
 
@@ -28,27 +34,46 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/categorymanagement/category", method = RequestMethod.GET)
-	public String listCategory( Model model) {
+	public String listCategory( Model model,HttpServletRequest request) {
 		model.addAttribute("category", new Category());
 		model.addAttribute("listCategory", this.categoryService.listCategory());
+		UserVO user = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+		model.addAttribute("userVO", user);
 		return "/bookstore/categorymanagement/category";
 	}
 	
 	
 	//For add and update category both
 		@RequestMapping(value= "/categorymanagement/category/add", method = RequestMethod.POST)
-		public String addCategory(@ModelAttribute("category") Category p){
-			if ((p.getCategory_name().isEmpty()==false)){
+		public String addCategory(@ModelAttribute("category") Category p, Model model){
+			boolean x=false;
+			int y=0;
+			List<Category> categorys = new ArrayList<Category>();
+			categorys = this.categoryService.listCategory();
+			for (Category category : categorys) {
+				if (category.getCategory_name().equalsIgnoreCase(p.getCategory_name())){
+					x=true;
+					y=category.getCategory_id();
+				}
+			}
+			if (x==true) {
+				model.addAttribute("error_msg", "Duplicate name in ID=" + y + " !!!");
+				model.addAttribute("category", new Category());
+				model.addAttribute("listCategory", this.categoryService.listCategory());
+				return "/bookstore/categorymanagement/category";
+			}
+			if ((p.getCategory_name().isEmpty()==true)){
+				model.addAttribute("error_msg", "Please input a name!!!");
+				model.addAttribute("category", new Category());
+				model.addAttribute("listCategory", this.categoryService.listCategory());
+				return "/bookstore/categorymanagement/category";
+			}
 			if((p.getCategory_id() == 0)){
-				
 				//new category, add id
 					this.categoryService.addCategory(p);
-			}else{
+				}else{
 				//existing category, call update
-				this.categoryService.updateCategory(p);
-			}
-			}else{
-				return "/bookstore/categorymanagement/error";
+					this.categoryService.updateCategory(p);
 			}
 			
 			return "redirect:/categorymanagement/category";
@@ -67,7 +92,9 @@ public class CategoryController {
 	    public String editCategory(@PathVariable("id") int id, Model model){
 	        model.addAttribute("category", this.categoryService.getCategoryById(id));
 	        model.addAttribute("listCategory", this.categoryService.listCategory());
+	        
 	        return "/bookstore/categorymanagement/category";
 	    }
+		
 		
 }

@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -67,7 +68,6 @@ public class AddBookController {
 		UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
 		User user = ConvertUtils.convertUserVOToUser(userVO);
 		model.addAttribute("userVO", userVO);
-//		user.setUsers_id(1);
 		bookVO.setUser(user);
 		try {
 			Set<Category> categorys = new HashSet<Category>();
@@ -80,7 +80,6 @@ public class AddBookController {
 				 categorys.add(category);
 				}
 			bookVO.setCategories(categorys);
-//			int bookId = 0;
 			int bookId = this.bookmanagementService.getMaxId() + 1;
 			//set book
 	        Set<Upload> uploads = new HashSet<Upload>();
@@ -142,4 +141,11 @@ public class AddBookController {
 		return "redirect:/bookmanagement/addbook";
 
 	}
+	
+	@RequestMapping("/bookmanagement/delete/{book_Id}")
+    public String deleteBook(@PathVariable("book_Id") int book_Id){
+		
+        this.bookmanagementService.deleteBook(book_Id);
+        return "redirect:/bookmanagement";
+    }
 }

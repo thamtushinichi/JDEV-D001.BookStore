@@ -14,8 +14,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"
+<link 
+	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" 
 	rel="stylesheet" />
 <link
 	href="<c:url value="/resources/css/bookmanagement/insertbook.css" />"
@@ -75,9 +75,9 @@
 					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
 					<button  type="button"
 						class="btn btn-info btnEditBook">Edit</button></a>
-						<a href="<c:url value='/bookmanagement/delete/${bookVO.book_Id}'/>">
-					<button  type="button" class="btn btn-danger"
-						onclick="btnDelete(event)">Delete</button><br><br></a>
+					<button  type="button" class="btn btn-danger btnDelete"
+						>Delete</button><br><br></a>
+					<input type="hidden" name="book_Id" id="book_Id" value="${bookVO.book_Id}">
 				</div>
 				
 			</c:forEach>
@@ -119,18 +119,18 @@
 </body>
 </br>
 
-<script
+<script 
 	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src="/resources/js/bookmanagement/bookmanagement-main.js"></script>
-<script src="/resources/js/bookmanagement/bookmanagement-public.js"></script>
-<script type="text/javascript">
-		var url = '${pageContext.request.contextPath}/';
-		</script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script type="text/javascript">
+		var url = '${pageContext.request.contextPath}/';
+</script>
+<script type="text/javascript" src="<c:url value='/resources/js/bookmanagement/bookmanagement-main.js' />"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/bookmanagement/bookmanagement-public.js' />"></script>
 <script type="text/javascript">
 
 	

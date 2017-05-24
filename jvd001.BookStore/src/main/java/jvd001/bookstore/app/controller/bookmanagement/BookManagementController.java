@@ -1,17 +1,33 @@
 package jvd001.bookstore.app.controller.bookmanagement;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -182,4 +198,66 @@ public class BookManagementController {
 		}
 		return "bookstore/bookmanagement/detailbook";
 	}
+	@RequestMapping(value = "/bookmanagement/detail/download/{idbook}", method = RequestMethod.GET)
+    public void getFile(HttpServletResponse response,@PathVariable String idbook,HttpServletRequest request) {
+		String filename=this.bookmanagementService.getNameFile(idbook);
+    	System.out.println(filename);
+    	 String path1 = request.getSession().getServletContext().getRealPath("");
+//        try {
+//            DefaultResourceLoader loader = new DefaultResourceLoader();
+//            InputStream is = loader.getResource(path+"resources\\book\\"+filename).getInputStream();
+//            IOUtils.copy(is, response.getOutputStream());
+//            response.setHeader("Content-Disposition", "attachment; filename="+filename);
+//            response.flushBuffer();
+//        } catch (IOException ex) {
+//            throw new RuntimeException("IOError writing file to output stream");
+//        }
+    	 //Authorized user will download the file
+    	
+		try {
+			String pathFile=path1+"resources/book/"+filename;
+			System.out.println(pathFile);
+	    	File file = null;
+	    	//ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+	        file = new File(pathFile);
+	        if(!file.exists()){
+	            String errorMessage = "Sorry. The file you are looking for does not exist";
+	            System.out.println(errorMessage);
+	            OutputStream outputStream = response.getOutputStream();
+	            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+	            outputStream.close();
+	            return;
+	        }
+	        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+	        if(mimeType==null){
+	            System.out.println("mimetype is not detectable, will take default");
+	            mimeType = "application/octet-stream";
+	        }
+	        System.out.println("mimetype : "+mimeType);
+	         
+	        response.setContentType(mimeType);
+	         
+	        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
+	            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+	        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+	 
+	        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
+	        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+	         
+	        response.setContentLength((int)file.length());
+	        InputStream inputStream;
+			inputStream = new BufferedInputStream(new FileInputStream(file));
+			FileCopyUtils.copy(inputStream, response.getOutputStream());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        
+    }
+
 }

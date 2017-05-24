@@ -137,6 +137,12 @@ public class BookManagementServiceImpl implements BookManagementService{
 		return this.bookManagementDAO.getSize_By_SearchCondition_Per_Page(sc);
 	}
 
+	@Override
+	@Transactional
+	public String getNameFile(String idbook) {
+		return this.bookManagementDAO.getNameFile(idbook);
+	}
+
 
 
 }

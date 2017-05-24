@@ -53,7 +53,7 @@ public class UserLoginController {
 				userValid = this.UserLoginService.checkLogin(u.getUsername(), u.getPassword());
 				model.addAttribute("userVO", userValid);
 				request.getSession().setAttribute("CurrentUserLogin", userValid);
-				return "/bookstore/";
+				return "/bookstore/bookmanagement/bookmanagement";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

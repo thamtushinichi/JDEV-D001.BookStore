@@ -17,42 +17,45 @@ import jvd001.bookstore.app.util.ConvertUtils;
 public class UserSignupDAOImpl extends HibernateDaoSupport implements UserSignupDAO {
 
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional(readOnly = false)
 	public boolean ExecuteSignup(UserVO UserVO) {
 		// TODO Auto-generated method stub
-		
-		UserVO.setRole_id(1);
+
+		UserVO.setRole_id(2);
 		UserVO.setPassword(cryptWithMD5(UserVO.getPassword()));
 		User User = new User();
 		ConvertUtils c = new ConvertUtils();
-		User=c.convertUserVOToUser(UserVO);
-		if(!checkExistUser(User)){
+		User = c.convertUserVOToUser(UserVO);
+		if (!checkExistUser(User)) {
 			getHibernateTemplate().save(User);
 			return true;
 		}
-		
+
 		return false;
 	}
-	public static String cryptWithMD5(String pass){
-	    try {
-	    	MessageDigest md = MessageDigest.getInstance("MD5");
-	        byte[] passBytes = pass.getBytes();
-	        md.reset();
-	        byte[] digested = md.digest(passBytes);
-	        StringBuffer sb = new StringBuffer();
-	        for(int i=0;i<digested.length;i++){
-	            sb.append(Integer.toHexString(0xff & digested[i]));
-	        }
-	        return sb.toString();
-	    } catch (NoSuchAlgorithmException ex) {
-	       ex.printStackTrace();
-	    }
-	        return null;
-	   }
-	public boolean checkExistUser(User User){
-		List<User> results = (List<User>) getHibernateTemplate().find("from" + " User " + "where username = ? or email= ? ",
-				new Object[] { User.getUsername(),User.getEmail() });
-		if (results.isEmpty()){
+
+	public static String cryptWithMD5(String pass) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] passBytes = pass.getBytes();
+			md.reset();
+			byte[] digested = md.digest(passBytes);
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < digested.length; i++) {
+				sb.append(Integer.toHexString(0xff & digested[i]));
+			}
+			return sb.toString();
+		} catch (NoSuchAlgorithmException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public boolean checkExistUser(User User) {
+		List<User> results = (List<User>) getHibernateTemplate().find(
+				"from" + " User " + "where username = ? or email= ? ",
+				new Object[] { User.getUsername(), User.getEmail() });
+		if (results.isEmpty()) {
 			return false;
 		}
 		return true;

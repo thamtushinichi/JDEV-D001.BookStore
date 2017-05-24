@@ -11,7 +11,7 @@ var BookManagement = {
 			});
 		},
 		
-		initOnClickDeleteBook : function(){
+		initOnClickDeleteBook : function(elementId){
 			$('.btnDelete').on('click',function(){
 				swal({
 					  title: "Are you sure?",
@@ -24,8 +24,7 @@ var BookManagement = {
 					},
 					function(isConfirm){
 						if(isConfirm){
-							var id = $('#book_Id').val();
-							window.location.href = url + "bookmanagement/delete/" + id;
+							window.location.href = url + "bookmanagement/delete/" + elementId;
 						}
 				});
 			});

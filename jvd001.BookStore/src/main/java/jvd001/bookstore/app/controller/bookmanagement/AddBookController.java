@@ -65,10 +65,15 @@ public class AddBookController {
 	@RequestMapping(value = "/bookmanagement/addbook/save", method = RequestMethod.POST)
 	public String addBook(@ModelAttribute("bookVO") BookVO bookVO,HttpServletRequest request,RedirectAttributes rd, Model model) {
 		// get user infor
-		UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
-		User user = ConvertUtils.convertUserVOToUser(userVO);
-		model.addAttribute("userVO", userVO);
-		bookVO.setUser(user);
+		try {
+			UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+			User user = ConvertUtils.convertUserVOToUser(userVO);
+			model.addAttribute("userVO", userVO);
+			bookVO.setUser(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "redirect:/login";
+		}
 		try {
 			Set<Category> categorys = new HashSet<Category>();
 			Category category = null;
@@ -80,7 +85,12 @@ public class AddBookController {
 				 categorys.add(category);
 				}
 			bookVO.setCategories(categorys);
-			int bookId = this.bookmanagementService.getMaxId() + 1;
+			int bookId = 0;
+			try {
+				bookId = this.bookmanagementService.getMaxId() + 1;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			//set book
 	        Set<Upload> uploads = new HashSet<Upload>();
 	        Upload upload = new Upload();

@@ -75,9 +75,8 @@
 					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
 					<button  type="button"
 						class="btn btn-info btnEditBook">Edit</button></a>
-					<button  type="button" class="btn btn-danger btnDelete"
+					<button  type="button" class="btn btn-danger btnDelete" onclick="BookManagement.initOnClickDeleteBook(${bookVO.book_Id})"
 						>Delete</button><br><br></a>
-					<input type="hidden" name="book_Id" id="book_Id" value="${bookVO.book_Id}">
 				</div>
 				
 			</c:forEach>

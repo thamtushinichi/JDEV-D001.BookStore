@@ -145,6 +145,12 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-test</artifactId>
+    	<version>4.3.0.RELEASE</version>
+   		 <scope>test</scope>
+		</dependency>
 		<!-- Apache Commons FileUpload --> 
 		<dependency>
 		    <groupId>commons-fileupload</groupId>

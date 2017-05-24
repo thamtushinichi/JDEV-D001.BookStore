@@ -263,7 +263,15 @@ public class BookManagementController {
 		return "bookstore/bookmanagement/detailbook";
 	}
 	@RequestMapping(value = "/bookmanagement/detail/download/{idbook}", method = RequestMethod.GET)
-    public void getFile(HttpServletResponse response,@PathVariable String idbook,HttpServletRequest request) {
+    public String getFile(HttpServletResponse response,@PathVariable String idbook,HttpServletRequest request) {
+		//check login neu chua login quay lai trang login
+		UserVO userVO=(UserVO)request.getSession().getAttribute("CurrentUserLogin");
+		if(userVO==null)
+		{
+			//chua login thi
+			return "/bookstore/user/login";
+		}
+		
 		String filename=this.bookmanagementService.getNameFile(idbook);
     	System.out.println(filename);
     	 String path1 = request.getSession().getServletContext().getRealPath("");
@@ -290,7 +298,7 @@ public class BookManagementController {
 	            OutputStream outputStream = response.getOutputStream();
 	            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
 	            outputStream.close();
-	            return;
+	            return null; //tra ve trang error
 	        }
 	        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
 	        if(mimeType==null){
@@ -312,6 +320,7 @@ public class BookManagementController {
 	        InputStream inputStream;
 			inputStream = new BufferedInputStream(new FileInputStream(file));
 			FileCopyUtils.copy(inputStream, response.getOutputStream());
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -319,6 +328,7 @@ public class BookManagementController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return "redirect:/bookmanagement/detail/{idbook}";
  
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         

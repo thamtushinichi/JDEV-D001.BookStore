@@ -16,6 +16,7 @@
 </head>
 <body>
 <%@ include file="../../comment/header.jsp"%>
+<input type="hidden" name="userVO" id="users_id" value="${userVO.users_id == null ? '0':userVO.users_id}">
 <form id="team">
 			<div class="container-fluid bg-3">
 				<div class="ibox-title">

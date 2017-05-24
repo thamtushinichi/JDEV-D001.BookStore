@@ -26,7 +26,7 @@
 	<%@ include file="../../comment/header.jsp"%>
 
 	<!-- start code -->
-	
+	<input type="hidden" name="userVO" id="users_id" value="${userVO.users_id == null ? '0':userVO.users_id}">
 	<div class="container-fluid bg-3 text-center">
 	
 	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">

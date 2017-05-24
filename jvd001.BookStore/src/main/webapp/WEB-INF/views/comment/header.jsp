@@ -11,11 +11,11 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/bookstore/bookmanagement">Logo</a>
+			<a class="navbar-brand" href="/bookstore/">Logo</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/bookstore/bookmanagement">Home</a></li>
+				<li class="active"><a href="/bookstore/">Home</a></li>
 
 				<li><a href="#">Contact</a></li>
 

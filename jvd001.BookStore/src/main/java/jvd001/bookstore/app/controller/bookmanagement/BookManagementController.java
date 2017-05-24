@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.CategoryVO;
+import jvd001.bookstore.app.dto.UserVO;
 import jvd001.bookstore.app.model.classification.Category;
 import jvd001.bookstore.app.service.bookmanagement.BookManagementService;
 import jvd001.bookstore.app.service.classification.CategoryService;
@@ -64,10 +65,58 @@ public class BookManagementController {
 	public void setBookService(BookManagementService bookmanagementService) {
 		this.bookmanagementService = bookmanagementService;
 	}
-
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String indexBookmanagement(Locale locale, Model model, HttpServletRequest request) {
+		//check login
+		UserVO userVO=(UserVO)request.getSession().getAttribute("CurrentUserLogin");
+		if(userVO!=null)
+		model.addAttribute("userVO",userVO);
+		else
+			model.addAttribute("userVO",null);
+		//
+		BookSearchCondition sc= new BookSearchCondition();
+		sc.setCategory_id(0);
+		sc.setPublisher("");
+		sc.setTitle("");
+		sc.setYear_of_publishing("");
+		
+		if(sc !=null)
+		{
+	//	System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
+		model.addAttribute("bsc",sc);
+	}
+		
+		int size=(int)this.bookmanagementService.getSize_By_SearchCondition_Per_Page(sc);
+		
+		int numberpagerender=8;
+		int pagenumber;
+		if(size%numberpagerender==0)
+		{
+			pagenumber=size/numberpagerender;
+		}
+		else
+		{
+			pagenumber=size/numberpagerender + 1;
+		}
+		
+		model.addAttribute("bookVO",new BookVO());
+		model.addAttribute("listBook",this.bookmanagementService.getListBook_By_SearchCondition_Per_Page(sc, 1, numberpagerender));
+		model.addAttribute("sizeListBook", size);
+		model.addAttribute("pagenumber", pagenumber);
+		model.addAttribute("category",new Category());
+		model.addAttribute("listCategory",this.categoryService.listCategory());
+		
+		
+		return "/bookstore/bookmanagement/bookmanagement";
+	}
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
 	public String bookManagement(Locale locale, Model model, HttpServletRequest request) {
 		
+		UserVO userVO=(UserVO)request.getSession().getAttribute("CurrentUserLogin");
+		if(userVO!=null)
+		model.addAttribute("userVO",userVO);
+		else
+			model.addAttribute("userVO",null);
 		BookSearchCondition sc= new BookSearchCondition();
 		sc.setCategory_id(0);
 		sc.setPublisher("");
@@ -111,6 +160,11 @@ public class BookManagementController {
 //		sc.setPublisher("");
 //		sc.setTitle("");
 //		sc.setYear_of_publishing("");
+		UserVO userVO=(UserVO)request.getSession().getAttribute("CurrentUserLogin");
+		if(userVO!=null)
+		model.addAttribute("userVO",userVO);
+		else
+			model.addAttribute("userVO",null);
 		sc=(BookSearchCondition) request.getSession().getAttribute("bookSearchCondition");
 		if(sc !=null)
 		{
@@ -143,6 +197,11 @@ public class BookManagementController {
 	@RequestMapping(value="/bookmanagement/search/", method=RequestMethod.POST)
 	public  String search(Locale locale, Model model,@ModelAttribute("bookSearchCondition") BookSearchCondition bookSearchCondition,HttpServletRequest request )
 	{
+		UserVO userVO=(UserVO)request.getSession().getAttribute("CurrentUserLogin");
+		if(userVO!=null)
+		model.addAttribute("userVO",userVO);
+		else
+			model.addAttribute("userVO",null);
 		request.getSession().setAttribute("bookSearchCondition", bookSearchCondition);
 		model.addAttribute("bsc",bookSearchCondition);
 		List<BookVO> listBook = bookmanagementService.getListBook_By_SearchCondition_Per_Page(bookSearchCondition, 1, 8);
@@ -173,8 +232,13 @@ public class BookManagementController {
 				
 	}
 	@RequestMapping(value="/bookmanagement/detail/{idbook}", method=RequestMethod.GET)
-	public String detailBook(@PathVariable String idbook,Locale locale, Model model)
+	public String detailBook(@PathVariable String idbook,Locale locale, Model model,HttpServletRequest request)
 	{
+		UserVO userVO=(UserVO)request.getSession().getAttribute("CurrentUserLogin");
+		if(userVO!=null)
+		model.addAttribute("userVO",userVO);
+		else
+			model.addAttribute("userVO",null);
 		System.out.println("id la: " + idbook);
 		List<BookVO> bookVOs= this.bookmanagementService.getBookById(Integer.parseInt(idbook));
 		if(bookVOs.size()>0)

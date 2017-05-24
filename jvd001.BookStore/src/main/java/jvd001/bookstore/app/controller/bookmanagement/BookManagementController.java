@@ -269,7 +269,7 @@ public class BookManagementController {
 		if(userVO==null)
 		{
 			//chua login thi
-			return "/bookstore/user/login";
+			return "redirect:/login";
 		}
 		
 		String filename=this.bookmanagementService.getNameFile(idbook);

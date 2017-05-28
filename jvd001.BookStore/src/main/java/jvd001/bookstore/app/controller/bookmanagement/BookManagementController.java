@@ -73,6 +73,8 @@ public class BookManagementController {
 		model.addAttribute("userVO",userVO);
 		else
 			model.addAttribute("userVO",null);
+		//clear session
+		
 		//
 		BookSearchCondition sc= new BookSearchCondition();
 		sc.setCategory_id(0);
@@ -84,8 +86,8 @@ public class BookManagementController {
 		{
 	//	System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
 		model.addAttribute("bsc",sc);
-	}
-		
+		}
+		request.getSession().setAttribute("bookSearchCondition", sc);
 		int size=(int)this.bookmanagementService.getSize_By_SearchCondition_Per_Page(sc);
 		
 		int numberpagerender=8;
@@ -125,10 +127,9 @@ public class BookManagementController {
 		
 		if(sc !=null)
 		{
-	//	System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+"," +bsc.getTitle()+"," +bsc.getPublisher()+","+bsc.getYear_of_publishing());
 		model.addAttribute("bsc",sc);
-	}
-		
+		}
+		request.getSession().setAttribute("bookSearchCondition", sc);
 		int size=(int)this.bookmanagementService.getSize_By_SearchCondition_Per_Page(sc);
 		
 		int numberpagerender=8;

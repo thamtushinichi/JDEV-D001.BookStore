@@ -72,11 +72,26 @@
 						width="60%" height="240"></br>
 					</br> <a href="<c:url value='/bookmanagement/detail/${bookVO.book_Id}'/>" name ="idbook">${bookVO.title }</a></br>
 					</br>
+					
+					<c:choose>
+					<c:when test="${userVO.role_id==1}">
 					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
 					<button  type="button"
 						class="btn btn-info btnEditBook">Edit</button></a>
-					<button  type="button" class="btn btn-danger btnDelete" onclick="BookManagement.initOnClickDeleteBook(${bookVO.book_Id})"
-						>Delete</button><br><br></a>
+					<button  type="button" class="btn btn-danger btnDelete" onclick="BookManagement.initOnClickDeleteBook(${bookVO.book_Id})">
+					Delete</button><br><br></a>
+					</c:when>
+						
+					<%-- <c:when test="${userVO.role_id==2}"> --%>
+					<c:when test="${userVO.users_id== bookVO.user.users_id}">
+					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
+					<button  type="button"
+						class="btn btn-info btnEditBook">Edit</button></a>
+					</br>
+					</c:when>
+						<%-- </c:when> --%>
+						
+						</c:choose>
 				</div>
 				
 			</c:forEach>

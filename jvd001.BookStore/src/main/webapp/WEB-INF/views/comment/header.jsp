@@ -16,7 +16,24 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/bookstore/">Home</a></li>
-
+				<c:choose>
+    				<c:when test="${userVO.role_id==1}">
+       					<!-- if user la admin-->
+       					<li><a href="#">User Management</a></li>
+       				<li><a href="#">Category Management</a></li>
+       				<li><a href="/bookstore/bookmanagement">Book Management</a></li>
+   					 </c:when>    
+   					 <c:when test="${userVO.role_id==2}">
+       					<!-- if user la user-->
+       					
+       				<li><a href="/bookstore/bookmanagement">Book Management</a></li>
+       				 
+   					 </c:when>   
+   				 <c:otherwise>
+      			<!-- else -->
+       			
+    			</c:otherwise>
+			</c:choose>
 				<li><a href="#">Contact</a></li>
 
 			</ul>

@@ -12,21 +12,46 @@
 <title>BookManagement</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <link 
 	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" 
 	rel="stylesheet" />
 <link
 	href="<c:url value="/resources/css/bookmanagement/insertbook.css" />"
 	rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"/>
+<!-- templatemo -->
+	<link href="<c:url value="/resources/css/bookmanagement/templatemo_style.css"/>" rel="stylesheet"/>
+	<!-- templatemo -->
 </head>
 <body>
-	<%@ include file="../../comment/header.jsp"%>
-
+<input type="hidden" name="userVO" id="users_id" value="${userVO.users_id == null ? '0':userVO.users_id}">
+<%@ include file="../../comment/header.jsp"%>
+ <div id="templatemo_container">
+	
 	<!-- start code -->
-	<input type="hidden" name="userVO" id="users_id" value="${userVO.users_id == null ? '0':userVO.users_id}">
+	 <div id="templatemo_header">
+    	<div id="templatemo_special_offers">
+        	<p> <span>100%</span> free for
+        new account</p>
+			<!-- <a href="subpage.html" style="margin-left: 50px;">Read more...</a> -->
+        </div>
+        <div id="templatemo_new_books">
+        	<ul>
+                <li>Harry Potter</li>
+                <li>THe Hobbit</li>
+                <li>Lord Of The Ring</li>
+            </ul>
+            <!-- <a href="subpage.html" style="margin-left: 50px;">Read more...</a> -->
+        </div>
+    </div> <!-- end of header -->
+    
 	<div class="container-fluid bg-3 text-center">
 	
 	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">
@@ -60,55 +85,88 @@
 			<div class="col-sm-3"></div>
 		</div>
 		</form>
-		</br>
-		<div class="container-fluid bg-3 text-center">
-		
-		
-		<div class="row text-center">
-			<c:forEach items="${listBook }" var ="bookVO">
-				<div class="col-sm-3">
-				
-					<img src="<c:url value="/resources/images/${bookVO.image}"/>" class="image-responsive" 
-						width="60%" height="240"></br>
-					</br> <a href="<c:url value='/bookmanagement/detail/${bookVO.book_Id}'/>" name ="idbook">${bookVO.title }</a></br>
-					</br>
-					
-					<c:choose>
-					<c:when test="${userVO.role_id==1}">
-					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
-					<button  type="button"
-						class="btn btn-info btnEditBook">Edit</button></a>
-					<button  type="button" class="btn btn-danger btnDelete" onclick="BookManagement.initOnClickDeleteBook(${bookVO.book_Id})">
-					Delete</button><br><br></a>
-					</c:when>
-						
-					<%-- <c:when test="${userVO.role_id==2}"> --%>
-					<c:when test="${userVO.users_id== bookVO.user.users_id}">
-					<a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">
-					<button  type="button"
-						class="btn btn-info btnEditBook">Edit</button></a>
-					</br>
-					</c:when>
-						<%-- </c:when> --%>
-						
-						</c:choose>
-				</div>
-				
-			</c:forEach>
-			<br>
 		</div>
+		<!-- Right content -->
+		<c:set var = "count" value = "${0}"/>
+		<div id="templatemo_content">
+		<div id="templatemo_content_left">
+        	<div class="templatemo_content_left_section">
+            	<h1>Categories</h1>
+                <ul>
+                     <c:forEach items="${listCategory}" var ="category">
+                        <li style="font-size: 13px"><a href="">${category.category_name}</a></li>
+                    </c:forEach>
+            	</ul>
+            </div>
+			<div class="templatemo_content_left_section">
+            	<h1>Add New Book</h1>
+                <ul>
+                    <li><a href ="/bookstore/bookmanagement/addbook">
+					<button type="button" id="btnAddBook" class="btn btn-success"
+						style="text-align: center;">Add Book</button>
+						</a></li>
+            	</ul>
+            </div>
+           </div>
+		<div id="templatemo_content_right">
+		<c:forEach items="${listBook}" var ="bookVO">
+		<c:set var = "count" value = "${count+1}"/>
+		<div class="templatemo_product_box">
+		<h1>${bookVO.title}<span>(by ${bookVO.author })</span></h1>
+		 
+		 <img src="<c:url value="/resources/images/${bookVO.image}"/>" alt="image"
+						width="78" height="128"/>
+			
+		<div class="product_info">
+		<h3>Free</h3>
+        <div class="detail_button"> <a href="<c:url value='/bookmanagement/detail/${bookVO.book_Id}'/>" name ="idbook">Detail</a></div>
+		<c:choose>
+					<c:when test="${userVO.role_id==1}">
+					<div class="buy_now_button"><a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">Edit</a></div>
+					<button  type="button" class="btn btn-danger btn-sm btnDelete" style="width: 78px" onclick="BookManagement.initOnClickDeleteBook(${bookVO.book_Id})">
+					Delete</button>
+					</c:when>
+					<c:when test="${userVO.users_id== bookVO.user.users_id}">
+					<div class="buy_now_button"><a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">Edit</a></div>
+					</c:when>
+		</c:choose>
+		
+		
+		</div>
+		  <div class="cleaner">&nbsp;</div>
+		</div>
+		
+		<c:choose>
+		<c:when test="${count%2 !=0 }">
+		<div class="cleaner_with_width">&nbsp;</div>
+		</c:when>
+		 <c:otherwise>
+		  <div class="cleaner_with_height">&nbsp;</div>
+		  </c:otherwise>
+		  
+		</c:choose>
+		</c:forEach>
+		</div>
+		<div class="cleaner_with_height">&nbsp;</div>
+		</div>
+		
+		<!-- Right content -->
+		
 			
 		<!-- insert book -->
-		</br>
+		
+		
+		<!-- end code -->
+		</div> <!-- end container -->
 		<div class="container-fluid bg-3 text-center">
-			<div class="row text-center">
+			<!-- <div class="row text-center">
 				<div class="col-sm-1">
 				<a href ="/bookstore/bookmanagement/addbook">
 					<button type="button" id="btnAddBook" class="btn btn-success"
 						style="text-align: center;">Add Book</button>
 						</a>
 				</div>
-			</div>
+			</div> -->
 			<br>
 			<input id="sizeListBook" type="hidden" name="" value="${sizeListBook }">
 			<input  id="pagenumber" type="hidden" name="" value="${pagenumber }">
@@ -119,19 +177,13 @@
 					 <a id="N2" href="/bookstore/bookmanagement/${ i}" name="page"
 							class="page">${ i}</a> 
 					</c:forEach>
-						
 					</div>
 				</div>
 			</div>
-
 		</div>
-		<!-- end code -->
-
-
-
 		<%@ include file="../../comment/footer.jsp"%>
 </body>
-</br>
+
 
 <script 
 	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>

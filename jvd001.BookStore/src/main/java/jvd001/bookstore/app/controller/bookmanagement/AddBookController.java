@@ -116,6 +116,7 @@ public class AddBookController {
 	            byte[] bytes = bookVO.getFile().getBytes();
 	            BufferedOutputStream buffStream = 
 	                    new BufferedOutputStream(new FileOutputStream(new File(path + "resources\\images\\" + bookId + fileName)));
+	            System.out.println("\n"+ path + "resources\\images\\" + bookId + fileName);
 	            buffStream.write(bytes);
 	            buffStream.close();
 	        } catch (Exception e) {
@@ -133,6 +134,7 @@ public class AddBookController {
 	            byte[] bytes = bookVO.getBook().getBytes();
 	            BufferedOutputStream buffStream = 
 	                    new BufferedOutputStream(new FileOutputStream(new File(path + "resources\\book\\" + bookId + fileNameBook)));
+	            System.out.println(path + "resources\\book\\" + bookId + fileNameBook);
 	            buffStream.write(bytes);
 	            buffStream.close();
 	        } catch (Exception e) {

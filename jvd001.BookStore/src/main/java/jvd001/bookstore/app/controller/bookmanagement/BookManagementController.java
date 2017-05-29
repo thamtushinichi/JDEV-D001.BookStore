@@ -67,6 +67,10 @@ public class BookManagementController {
 	}
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String indexBookmanagement(Locale locale, Model model, HttpServletRequest request) {
+		//set path 
+		request.getSession().setAttribute("path", request.getSession().getServletContext().getRealPath(""));
+		model.addAttribute("path",request.getSession().getServletContext().getRealPath(""));
+		//end set path
 		//check login
 		UserVO userVO=(UserVO)request.getSession().getAttribute("CurrentUserLogin");
 		if(userVO!=null)

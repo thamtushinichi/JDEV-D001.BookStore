@@ -42,7 +42,7 @@
             	<h1>Categories of Book</h1>
                 <ul>
                     <c:forEach items="${listCategory}" var ="category">
-                        <li style="font-size: 13px"><a href="">${category.category_name}</a></li>
+                        <li style="font-size: 13px"><p>${category.category_name}</p></li>
                     </c:forEach>
             	</ul>
             	<h1>Download</h1>

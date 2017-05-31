@@ -4,5 +4,5 @@ $(document).ready(function(){
 	AddBookPublic.initValidateFile(); 
 	AddBookPublic.initValidateFileImage(); 
 	AddBookPublic.initOnlyNumber(); 
-//	AddBookPublic.initNotifyMessageBox(); 
+	AddBookPublic.initNotifyMessageBox(); 
 });

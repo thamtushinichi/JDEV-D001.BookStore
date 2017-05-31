@@ -37,15 +37,17 @@ import jvd001.bookstore.app.util.ConvertUtils;
 public class AddBookController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AddBookController.class);
-	
+
 	private BookManagementService bookmanagementService;
+
 	@Autowired(required = true)
 	@Qualifier(value = "bookmanagementService")
 	public void setBookManagementService(BookManagementService bookmanagementService) {
 		this.bookmanagementService = bookmanagementService;
 	}
-	
+
 	private CategoryService categoryService;
+
 	@Autowired(required = true)
 	@Qualifier(value = "categoryService")
 	public void setCategorySevice(CategoryService categoryService) {
@@ -63,85 +65,90 @@ public class AddBookController {
 	}
 
 	@RequestMapping(value = "/bookmanagement/addbook/save", method = RequestMethod.POST)
-	public String addBook(@ModelAttribute("bookVO") BookVO bookVO,HttpServletRequest request,RedirectAttributes rd, Model model) {
+	public String addBook(@ModelAttribute("bookVO") BookVO bookVO, HttpServletRequest request, RedirectAttributes rd,
+			Model model) {
 		// get user infor
+
 		try {
 			UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
-			User user = ConvertUtils.convertUserVOToUser(userVO);
-			model.addAttribute("userVO", userVO);
-			bookVO.setUser(user);
-		} catch (Exception e) {
-			// TODO: handle exception
-			return "redirect:/login";
-		}
-		try {
-			Set<Category> categorys = new HashSet<Category>();
-			Category category = null;
-			// set category
-			for (int i = 0; i < bookVO.getCategory_Ids().size(); i++) {
-				category = new Category();
-				category.setCategory_id(bookVO.getCategory_Ids().get(i));
-				// add category to set category
-				 categorys.add(category);
-				}
-			bookVO.setCategories(categorys);
-			int bookId = 0;
 			try {
-				bookId = this.bookmanagementService.getMaxId() + 1;
+				User user = ConvertUtils.convertUserVOToUser(userVO);
+				model.addAttribute("userVO", userVO);
+				bookVO.setUser(user);
 			} catch (Exception e) {
 				// TODO: handle exception
+				return "redirect:/login";
 			}
-			//set book
-	        Set<Upload> uploads = new HashSet<Upload>();
-	        Upload upload = new Upload();
-	        //set upload file name
-	        upload.setUpload_File_Name(bookVO.getBook().getOriginalFilename());
-	        //set upload file show
-	        String fileNameBookUpLoad = bookId + bookVO.getBook().getOriginalFilename();
-	        upload.setFile_Name(fileNameBookUpLoad);
-	        //set extension
-	        String extention = FilenameUtils.getExtension(bookVO.getBook().getOriginalFilename());
-	        upload.setExtension(extention);
-	        upload.setUsers_Id(bookVO.getUser().getUsers_id());
-	        uploads.add(upload);
-	        bookVO.setUploads(uploads);
-	        
-	        //save book
-			String fileName = null;
-			//image upload
-		if(!bookVO.getFile().isEmpty()){
-	        try {
-	        	String path = request.getSession().getServletContext().getRealPath("");
-	        	fileName = bookVO.getFile().getOriginalFilename();
-	            byte[] bytes = bookVO.getFile().getBytes();
-	            BufferedOutputStream buffStream = 
-	                    new BufferedOutputStream(new FileOutputStream(new File(path + "resources\\images\\" + bookId + fileName)));
-	            System.out.println("\n"+ path + "resources\\images\\" + bookId + fileName);
-	            buffStream.write(bytes);
-	            buffStream.close();
-	        } catch (Exception e) {
-	            return "You failed to upload " + fileName + ": " + e.getMessage();
-	        }
-		}
-		//set image name
-		bookVO.setImage(bookId + bookVO.getFile().getOriginalFilename());
-		
-		String fileNameBook = null;
-		if(!bookVO.getBook().isEmpty()){
-	        try {
-	        	String path = request.getSession().getServletContext().getRealPath("");
-	        	fileNameBook = bookVO.getBook().getOriginalFilename();
-	            byte[] bytes = bookVO.getBook().getBytes();
-	            BufferedOutputStream buffStream = 
-	                    new BufferedOutputStream(new FileOutputStream(new File(path + "resources\\book\\" + bookId + fileNameBook)));
-	            System.out.println(path + "resources\\book\\" + bookId + fileNameBook);
-	            buffStream.write(bytes);
-	            buffStream.close();
-	        } catch (Exception e) {
-	            return "You failed to upload " + fileName + ": " + e.getMessage();
-	        }
-	        bookId = this.bookmanagementService.addBook(bookVO);
-		}
+
+			if (userVO.getRole_id() == 1 || userVO.getRole_id() == 2) {
+				Set<Category> categorys = new HashSet<Category>();
+				Category category = null;
+				// set category
+				for (int i = 0; i < bookVO.getCategory_Ids().size(); i++) {
+					category = new Category();
+					category.setCategory_id(bookVO.getCategory_Ids().get(i));
+					// add category to set category
+					categorys.add(category);
+				}
+				bookVO.setCategories(categorys);
+				int bookId = 0;
+				try {
+					bookId = this.bookmanagementService.getMaxId() + 1;
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				// set book
+				Set<Upload> uploads = new HashSet<Upload>();
+				Upload upload = new Upload();
+				// set upload file name
+				upload.setUpload_File_Name(bookVO.getBook().getOriginalFilename());
+				// set upload file show
+				String fileNameBookUpLoad = bookId + bookVO.getBook().getOriginalFilename();
+				upload.setFile_Name(fileNameBookUpLoad);
+				// set extension
+				String extention = FilenameUtils.getExtension(bookVO.getBook().getOriginalFilename());
+				upload.setExtension(extention);
+				upload.setUsers_Id(bookVO.getUser().getUsers_id());
+				uploads.add(upload);
+				bookVO.setUploads(uploads);
+
+				// save book
+				String fileName = null;
+				// image upload
+				if (!bookVO.getFile().isEmpty()) {
+					try {
+						String path = request.getSession().getServletContext().getRealPath("");
+						fileName = bookVO.getFile().getOriginalFilename();
+						byte[] bytes = bookVO.getFile().getBytes();
+						BufferedOutputStream buffStream = new BufferedOutputStream(
+								new FileOutputStream(new File(path + "resources\\images\\" + bookId + fileName)));
+						System.out.println("\n" + path + "resources\\images\\" + bookId + fileName);
+						buffStream.write(bytes);
+						buffStream.close();
+					} catch (Exception e) {
+						return "You failed to upload " + fileName + ": " + e.getMessage();
+					}
+				}
+				// set image name
+				bookVO.setImage(bookId + bookVO.getFile().getOriginalFilename());
+
+				String fileNameBook = null;
+				if (!bookVO.getBook().isEmpty()) {
+					try {
+						String path = request.getSession().getServletContext().getRealPath("");
+						fileNameBook = bookVO.getBook().getOriginalFilename();
+						byte[] bytes = bookVO.getBook().getBytes();
+						BufferedOutputStream buffStream = new BufferedOutputStream(
+								new FileOutputStream(new File(path + "resources\\book\\" + bookId + fileNameBook)));
+						System.out.println(path + "resources\\book\\" + bookId + fileNameBook);
+						buffStream.write(bytes);
+						buffStream.close();
+					} catch (Exception e) {
+						return "You failed to upload " + fileName + ": " + e.getMessage();
+					}
+					bookId = this.bookmanagementService.addBook(bookVO);
+				}
+			}
 
 			rd.addFlashAttribute("message", 1);
 		} catch (Exception e) {
@@ -153,11 +160,11 @@ public class AddBookController {
 		return "redirect:/bookmanagement/addbook";
 
 	}
-	
+
 	@RequestMapping("/bookmanagement/delete/{book_Id}")
-    public String deleteBook(@PathVariable("book_Id") int book_Id){
-		
-        this.bookmanagementService.deleteBook(book_Id);
-        return "redirect:/bookmanagement";
-    }
+	public String deleteBook(@PathVariable("book_Id") int book_Id) {
+
+		this.bookmanagementService.deleteBook(book_Id);
+		return "redirect:/bookmanagement";
+	}
 }

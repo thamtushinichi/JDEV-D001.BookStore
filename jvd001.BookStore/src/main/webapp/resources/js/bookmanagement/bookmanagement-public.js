@@ -54,4 +54,29 @@ var BookManagement = {
 				 }
 			});
 		},
+		
+		initNotifyMessageBox : function(){
+			var message = $("#message").val();
+			//if message=1 then save successfully
+			if(message == 1){
+				swal({
+					   title: "Notify",
+				       text:  "Deleted successfully",
+				       type:  "success",
+				       confirmButtonText: "OK"
+				 });
+				$('body').css('overflow','auto');
+			}
+			//if message=2 then save failed
+			else if(message == 2){
+				swal({
+					   title: "Notify",
+				       text:  "Deleted failed",
+				       type:  "error",
+				       confirmButtonText: "OK"
+				 });
+				$('body').css('overflow','auto');
+			}
+			$("#message").val(0);
+		},
 }

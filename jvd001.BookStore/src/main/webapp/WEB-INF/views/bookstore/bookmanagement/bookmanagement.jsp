@@ -55,6 +55,7 @@
 	<div class="container-fluid bg-3 text-center">
 	
 	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition" id="formSearch">
+	<input type="hidden" name="message" id="message" value="${message }">
 		<div class="row text-center">
 			<div class="col-sm-offset-2 col-sm-2">
 				<select class="form-control" name="category_id" id="category_id">

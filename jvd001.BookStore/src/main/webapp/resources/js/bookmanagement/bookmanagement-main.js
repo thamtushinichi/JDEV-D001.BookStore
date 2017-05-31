@@ -4,4 +4,5 @@ $(document).ready(function(){
 //	BookManagement.initOnClickDeleteBook();
 	BookManagement.initValidate();
 	BookManagement.initOnlyNumber();
+	BookManagement.initNotifyMessageBox();
 });

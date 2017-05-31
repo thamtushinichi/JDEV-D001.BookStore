@@ -162,9 +162,14 @@ public class AddBookController {
 	}
 
 	@RequestMapping("/bookmanagement/delete/{book_Id}")
-	public String deleteBook(@PathVariable("book_Id") int book_Id) {
-
-		this.bookmanagementService.deleteBook(book_Id);
+	public String deleteBook(@PathVariable("book_Id") int book_Id, RedirectAttributes rd) {
+		try {
+			this.bookmanagementService.deleteBook(book_Id);
+			rd.addFlashAttribute("message", 1);
+		} catch (Exception e) {
+			// TODO: handle exception
+			rd.addFlashAttribute("message", 2);
+		}
 		return "redirect:/bookmanagement";
 	}
 }

@@ -86,47 +86,56 @@ var url = '${pageContext.request.contextPath}';
     <h1>Catagory Management</h1>
     <div class="content">
     <c:if test="${!empty listCategory}">
-    <table  border="1">
-      <tr>
-        <th>ID</th>
-        <th>Catagory Name</th> 
-        <th>Function</th>
-      </tr>
-      <c:forEach items="${listCategory}" var="category">
-      	<tr>
-			<td width=10%>${category.category_id}</td>
-			<td>${category.category_name}</td>
-			<td width=20%>
-				<button class="btn btn-warning" type="button" onclick="btnedit(event,${category.category_id})">Edit</button>
-				<button class="btn btn-danger" type="button" onclick="btndelete(event,${category.category_id})">Delete</button>
-			</td>
-		</tr>
-      </c:forEach>
-      <c:url var="addAction" value="/categorymanagement/category/add" ></c:url>
-      <form:form  action="${addAction}" commandName="category">
-      <tr>
-      		<td>
-      			<c:if test="${!empty category.category_name}">
-      				Editing: ${category.category_id}
-      				<form:input class="hideme" path="category_id" />
-      				<form:hidden class="hideme" path="category_id" />
-      			</c:if>
-			</td>
-			<td>
-				<form:input path="category_name" /> <b class="alert">${error_msg}</b>
-			</td>
-            <td>
-            	<c:if test="${empty category.category_name}"> 
-            	<input class="btn-success btn btn-block" type="submit" value="<spring:message text="Insert"/>" /> 
-            	</c:if>
-            	<c:if test="${!empty category.category_name}"> 
-            	<input class="btn-warning btn" type="submit" value="<spring:message text="Update"/>" /> 
-            	<button class="btn-danger btn" type="button" onclick="btncancel(event)">Cancel</button>
-            	</c:if>
-            </td>
-      </tr>
-      </form:form>
-    </table>
+    	<table  border="1">
+      		<tr>
+        		<th>ID</th>
+        		<th>Catagory Name</th> 
+        		<c:if test = "${userVO.role_id == 1}">
+        			<th>Function</th>
+        		</c:if>
+     		 </tr>
+      		<c:forEach items="${listCategory}" var="category">
+      			<tr>
+					<td width=10%>${category.category_id}</td>
+					<td>${category.category_name}</td>
+					<c:if test = "${userVO.role_id == 1}">
+						<td width=20%>
+							<button class="btn btn-warning" type="button" onclick="btnedit(event,${category.category_id})">Edit</button>
+							<button class="btn btn-danger" type="button" onclick="btndelete(event,${category.category_id})">Delete</button>
+						</td>
+					</c:if>
+				</tr>
+      		</c:forEach>
+      		<c:url var="addAction" value="/categorymanagement/category/add" ></c:url>
+      			<form:form  action="${addAction}" commandName="category">
+      				<tr>
+      					<c:if test = "${userVO.role_id == 1}">
+      						<td>
+      							<c:if test="${!empty category.category_name}">
+      								Editing: ${category.category_id}
+      								<form:input class="hideme" path="category_id" />
+      								<form:hidden class="hideme" path="category_id" />
+      							</c:if>
+							</td>
+							<td>
+								<form:input path="category_name" />
+								<b class="alert">${error_msg}</b>
+							</td>
+						</c:if>
+						<c:if test = "${userVO.role_id == 1}">
+            				<td>
+            					<c:if test="${empty category.category_name}"> 
+            						<input class="btn-success btn btn-block" type="submit" value="<spring:message text="Insert"/>" /> 
+            					</c:if>
+            					<c:if test="${!empty category.category_name}"> 
+            						<input class="btn-warning btn" type="submit" value="<spring:message text="Update"/>" /> 
+            						<button class="btn-danger btn" type="button" onclick="btncancel(event)">Cancel</button>
+            					</c:if>
+            				</td>
+            			</c:if>
+      				</tr>
+      			</form:form>
+    	</table>
     </c:if>
     <br/>
     </div>

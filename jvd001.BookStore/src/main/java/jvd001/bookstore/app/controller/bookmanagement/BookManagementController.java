@@ -209,6 +209,7 @@ public class BookManagementController {
 			model.addAttribute("userVO",null);
 		request.getSession().setAttribute("bookSearchCondition", bookSearchCondition);
 		model.addAttribute("bsc",bookSearchCondition);
+		
 		List<BookVO> listBook = bookmanagementService.getListBook_By_SearchCondition_Per_Page(bookSearchCondition, 1, 8);
 		if(listBook!=null)
 		{

@@ -28,5 +28,30 @@ var BookManagement = {
 						}
 				});
 			});
-		}
+		},
+		initValidate : function(){
+			$('#formSearch').validate({
+				rules : {
+					'year_of_publishing' : {
+						minlength : 4,
+					},
+				},
+				messages : {
+					'year_of_publishing' : {
+						minlength : "Please input 4 number" 
+					},
+				},
+			});
+		},
+		
+		initOnlyNumber : function(){
+			//allow input number
+			$('.onlynumber').on('keypress',function(evt){
+				 var self = $(this);
+				 if ((evt.which < 48 || evt.which > 57)) 
+				 {
+				    evt.preventDefault();
+				 }
+			});
+		},
 }

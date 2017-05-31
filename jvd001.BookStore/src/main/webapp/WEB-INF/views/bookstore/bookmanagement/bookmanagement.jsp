@@ -54,13 +54,13 @@
     
 	<div class="container-fluid bg-3 text-center">
 	
-	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition">
+	<form method="post" action ="/bookstore/bookmanagement/search/" commandName="bookSearchCondition" id="formSearch">
 		<div class="row text-center">
 			<div class="col-sm-offset-2 col-sm-2">
 				<select class="form-control" name="category_id" id="category_id">
 				<option value="0">NoOption</option>
 				<c:forEach items="${listCategory}" var ="category">
-			<option value="${category.category_id}">${category.category_name}</option>
+			<option value="${category.category_id}" ${category.category_id==bsc.category_id ? 'selected':''}>${category.category_name}</option>
 				</c:forEach>
 						</select>
 			</div>
@@ -73,8 +73,8 @@
 					placeholder="Publisher..." value="${bsc.publisher}"/>
 			</div>
 			<div class="col-sm-2">
-				<input  type="text" class="form-control" id="txt1" name="year_of_publishing"
-					placeholder="YearofPublishing..." value="${bsc.year_of_publishing}"/>
+				<input  type="text" class="form-control onlynumber" id="txt1" name="year_of_publishing"
+				maxlength="4"	placeholder="YearofPublishing..." value="${bsc.year_of_publishing}"/>
 			</div>
 			<div class="col-sm-2">
 				<button type="submit" class="btn btn-primary"
@@ -94,7 +94,7 @@
             	<h1>Categories</h1>
                 <ul>
                      <c:forEach items="${listCategory}" var ="category">
-                        <li style="font-size: 13px"><a href="">${category.category_name}</a></li>
+                        <li style="font-size: 13px"><p>${category.category_name}</p></li>
                     </c:forEach>
             	</ul>
             </div>
@@ -195,6 +195,7 @@
 <script type="text/javascript">
 		var url = '${pageContext.request.contextPath}/';
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/bookmanagement/bookmanagement-main.js' />"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/bookmanagement/bookmanagement-public.js' />"></script>
 <script type="text/javascript">

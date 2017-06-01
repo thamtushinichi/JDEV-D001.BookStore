@@ -1,135 +1,64 @@
+<%@page import="jvd001.bookstore.app.dto.BookSearchCondition"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
 <head>
-<title>Sign Up</title>
+<title>Login</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"
+	rel="stylesheet" />
+<link
+	href="<c:url value="/resources/css/bookmanagement/insertbook.css" />"
+	rel="stylesheet">
 
-<style>
-<
-tab3
->
-{
-padding-right
-
-
-:
-
-
-4
-cm
-;
-
-
-  
-
-}
-.btn {
-	-webkit-border-radius: 60;
-	-moz-border-radius: 60;
-	border-radius: 60px;
-	font-family: Arial;
-	color: #181a17;
-	font-size: 18px;
-	background: #0994f0;
-	padding: 10px 20px 10px 20px;
-	text-decoration: none;
-}
-
-.btn:hover {
-	background: #3cb0fd;
-	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-	text-decoration: none;
-}
-
-tab2 {
-	font-size: 30px;
-	text-align: left;
-	color: rgb(193, 219, 200);
-	font-family: Arial;
-}
-
-tab1 {
-	text-align: left;
-	font-size: 30px;
-	color: black;
-}
-
-p {
-	color: black;
-}
-
-.right1 {
-	color: rgb(3, 193, 213);
-}
-
-strong {
-	color-background: black;
-	color: black;
-}
-
-.button1 {
-	background-color: rgb(27, 118, 255);
-}
-/* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-	margin-bottom: 0;
-	border-radius: 0;
-}
-
-/* Add a gray background color and some padding to the footer */
-footer {
-	background-color: #f2f2f2;
-	padding: 25px;
-}
-
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-	width: 20%;
-	margin: auto;
-}
-</style>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
+<!-- templatemo -->
+<link
+	href="<c:url value="/resources/css/bookmanagement/templatemo_style.css"/>"
+	rel="stylesheet" />
+<!-- templatemo -->
 </head>
 <body>
 	<%@ include file="../../comment/header.jsp"%>
+	<div id="templatemo_container">
 
-	</br>
-	<div class="container-fluid bg-3 text-center">
-		<div class="row">
-			<div class="col-sm-2">
-				<img src="./images/bookstore-logo_1x.jpg" width="136px"
-					height="128px" />
+		<!-- start code -->
+		<div id="templatemo_header">
+			<div id="templatemo_special_offers">
+				<p>
+					<span>100%</span> free for new account
+				</p>
+				<!-- <a href="subpage.html" style="margin-left: 50px;">Read more...</a> -->
 			</div>
-			<div class="col-sm-3">
-				</br> </br>
-				<tab1>BOOK<tab2>STORE</tab2></tab1>
-			</div>
-			<div class="col-sm-3"></div>
-			<div class="col-sm-4">
-				</br> </br> <span style="font-size: 30px">CALL NOW!<span
-					style="font-size: 30px; color: rgb(193, 219, 200);">
-						1-800-123-4567</span></span>
+			<div id="templatemo_new_books">
+				<ul>
+					<li>Harry Potter</li>
+					<li>THe Hobbit</li>
+					<li>Lord Of The Ring</li>
+				</ul>
+				<!-- <a href="subpage.html" style="margin-left: 50px;">Read more...</a> -->
 			</div>
 		</div>
-	</div>
-	</br>
+		<!-- end of header -->
 
-	<div class="jumbotron">
-		<div class="container text-center">
+
+	<div class="templatemo_header">
+		<div class="templatemo_special_offers text-center">
 			<p>
 			<h2>
 				<strong>REGISTER</strong>
@@ -143,7 +72,7 @@ footer {
 			</p>
 		</div>
 	</div>
-	<div class="container">
+	<div class="form-group">
 		<form:form id="signupForm" method="post" modelAttribute="user">
 			<h2>Sign Up</h2>
 			<div class="form-group">

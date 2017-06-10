@@ -1,3 +1,11 @@
+/*
+ * ClassName: BookManagementController
+ * version: 1.0
+ * Date: 10/62017
+ * Copyright
+ * Description: this is controller class 
+ * The class is used for communicating with Service from View (jsp file)
+ */
 package jvd001.bookstore.app.controller.bookmanagement;
 
 import java.io.BufferedInputStream;
@@ -45,15 +53,17 @@ import jvd001.bookstore.app.service.classification.CategoryService;
 @Controller
 // @SessionAttributes("bookSearchCondition")
 public class BookManagementController {
+	// define bookmanagementService
 	private BookManagementService bookmanagementService;
+
+	// define categoryService
 	private CategoryService categoryService;
-	// private static final Logger logger =
-	// LoggerFactory.getLogger(HomeController.class);
 
 	public CategoryService getCategoryService() {
 		return categoryService;
 	}
 
+	// this is IOC
 	@Autowired(required = true)
 	@Qualifier(value = "categoryService")
 	public void setCategoryService(CategoryService categoryService) {
@@ -64,12 +74,14 @@ public class BookManagementController {
 		return bookmanagementService;
 	}
 
+	// this is IOC
 	@Autowired(required = true)
 	@Qualifier(value = "bookmanagementService")
 	public void setBookService(BookManagementService bookmanagementService) {
 		this.bookmanagementService = bookmanagementService;
 	}
 
+	// Home page
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String indexBookmanagement(Locale locale, Model model, HttpServletRequest request) {
 		// set path
@@ -84,7 +96,7 @@ public class BookManagementController {
 			model.addAttribute("userVO", null);
 		// clear session
 
-		//
+		// valid book search condition
 		BookSearchCondition sc = new BookSearchCondition();
 		sc.setCategory_id(0);
 		sc.setPublisher("");
@@ -92,9 +104,6 @@ public class BookManagementController {
 		sc.setYear_of_publishing("");
 
 		if (sc != null) {
-			// System.out.println("bookmanagemt/"+page+","+bsc.getCategory_id()+","
-			// +bsc.getTitle()+","
-			// +bsc.getPublisher()+","+bsc.getYear_of_publishing());
 			model.addAttribute("bsc", sc);
 		}
 		request.getSession().setAttribute("bookSearchCondition", sc);
@@ -119,6 +128,7 @@ public class BookManagementController {
 		return "/bookstore/bookmanagement/bookmanagement";
 	}
 
+	// return bookmanagement home
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
 	public String bookManagement(Locale locale, Model model, HttpServletRequest request) {
 
@@ -158,14 +168,11 @@ public class BookManagementController {
 		return "/bookstore/bookmanagement/bookmanagement";
 	}
 
+	// return list book in a page in bookmanagement page with book search
+	// condition
 	@RequestMapping(value = "/bookmanagement/{page}", method = RequestMethod.GET)
 	public String bookManagementByPage(@PathVariable String page, Locale locale, Model model,
 			@ModelAttribute("bookSearchCondition") BookSearchCondition sc, HttpServletRequest request) {
-		// BookSearchCondition sc= new BookSearchCondition();
-		// sc.setCategory_id(0);
-		// sc.setPublisher("");
-		// sc.setTitle("");
-		// sc.setYear_of_publishing("");
 		UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
 		if (userVO != null)
 			model.addAttribute("userVO", userVO);
@@ -196,6 +203,8 @@ public class BookManagementController {
 		return "bookstore/bookmanagement/bookmanagement";
 	}
 
+	// return home page when user input seach condition and press button
+	// "Search"
 	@RequestMapping(value = "/bookmanagement/search/", method = RequestMethod.POST)
 	public String search(Locale locale, Model model,
 			@ModelAttribute("bookSearchCondition") BookSearchCondition bookSearchCondition,
@@ -231,6 +240,7 @@ public class BookManagementController {
 
 	}
 
+	// return detail a book page when user press detail button
 	@RequestMapping(value = "/bookmanagement/detail/{idbook}", method = RequestMethod.GET)
 	public String detailBook(@PathVariable String idbook, Locale locale, Model model, HttpServletRequest request) {
 		UserVO userVO = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
@@ -259,6 +269,7 @@ public class BookManagementController {
 		return "bookstore/bookmanagement/detailbook";
 	}
 
+	// detail page will return download dialog if user press download page
 	@RequestMapping(value = "/bookmanagement/detail/download/{idbook}", method = RequestMethod.GET)
 	public String getFile(HttpServletResponse response, @PathVariable String idbook, HttpServletRequest request) {
 		// check login neu chua login quay lai trang login
@@ -271,25 +282,11 @@ public class BookManagementController {
 		String filename = this.bookmanagementService.getNameFile(idbook);
 		System.out.println(filename);
 		String path1 = request.getSession().getServletContext().getRealPath("");
-		// try {
-		// DefaultResourceLoader loader = new DefaultResourceLoader();
-		// InputStream is =
-		// loader.getResource(path+"resources\\book\\"+filename).getInputStream();
-		// IOUtils.copy(is, response.getOutputStream());
-		// response.setHeader("Content-Disposition", "attachment;
-		// filename="+filename);
-		// response.flushBuffer();
-		// } catch (IOException ex) {
-		// throw new RuntimeException("IOError writing file to output stream");
-		// }
-		// Authorized user will download the file
 
 		try {
 			String pathFile = path1 + "resources/book/" + filename;
 			System.out.println(pathFile);
 			File file = null;
-			// ClassLoader classloader =
-			// Thread.currentThread().getContextClassLoader();
 			file = new File(pathFile);
 			if (!file.exists()) {
 				String errorMessage = "Sorry. The file you are looking for does not exist";
@@ -308,24 +305,13 @@ public class BookManagementController {
 
 			response.setContentType(mimeType);
 
-			/*
-			 * "Content-Disposition : inline" will show viewable types [like
-			 * images/text/pdf/anything viewable by browser] right on browser
-			 * while others(zip e.g) will be directly downloaded [may provide
-			 * save as popup, based on your browser setting.]
-			 */
 			response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
-
-			/*
-			 * "Content-Disposition : attachment" will be directly download, may
-			 * provide save as popup, based on your browser setting
-			 */
-			// response.setHeader("Content-Disposition",
-			// String.format("attachment; filename=\"%s\"", file.getName()));
 
 			response.setContentLength((int) file.length());
 			InputStream inputStream;
 			inputStream = new BufferedInputStream(new FileInputStream(file));
+			
+			//copy file from root file to 
 			FileCopyUtils.copy(inputStream, response.getOutputStream());
 
 		} catch (FileNotFoundException e) {

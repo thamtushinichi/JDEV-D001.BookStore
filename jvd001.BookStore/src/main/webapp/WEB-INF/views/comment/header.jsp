@@ -21,7 +21,7 @@
     				<c:when test="${userVO.role_id==1}">
        					<!-- if user la admin-->
        					<li><a href="#">User Management</a></li>
-       				<li><a href="#">Category Management</a></li>
+       				<li><a href="/bookstore/categorymanagement/category">Category Management</a></li>
        				<li><a href="/bookstore/bookmanagement">Book Management</a></li>
    					 </c:when>    
    					 <c:when test="${userVO.role_id==2}">

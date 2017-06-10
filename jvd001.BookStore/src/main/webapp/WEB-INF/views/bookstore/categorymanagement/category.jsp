@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
 <link href="<c:url value="/resources/css/insertbook/insertbook.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bookmanagement/templatemo_style.css"/>" rel="stylesheet"/>
 
 <!-- LINK LIB JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -27,13 +28,19 @@ var url = '${pageContext.request.contextPath}';
 <title>Insert title here</title>
 </head>
 <style>
+		html{
+			height: 100%;
+		}
         h1{
             text-align: center;
         }
         .content{
-            width: auto;
-            margin-left: auto;
-            margin-right: auto;
+        	border:1;
+        	padding-left: 10%;
+        	padding-right: 10%;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
         }
         table{
             width: 100%;
@@ -42,6 +49,7 @@ var url = '${pageContext.request.contextPath}';
             text-align: center;
         }
         table *{
+        	color:black;
             padding: 5px;
         }
          table th{
@@ -82,10 +90,10 @@ var url = '${pageContext.request.contextPath}';
 </head>
 <body>
 	<%@include file="../../comment/header.jsp" %>
-    <p align="right"><input class="searchtxtbox" type="text" name="Search" placeholder="Search"></p><br>
+    <!-- <p align="right"><input class="searchtxtbox" type="text" name="Search" placeholder="Search"></p><br> -->
     <h1>Catagory Management</h1>
     <div class="content">
-    <c:if test="${!empty listCategory}">
+    <%-- <c:if test="${!empty listCategory}"> --%>
     	<table  border="1">
       		<tr>
         		<th>ID</th>
@@ -109,20 +117,19 @@ var url = '${pageContext.request.contextPath}';
       		<c:url var="addAction" value="/categorymanagement/category/add" ></c:url>
       			<form:form  action="${addAction}" commandName="category">
       				<tr>
-      					<c:if test = "${userVO.role_id == 1}">
+      					 <c:if test = "${userVO.role_id == 1}">
       						<td>
       							<c:if test="${!empty category.category_name}">
       								Editing: ${category.category_id}
       								<form:input class="hideme" path="category_id" />
       								<form:hidden class="hideme" path="category_id" />
       							</c:if>
+      							<c:if test="${empty category.category_name}">#</c:if>
 							</td>
 							<td>
 								<form:input path="category_name" />
 								<b class="alert">${error_msg}</b>
 							</td>
-						</c:if>
-						<c:if test = "${userVO.role_id == 1}">
             				<td>
             					<c:if test="${empty category.category_name}"> 
             						<input class="btn-success btn btn-block" type="submit" value="<spring:message text="Insert"/>" /> 
@@ -136,9 +143,10 @@ var url = '${pageContext.request.contextPath}';
       				</tr>
       			</form:form>
     	</table>
-    </c:if>
+    <%-- </c:if> --%>
     <br/>
     </div>
+    <%@include file="../../comment/footer.jsp" %>
     <script>
     function btncancel(event){
     	window.location= url + "/categorymanagement/category/";

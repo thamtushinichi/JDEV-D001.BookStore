@@ -53,7 +53,9 @@ public class CategoryController {
 
 	// For add and update category both
 	@RequestMapping(value = "/categorymanagement/category/add", method = RequestMethod.POST)
-	public String addCategory(@ModelAttribute("category") Category p, Model model) {
+	public String addCategory(@ModelAttribute("category") Category p, Model model, HttpServletRequest request) {
+		UserVO user = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+		model.addAttribute("userVO", user);
 		boolean x = false;
 		int y = 0;
 		List<Category> categorys = new ArrayList<Category>();
@@ -90,15 +92,18 @@ public class CategoryController {
 	}
 
 	@RequestMapping("/categorymanagement/category/remove/{id}")
-	public String removeCategory(@PathVariable("id") int id) {
-
+	public String removeCategory(@PathVariable("id") int id, HttpServletRequest request, Model model) {
+		UserVO user = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+		model.addAttribute("userVO", user);
 		this.categoryService.removeCategory(id);
 		return "redirect:/categorymanagement/category";
 	}
 
 	@RequestMapping("/categorymanagement/category/edit/{id}")
 
-	public String editCategory(@PathVariable("id") int id, Model model) {
+	public String editCategory(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+		UserVO user = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+		model.addAttribute("userVO", user);
 		model.addAttribute("category", this.categoryService.getCategoryById(id));
 		model.addAttribute("listCategory", this.categoryService.listCategory());
 

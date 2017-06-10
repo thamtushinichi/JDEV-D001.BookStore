@@ -113,7 +113,7 @@
 		<c:forEach items="${listBook}" var ="bookVO">
 		<c:set var = "count" value = "${count+1}"/>
 		<div class="templatemo_product_box">
-		<h1>${bookVO.title}<span>(by ${bookVO.author })</span></h1>
+		<h1>${bookVO.title}<span></span></h1>
 		 
 		 <img src="<c:url value="/resources/images/${bookVO.image}"/>" alt="image"
 						width="78" height="128"/>

@@ -14,8 +14,20 @@ var AddBookPublic = {
 			});
 		},
 		
+		//valid form
 		initValidate : function(){
+			jQuery.validator.addMethod("selectCheck", function(value,element){
+				var checkValue = $('#category_Ids').val();
+				if(jQuery.isEmptyObject(checkValue)){
+					return false;
+				}else{
+					return true;
+				}
+			}, "");
 			$('#frmAddBook').validate({
+				onfocusout : function(element) {
+					$(element).valid();
+				},
 				rules : {
 					'title' : {
 						required : true,
@@ -24,7 +36,7 @@ var AddBookPublic = {
 						minlength : 4,
 					},
 					'category_Ids' : {
-						required : true,
+						selectCheck : true,
 					},
 					'file' : {
 						required : true,
@@ -41,7 +53,7 @@ var AddBookPublic = {
 						minlength : "Please input 4 number" 
 					},
 					'category_Ids' : {
-						required : "Please choose category" 
+						selectCheck : "Please choose category" 
 					},
 					'file' : {
 						required : "Please choose image" 
@@ -68,6 +80,7 @@ var AddBookPublic = {
 			});
 		},
 		
+		//allow input only number
 		initOnlyNumber : function(){
 			//allow input number
 			$('.onlynumber').on('keypress',function(evt){
@@ -78,6 +91,8 @@ var AddBookPublic = {
 				 }
 			});
 		},
+		
+		//valid file document
 		initValidateFile : function(){
 			$('input[name="book"]').change(function () {
 				if ($(this).val() != '') {      
@@ -95,6 +110,8 @@ var AddBookPublic = {
 				
 			});
 		},
+		
+		// valid file image
 		initValidateFileImage : function(){
 			$('input[name="file"]').change(function () {
 				if ($(this).val() != '') {      
@@ -113,6 +130,7 @@ var AddBookPublic = {
 			});
 		},
 		
+		//notify when save
 		initNotifyMessageBox : function(){
 			var message = $("#message").val();
 			//if message=1 then save successfully
@@ -137,4 +155,5 @@ var AddBookPublic = {
 			}
 			$("#message").val(0);
 		},
+		
 }

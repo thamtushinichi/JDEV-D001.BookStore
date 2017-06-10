@@ -56,7 +56,7 @@ public class UserSignupController {
 		u.setPassword(null);
 		model.addAttribute("userVO", userVO);
 		request.getSession().setAttribute("CurrentUserLogin", userVO);
-		return "redirect:/login";
+		return "redirect:/";
 		}
 		return "/bookstore/user/signup";
 	}

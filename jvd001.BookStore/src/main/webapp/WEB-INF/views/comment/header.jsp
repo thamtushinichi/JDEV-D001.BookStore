@@ -46,12 +46,14 @@
 								Hello ${userVO.fullname}</a></li>
 								<li><a href="/bookstore/logout"><span class="glyphicon glyphicon-log-in"></span>
 								Log Out</a></li>
-						<br />
+						
 					</c:when>
 					<c:otherwise>
 						<li><a href="/bookstore/login"><span
 								class="glyphicon glyphicon-log-in"></span> Login</a></li>
-						<br />
+						<li><a href="/bookstore/signup"><span
+								class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+						
 					</c:otherwise>
 				</c:choose>
 

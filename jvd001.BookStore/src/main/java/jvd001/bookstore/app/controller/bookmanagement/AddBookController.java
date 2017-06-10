@@ -54,16 +54,30 @@ public class AddBookController {
 		this.categoryService = categoryService;
 	}
 
+	//view add book
 	@RequestMapping(value = "/bookmanagement/addbook", method = RequestMethod.GET)
 	public String addbook(Locale locale, Model model, HttpServletRequest request) {
-		List<Category> categoryLists = new ArrayList<Category>();
-		categoryLists = this.categoryService.listCategory();
-		model.addAttribute("categoryLists", categoryLists);
-		UserVO user = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
-		model.addAttribute("userVO", user);
+		try {
+			List<Category> categoryLists = new ArrayList<Category>();
+			categoryLists = this.categoryService.listCategory();
+			model.addAttribute("categoryLists", categoryLists);
+			
+			//check login, role
+			UserVO user = (UserVO) request.getSession().getAttribute("CurrentUserLogin");
+			if(user == null){
+				return "redirect:/login";
+			}else if(user.getRole_id() != 1 && user.getRole_id() != 2){
+				return "redirect:/";
+			}
+			model.addAttribute("userVO", user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		return "/bookstore/bookmanagement/insertbook";
 	}
 
+	//save book
 	@RequestMapping(value = "/bookmanagement/addbook/save", method = RequestMethod.POST)
 	public String addBook(@ModelAttribute("bookVO") BookVO bookVO, HttpServletRequest request, RedirectAttributes rd,
 			Model model) {
@@ -161,6 +175,7 @@ public class AddBookController {
 
 	}
 
+	//delete book
 	@RequestMapping("/bookmanagement/delete/{book_Id}")
 	public String deleteBook(@PathVariable("book_Id") int book_Id, RedirectAttributes rd) {
 		try {

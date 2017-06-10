@@ -1,6 +1,16 @@
+/*
+ * ClassName: BookSearchCondition
+ * Version information: 1.0
+ * Date: 10/6/2017
+ * Copyright notice
+ */
 package jvd001.bookstore.app.dto;
 
 public class BookSearchCondition {
+	/*
+	 * Using for Search Book from Web 
+	 * 
+	 */
 	private int category_id;
 	public int getCategory_id() {
 		return category_id;

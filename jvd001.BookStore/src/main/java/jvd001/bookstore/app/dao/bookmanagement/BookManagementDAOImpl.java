@@ -1,3 +1,9 @@
+/*
+ * ClassName: BookManagementDAOImpl
+ * Version information: 1.0
+ * Date: 10/6/2017
+ * Copyright
+ */
 package jvd001.bookstore.app.dao.bookmanagement;
 
 import java.util.ArrayList;
@@ -25,7 +31,9 @@ import jvd001.bookstore.app.util.ConvertUtils;
 
 @Transactional
 public class BookManagementDAOImpl extends HibernateDaoSupport implements BookManagementDAO {
-
+	/*
+	 * this class is implement of BookManagementDAO
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(BookManagementDAOImpl.class);
 	private ConvertUtils convertUtils;
 

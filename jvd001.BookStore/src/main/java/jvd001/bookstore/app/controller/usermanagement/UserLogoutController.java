@@ -29,7 +29,7 @@ public class UserLogoutController {
 		request.getSession().removeAttribute("CurrentUserLogin");
 		model.addAttribute("userVO", u);
 		
-		return "/bookstore/user/logout";
+		return "redirect:/";
 	}
 	
 	

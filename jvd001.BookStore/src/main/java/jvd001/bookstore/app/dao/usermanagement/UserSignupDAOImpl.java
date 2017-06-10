@@ -21,7 +21,7 @@ public class UserSignupDAOImpl extends HibernateDaoSupport implements UserSignup
 	public boolean ExecuteSignup(UserVO UserVO) {
 		// TODO Auto-generated method stub
 
-		UserVO.setRole_id(2);
+		UserVO.setRole_id(3);
 		UserVO.setPassword(cryptWithMD5(UserVO.getPassword()));
 		User User = new User();
 		ConvertUtils c = new ConvertUtils();

@@ -124,7 +124,7 @@
 		<c:choose>
 					<c:when test="${userVO.role_id==1}">
 					<div class="buy_now_button"><a href="<c:url value='/bookmanagement/edit/${bookVO.book_Id}'/>">Edit</a></div>
-					<button  type="button" class="btn btn-danger btn-sm btnDelete" style="width: 78px" onclick="BookManagement.initOnClickDeleteBook(${bookVO.book_Id})">
+					<button  type="button" class="btn btn-danger btn-sm" style="width: 78px" onclick="BookManagement.initOnClickDeleteBook(${bookVO.book_Id})">
 					Delete</button>
 					</c:when>
 					<c:when test="${userVO.users_id== bookVO.user.users_id}">

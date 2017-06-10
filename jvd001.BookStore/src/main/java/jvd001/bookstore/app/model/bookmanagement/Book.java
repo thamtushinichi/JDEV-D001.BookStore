@@ -1,3 +1,9 @@
+/*
+ * ClassName: Book
+ * Version information: 1.0
+ * Date: 10/6/2017
+ * Copyright
+ */
 package jvd001.bookstore.app.model.bookmanagement;
 
 import java.util.HashSet;
@@ -25,6 +31,9 @@ import jvd001.bookstore.app.model.usermanagement.User;
 @Entity
 @Table(name = "book")
 public class Book implements java.io.Serializable {
+	/*
+	 * this class is mapped by database
+	 */
 	public Book() {
 
 	}
@@ -35,7 +44,7 @@ public class Book implements java.io.Serializable {
 	private int book_Id;
 	@Column(name = "title")
 	private String title;
-	//private int user_Id;
+	// private int user_Id;
 	@Column(name = "category_id")
 	private int category_Id;
 	@Column(name = "publisher")
@@ -48,7 +57,7 @@ public class Book implements java.io.Serializable {
 	private String description;
 	@Column(name = "image")
 	private String image;
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "book_category", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "category_id") })
 	private Set<Category> categories = new HashSet<Category>(0);
@@ -56,6 +65,7 @@ public class Book implements java.io.Serializable {
 	@ManyToOne
 	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
+
 	public User getUser() {
 		return user;
 	}
@@ -72,8 +82,8 @@ public class Book implements java.io.Serializable {
 		this.categories = categories;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinColumn(name="book_id")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "book_id")
 	private Set<Upload> uploads = new HashSet<Upload>();
 
 	public Set<Upload> getUploads() {
@@ -139,8 +149,6 @@ public class Book implements java.io.Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
 
 	public int getCategory_Id() {
 		return category_Id;
@@ -151,9 +159,8 @@ public class Book implements java.io.Serializable {
 	}
 
 	@Override
-	public String toString()
-	{
-		return "title: "+ this.title+" " + " "+ this.book_Id + "user fullname la : " + this.user.getFullname();
+	public String toString() {
+		return "title: " + this.title + " " + " " + this.book_Id + "user fullname la : " + this.user.getFullname();
 	}
 
 }

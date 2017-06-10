@@ -1,3 +1,9 @@
+/*
+ * ClassName" ConvertUtils
+ * Version information: 1.0
+ * Date: 10/6/2017
+ * Copyright
+ */
 package jvd001.bookstore.app.util;
 
 import jvd001.bookstore.app.dto.BookVO;

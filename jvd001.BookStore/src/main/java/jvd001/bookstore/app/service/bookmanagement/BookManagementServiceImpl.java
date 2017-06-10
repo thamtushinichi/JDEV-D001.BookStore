@@ -11,9 +11,10 @@ import jvd001.bookstore.app.dto.BookVO;
 import jvd001.bookstore.app.dto.BookSearchCondition;
 
 @Service
-@Transactional(value="LiveTransactionManager") 
-public class BookManagementServiceImpl implements BookManagementService{
+@Transactional(value = "LiveTransactionManager")
+public class BookManagementServiceImpl implements BookManagementService {
 	private BookManagementDAO bookManagementDAO;
+
 	public BookManagementDAO getBookManagementDAO() {
 		return bookManagementDAO;
 	}
@@ -28,7 +29,7 @@ public class BookManagementServiceImpl implements BookManagementService{
 		// TODO Auto-generated method stub
 		return this.bookManagementDAO.addBook(book);
 	}
-	
+
 	@Override
 	@Transactional
 	public void deleteBook(int book_Id) {
@@ -66,17 +67,17 @@ public class BookManagementServiceImpl implements BookManagementService{
 
 	@Override
 	@Transactional
-	public List<BookVO> getListBookByPage(int pageStart,int NumberImageRender) {
+	public List<BookVO> getListBookByPage(int pageStart, int NumberImageRender) {
 		// TODO Auto-generated method stub
-		
+
 		return this.bookManagementDAO.getListBookByPage(pageStart, NumberImageRender);
 	}
+
 	@Override
 	@Transactional
-	public List<BookVO> getBooksStandard( int pageStart, int record)
-	{
-		int start=(pageStart-1)*record;
-		
+	public List<BookVO> getBooksStandard(int pageStart, int record) {
+		int start = (pageStart - 1) * record;
+
 		return this.bookManagementDAO.getBooksStandard(start, record);
 	}
 
@@ -126,8 +127,8 @@ public class BookManagementServiceImpl implements BookManagementService{
 	@Transactional
 	public List<BookVO> getListBook_By_SearchCondition_Per_Page(BookSearchCondition sc, int start_Page,
 			int nRecord_Per_Page) {
-		int start=(start_Page-1)*nRecord_Per_Page;
-		return this.bookManagementDAO.getListBook_By_SearchCondition_Per_Page(sc,start, nRecord_Per_Page);
+		int start = (start_Page - 1) * nRecord_Per_Page;
+		return this.bookManagementDAO.getListBook_By_SearchCondition_Per_Page(sc, start, nRecord_Per_Page);
 	}
 
 	@Override
@@ -142,7 +143,5 @@ public class BookManagementServiceImpl implements BookManagementService{
 	public String getNameFile(String idbook) {
 		return this.bookManagementDAO.getNameFile(idbook);
 	}
-
-
 
 }
